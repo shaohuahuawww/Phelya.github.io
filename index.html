@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>醉月失真 | 数学博客</title>
+    <meta
+      name="description"
+      content="全屏二次元首屏 + 下滑进入正文内容区的数学博客主页。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-inner">
+        <div class="header-left">
+          <a class="logo" href="#landing">
+            <img class="logo-avatar" src="./assets/anime/nav-avatar.jpg" alt="醉月失真" />
+          </a>
+          <nav class="nav-left">
+            <a href="#landing" class="nav-btn nav-btn-text"><span class="nav-icon">⌂</span><span>首页</span></a>
+            <a href="#about" class="nav-btn nav-btn-text"><span class="nav-icon">◌</span><span>关于</span></a>
+          </nav>
+        </div>
+
+        <div class="header-right">
+          <div class="search-box" id="searchBox" role="button" aria-label="搜索文章" tabindex="0">
+            <span class="search-box-icon">⌕</span>
+            <span class="search-box-text">搜索文章...</span>
+            <kbd class="search-box-kbd">Ctrl K</kbd>
+          </div>
+          <button class="nav-btn theme-toggle" id="themeToggle" aria-label="切换主题">
+            <span>☼</span>
+            <span>☾</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="search-modal" id="searchModal">
+      <div class="search-modal-overlay" id="searchOverlay"></div>
+      <div class="search-modal-content">
+        <div class="search-modal-header">
+          <span class="search-box-icon">⌕</span>
+          <input type="text" class="search-input" id="searchInput" placeholder="搜索文章..." autocomplete="off" />
+          <button class="search-close" id="searchClose" aria-label="关闭搜索">×</button>
+        </div>
+        <div class="search-results" id="searchResults">
+          <div class="search-empty">输入关键词开始搜索</div>
+        </div>
+      </div>
+    </div>
+
+    <main class="main">
+      <section class="landing-screen" id="landing">
+        <div class="landing-bg">
+          <img src="./assets/anime/kikuri-landing-bg.jpg" alt="" class="landing-bg-img" />
+        </div>
+        <div class="landing-overlay"></div>
+
+        <div class="landing-content">
+          <div class="landing-avatar-wrap">
+            <img class="landing-avatar" src="./assets/anime/nav-avatar.jpg" alt="头像" />
+          </div>
+
+          <div class="landing-copy">
+            <h1 class="landing-title">醉月失真</h1>
+            <p class="landing-tagline">热爱可抵岁月漫长</p>
+            <p class="landing-bio">
+              一个喜欢数学、喜欢整理笔记，也喜欢二次元视觉的站长。
+              这里会长期整理高等数学与线性代数内容。
+            </p>
+            <div class="landing-meta">
+              <span class="meta-pill" id="heroTime">--:--</span>
+              <span class="meta-pill">定位中</span>
+              <span class="meta-pill">--</span>
+              <span class="meta-pill">--°</span>
+            </div>
+            <div class="landing-social">
+              <a href="#math-sections" class="social-link" title="分区">∑</a>
+              <a href="#timeline" class="social-link" title="动态">◎</a>
+            </div>
+          </div>
+        </div>
+
+        <a class="landing-scroll" href="#content">
+          <span>下滑进入下一页</span>
+          <span class="scroll-arrow">⌄</span>
+        </a>
+      </section>
+
+      <section class="content-screen" id="content">
+        <section class="compass-zone">
+          <div class="container">
+            <div class="hero-compass">
+              <h2 class="compass-title">风向标</h2>
+              <p class="compass-subtitle">快速导航到你想去的地方</p>
+              <div class="compass-grid">
+                <a href="#math-sections" class="compass-item"><span>∫</span><span>高等数学</span></a>
+                <a href="#math-sections" class="compass-item"><span>⊞</span><span>线性代数</span></a>
+                <a href="#about" class="compass-item"><span>◌</span><span>关于</span></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="feed-zone">
+          <div class="container">
+            <div class="feed-layout">
+              <div class="feed-block">
+                <div class="block-head">
+                  <h2 class="block-label">近期笔记</h2>
+                  <a href="#math-sections" class="block-more">更多 &gt;</a>
+                </div>
+
+                <div class="article-wrapper">
+                  <span class="article-watermark">Serenity</span>
+                  <ul class="article-feed" id="math-sections">
+                    <li class="article-row">
+                      <a href="./posts/gaoshu-ch3.html" class="article-link">
+                        <span class="article-index">01</span>
+                        <div class="article-detail">
+                          <h3 class="article-name">高等数学</h3>
+                          <p class="article-desc">极限、连续、导数、微分、中值定理、积分、级数、常微分方程。</p>
+                          <div class="article-actions">
+                            <span class="article-action">进入文章页</span>
+                            <span class="article-action">PDF 预览</span>
+                          </div>
+                        </div>
+                        <span class="article-views">进入笔记</span>
+                      </a>
+                    </li>
+                    <li class="article-row">
+                      <a href="#math-sections" class="article-link">
+                        <span class="article-index">02</span>
+                        <div class="article-detail">
+                          <h3 class="article-name">线性代数</h3>
+                          <p class="article-desc">矩阵、行列式、向量组、线性空间、特征值、特征向量、二次型。</p>
+                        </div>
+                        <span class="article-views">分类入口</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="feed-block" id="timeline">
+                <div class="block-head">
+                  <h2 class="block-label">站点动态</h2>
+                  <div class="block-stats">
+                    <span class="stat-item">总分区 2</span>
+                    <span class="stat-divider">·</span>
+                    <span class="stat-item">页面 1</span>
+                  </div>
+                </div>
+
+                <div class="stream-wrapper">
+                  <span class="stream-watermark">Serenity</span>
+                  <ul class="stream-feed">
+                    <li class="stream-row">
+                      <span class="stream-marker"></span>
+                      <div class="stream-body">
+                        <span class="stream-verb">建立了分类</span>
+                        <a href="#math-sections" class="stream-object">高等数学</a>
+                      </div>
+                      <span class="stream-time">03月18日</span>
+                    </li>
+                    <li class="stream-row">
+                      <span class="stream-marker"></span>
+                      <div class="stream-body">
+                        <span class="stream-verb">建立了分类</span>
+                        <a href="#math-sections" class="stream-object">线性代数</a>
+                      </div>
+                      <span class="stream-time">03月18日</span>
+                    </li>
+                    <li class="stream-row">
+                      <span class="stream-marker"></span>
+                      <div class="stream-body">
+                        <span class="stream-verb">更新了页面</span>
+                        <a href="#landing" class="stream-object">全屏首屏</a>
+                      </div>
+                      <span class="stream-time">03月18日</span>
+                    </li>
+                    <li class="stream-row">
+                      <span class="stream-marker"></span>
+                      <div class="stream-body">
+                        <span class="stream-verb">上传了图片</span>
+                        <a href="#landing" class="stream-object">首页背景图</a>
+                      </div>
+                      <span class="stream-time">03月18日</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="life-zone" id="about">
+              <div class="block-head">
+                <h2 class="block-label">生活回想</h2>
+                <a href="#math-sections" class="block-more">更多 &gt;</a>
+              </div>
+              <div class="life-grid">
+                <a href="#math-sections" class="life-card">
+                  <span class="life-date">2026-03-18</span>
+                  <strong>主页布局完成</strong>
+                  <p>首页改成全屏封面，向下滑动进入正文内容区。</p>
+                </a>
+                <a href="#math-sections" class="life-card">
+                  <span class="life-date">2026-03-19</span>
+                  <strong>准备高数目录</strong>
+                  <p>后面会把极限、导数、积分、级数等内容拆成独立条目。</p>
+                </a>
+                <a href="#math-sections" class="life-card">
+                  <span class="life-date">2026-03-20</span>
+                  <strong>准备线代目录</strong>
+                  <p>矩阵与向量空间会是接下来第一批整理的内容。</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <p>© 2024 - 2026 醉月失真 版权所有</p>
+        <div class="footer-links">
+          <a href="#about">关于</a>
+          <a href="#math-sections">分类</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const root = document.documentElement;
+      const themeToggle = document.getElementById("themeToggle");
+      const searchBox = document.getElementById("searchBox");
+      const searchModal = document.getElementById("searchModal");
+      const searchOverlay = document.getElementById("searchOverlay");
+      const searchClose = document.getElementById("searchClose");
+      const searchInput = document.getElementById("searchInput");
+      const searchResults = document.getElementById("searchResults");
+      const heroTime = document.getElementById("heroTime");
+      const searchItems = [
+        { title: "高等数学", text: "极限 连续 导数 微分 积分 级数 常微分方程", href: "#math-sections" },
+        { title: "线性代数", text: "矩阵 行列式 向量组 线性空间 特征值 二次型", href: "#math-sections" }
+      ];
+
+      function applyTheme(theme) {
+        root.setAttribute("data-theme", theme);
+        localStorage.setItem("math-blog-theme", theme);
+      }
+
+      function toggleTheme() {
+        applyTheme(root.getAttribute("data-theme") === "light" ? "dark" : "light");
+      }
+
+      function openSearch() {
+        searchModal.classList.add("is-open");
+        searchInput.focus();
+      }
+
+      function closeSearch() {
+        searchModal.classList.remove("is-open");
+      }
+
+      function renderSearchResults(keyword) {
+        const trimmed = keyword.trim().toLowerCase();
+        if (!trimmed) {
+          searchResults.innerHTML = '<div class="search-empty">输入关键词开始搜索</div>';
+          return;
+        }
+
+        const results = searchItems.filter((item) =>
+          `${item.title} ${item.text}`.toLowerCase().includes(trimmed)
+        );
+
+        if (!results.length) {
+          searchResults.innerHTML = '<div class="search-empty">没有找到相关内容</div>';
+          return;
+        }
+
+        searchResults.innerHTML = results
+          .map(
+            (item) => `
+              <a class="search-result-item" href="${item.href}">
+                <strong>${item.title}</strong>
+                <span>${item.text}</span>
+              </a>
+            `
+          )
+          .join("");
+      }
+
+      function updateTime() {
+        heroTime.textContent = new Date().toLocaleTimeString("zh-CN", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false
+        });
+      }
+
+      applyTheme(localStorage.getItem("math-blog-theme") || "dark");
+      updateTime();
+      setInterval(updateTime, 1000);
+
+      themeToggle.addEventListener("click", toggleTheme);
+      searchBox.addEventListener("click", openSearch);
+      searchOverlay.addEventListener("click", closeSearch);
+      searchClose.addEventListener("click", closeSearch);
+      searchInput.addEventListener("input", (event) => renderSearchResults(event.target.value));
+
+      document.addEventListener("keydown", (event) => {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+          event.preventDefault();
+          openSearch();
+        }
+        if (event.key === "Escape") {
+          closeSearch();
+        }
+      });
+    </script>
+  </body>
+</html>

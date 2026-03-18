@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>高数基础 第三章 | 中值定理及导数应用</title>
+    <meta
+      name="description"
+      content="高等数学第三章：中值定理及导数应用，已包含原 PDF 印刷内容与手写笔记整理。"
+    />
+    <style>
+      :root {
+        --bg: #070a14;
+        --surface: rgba(16, 15, 26, 0.78);
+        --surface-soft: rgba(255, 255, 255, 0.05);
+        --line: rgba(255, 169, 199, 0.34);
+        --text: #fff0f6;
+        --muted: rgba(255, 233, 242, 0.78);
+        --accent: #ff94b7;
+        --shadow: 0 18px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(255, 148, 183, 0.12), transparent 18%),
+          linear-gradient(180deg, #060913 0%, #0a0f1a 100%);
+        font-family: "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      .shell {
+        width: min(1100px, calc(100% - 28px));
+        margin: 24px auto 40px;
+      }
+
+      .topbar,
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--surface);
+        backdrop-filter: blur(18px);
+        box-shadow: var(--shadow);
+      }
+
+      .topbar {
+        padding: 14px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--accent);
+        font-weight: 800;
+      }
+
+      .brand img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center 22%;
+      }
+
+      .back-link {
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--muted);
+      }
+
+      .hero {
+        margin-top: 18px;
+        padding: 28px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: var(--accent);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      h1, h2 {
+        margin: 12px 0 0;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 4vw, 3.4rem);
+      }
+
+      .hero p,
+      .summary-list li,
+      .outline-list li {
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 16px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--surface-soft);
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .panel {
+        padding: 24px;
+      }
+
+      .panel h2 {
+        font-size: 1.4rem;
+      }
+
+      .summary-list,
+      .outline-list {
+        margin: 14px 0 0;
+        padding-left: 20px;
+      }
+
+      .pdf-panel {
+        margin-top: 18px;
+        padding: 18px;
+      }
+
+      .pdf-frame {
+        width: 100%;
+        height: min(78vh, 980px);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fff;
+      }
+
+      @media (max-width: 900px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 720px) {
+        .shell { width: min(100% - 18px, 1100px); }
+        .topbar { flex-direction: column; align-items: start; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="../index.html#math-sections">
+          <img src="../assets/anime/nav-avatar.jpg" alt="头像" />
+          <span>醉月失真 · 高等数学</span>
+        </a>
+        <a class="back-link" href="../index.html#math-sections">返回首页</a>
+      </header>
+
+      <section class="hero panel">
+        <p class="eyebrow">Calculus Notes</p>
+        <h1>第三章 中值定理及导数应用</h1>
+        <p>
+          这篇内容根据你提供的 PDF 讲义整理而来，已经把原始印刷内容和主要手写批注一起转成 LaTeX 并编译成 PDF。
+          这里是博客里的阅读页面，你可以直接在下面预览整理后的讲义，也可以下载原始 PDF 或 LaTeX 源文件。
+        </p>
+        <div class="actions">
+          <a class="action" href="../content/gaoshu-ch3-mean-value.pdf" target="_blank" rel="noopener noreferrer">查看整理后 PDF</a>
+          <a class="action" href="../content/gaoshu-ch3-source.pdf" target="_blank" rel="noopener noreferrer">查看原 PDF</a>
+          <a class="action" href="../content/gaoshu-ch3-mean-value.tex" target="_blank" rel="noopener noreferrer">下载 LaTeX</a>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="panel">
+          <h2>整理说明</h2>
+          <ul class="summary-list">
+            <li>已按章节主线整理为可维护的 LaTeX 讲义。</li>
+            <li>已经补入原 PDF 中可辨认的主要手写笔记与课堂批注。</li>
+            <li>正文现在同时包含定理、推论、例题思路和手写补充证明。</li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <h2>本章目录</h2>
+          <ul class="outline-list">
+            <li>微分中值定理</li>
+            <li>罗尔中值定理、拉格朗日中值定理、柯西中值定理</li>
+            <li>泰勒中值定理</li>
+            <li>函数单调性、极值与最值</li>
+            <li>凹凸性、拐点与渐近线</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="panel pdf-panel">
+        <h2>讲义预览</h2>
+        <iframe
+          class="pdf-frame"
+          src="../content/gaoshu-ch3-mean-value.pdf"
+          title="高数基础第三章讲义 PDF"
+        ></iframe>
+      </section>
+    </div>
+  </body>
+</html>
