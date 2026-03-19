@@ -6,23 +6,22 @@
     <title>高数基础 第三章 | 中值定理及导数应用</title>
     <meta
       name="description"
-      content="高等数学第三章：中值定理及导数应用，完整原稿阅读页。"
+      content="高等数学第三章：中值定理及导数应用，主题化正文阅读页。"
     />
     <style>
       :root {
         --bg: #070a14;
         --surface: rgba(16, 15, 26, 0.8);
+        --surface-soft: rgba(255, 255, 255, 0.05);
         --line: rgba(255, 169, 199, 0.3);
         --text: #fff0f6;
         --muted: rgba(255, 233, 242, 0.76);
         --accent: #ff94b7;
+        --note: #ffd8a8;
         --shadow: 0 20px 60px rgba(0, 0, 0, 0.32);
       }
 
-      * {
-        box-sizing: border-box;
-      }
-
+      * { box-sizing: border-box; }
       body {
         margin: 0;
         color: var(--text);
@@ -32,32 +31,18 @@
           linear-gradient(180deg, #060913 0%, #0a0f1a 100%);
         font-family: "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
       }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      img {
-        display: block;
-        max-width: 100%;
-      }
-
+      a { color: inherit; text-decoration: none; }
       .shell {
-        width: min(1160px, calc(100% - 24px));
-        margin: 24px auto 40px;
+        width: min(1240px, calc(100% - 28px));
+        margin: 24px auto 42px;
       }
-
-      .topbar,
-      .hero,
-      .pages-wrap {
+      .topbar, .hero, .article, .block {
         border: 1px solid var(--line);
         border-radius: 24px;
         background: var(--surface);
         backdrop-filter: blur(18px);
         box-shadow: var(--shadow);
       }
-
       .topbar {
         display: flex;
         justify-content: space-between;
@@ -65,7 +50,6 @@
         gap: 18px;
         padding: 14px 18px;
       }
-
       .brand {
         display: flex;
         align-items: center;
@@ -73,7 +57,6 @@
         color: var(--accent);
         font-weight: 800;
       }
-
       .brand img {
         width: 42px;
         height: 42px;
@@ -81,7 +64,6 @@
         object-fit: cover;
         object-position: center 22%;
       }
-
       .back-link {
         min-height: 42px;
         padding: 10px 16px;
@@ -89,12 +71,10 @@
         border-radius: 999px;
         color: var(--muted);
       }
-
       .hero {
         margin-top: 18px;
         overflow: hidden;
       }
-
       .hero-cover {
         min-height: 280px;
         padding: 34px 30px;
@@ -104,7 +84,6 @@
           linear-gradient(180deg, rgba(9, 7, 14, 0.16), rgba(8, 5, 14, 0.84)),
           url("../assets/anime/kikuri-landing-bg.jpg") center/cover;
       }
-
       .eyebrow {
         margin: 0;
         color: var(--accent);
@@ -113,33 +92,25 @@
         font-size: 0.82rem;
         font-weight: 800;
       }
-
-      h1,
-      p {
-        margin: 0;
-      }
-
+      h1, h2, h3, p { margin: 0; }
       h1 {
         margin-top: 14px;
         font-size: clamp(2.4rem, 4vw, 4.2rem);
         line-height: 1.06;
       }
-
       .hero-desc {
         margin-top: 16px;
         max-width: 760px;
         color: var(--muted);
         line-height: 1.9;
       }
-
       .hero-meta {
         margin-top: 18px;
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
       }
-
-      .meta-pill {
+      .meta-pill, .kicker {
         display: inline-flex;
         align-items: center;
         min-height: 34px;
@@ -150,63 +121,170 @@
         color: var(--accent);
         font-weight: 800;
       }
-
-      .pages-wrap {
+      .article {
         margin-top: 18px;
-        padding: 22px;
+        padding: 24px;
       }
-
-      .pages-head {
-        margin-bottom: 18px;
+      .article section + section { margin-top: 24px; }
+      .block {
+        padding: 18px 18px 20px;
       }
-
-      .pages-head h2 {
+      .block + .block { margin-top: 16px; }
+      .block-title {
+        margin-top: 12px;
+        font-size: 1.18rem;
+      }
+      .block-body {
+        margin-top: 12px;
+        color: var(--muted);
+        line-height: 1.9;
+      }
+      .block-body p + p { margin-top: 10px; }
+      .formula {
+        margin: 14px 0;
+        padding: 14px 16px;
+        border: 1px solid rgba(255, 169, 199, 0.2);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.03);
+        overflow-x: auto;
+      }
+      .list {
+        margin: 12px 0 0;
+        padding-left: 20px;
+        color: var(--muted);
+        line-height: 1.9;
+      }
+      .subtle-title {
+        margin-top: 6px;
+        color: var(--text);
+        font-weight: 700;
+        font-size: 1.02rem;
+      }
+      .diagram-grid {
+        margin-top: 16px;
+        display: grid;
+        gap: 14px;
+      }
+      .mindmap {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        align-items: start;
+      }
+      .map-node, .tree-card, .sketch-card {
+        padding: 16px;
+        border: 1px solid rgba(255, 169, 199, 0.18);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .map-node strong, .tree-card strong {
+        display: inline-block;
+        margin-bottom: 10px;
+        color: var(--accent);
+      }
+      .map-node ul, .tree-card ul {
         margin: 0;
-        font-size: 1.28rem;
-      }
-
-      .pages-head p {
-        margin-top: 8px;
+        padding-left: 18px;
         color: var(--muted);
         line-height: 1.8;
       }
-
-      .pages {
+      .tree-flow {
         display: grid;
-        gap: 20px;
+        gap: 12px;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        margin-top: 16px;
       }
-
-      .page-card {
-        margin: 0;
-        padding: 16px;
-        border: 1px solid var(--line);
-        border-radius: 22px;
-        background: rgba(255, 255, 255, 0.04);
+      .tree-card {
+        position: relative;
       }
-
-      .page-card img {
-        width: 100%;
+      .tree-card::after {
+        content: "→";
+        position: absolute;
+        top: 18px;
+        right: -11px;
+        color: var(--accent);
+        font-weight: 800;
+      }
+      .tree-card:last-child::after {
+        display: none;
+      }
+      .curve-grid {
+        margin-top: 16px;
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1.3fr 1fr;
+      }
+      .compare-grid {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .curve-stack {
+        display: grid;
+        gap: 14px;
+      }
+      .sketch-title {
+        margin-bottom: 10px;
+        color: var(--note);
+        font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+      }
+      .sketch-box {
+        position: relative;
+        min-height: 126px;
         border-radius: 16px;
-        box-shadow: 0 22px 48px rgba(0, 0, 0, 0.26);
+        border: 1px dashed rgba(255, 169, 199, 0.25);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+        overflow: hidden;
       }
-
+      .axis-h, .axis-v, .curve-line, .dot-label {
+        position: absolute;
+      }
+      .axis-h {
+        left: 12%;
+        right: 8%;
+        bottom: 26%;
+        height: 2px;
+        background: rgba(255,240,246,0.76);
+      }
+      .axis-v {
+        left: 18%;
+        top: 10%;
+        bottom: 14%;
+        width: 2px;
+        background: rgba(255,240,246,0.76);
+      }
+      .curve-line {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .dot-label {
+        color: var(--note);
+        font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+        font-size: 0.96rem;
+      }
+      .hand {
+        color: var(--note);
+        font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+      }
       @media (max-width: 720px) {
-        .shell {
-          width: min(100% - 16px, 1160px);
-        }
-
-        .topbar {
-          flex-direction: column;
-          align-items: stretch;
-        }
-
-        .hero-cover,
-        .pages-wrap,
-        .page-card {
-          padding: 16px;
-        }
+        .shell { width: min(100% - 18px, 1240px); }
+        .topbar { flex-direction: column; align-items: stretch; }
+        .hero-cover, .article { padding: 18px; }
+        .mindmap, .tree-flow, .curve-grid, .compare-grid { grid-template-columns: 1fr; }
+        .tree-card::after { display: none; }
       }
     </style>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["\\(", "\\)"]],
+          displayMath: [["\\[", "\\]"]]
+        },
+        svg: { fontCache: "global" }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   </head>
   <body>
     <div class="shell">
@@ -224,57 +302,1000 @@
             <p class="eyebrow">Calculus Notes</p>
             <h1>第三章 中值定理及导数应用</h1>
             <p class="hero-desc">
-              这一版直接按原 PDF 页面完整展示，不做删减，不改段落位置。
-              外层保留博客主题风格，内部则完整显示原稿内容。
+              高等数学第三章围绕微分中值定理、泰勒公式以及导数在单调性、极值、最值、凹凸性、拐点和渐近线中的应用展开。
             </p>
             <div class="hero-meta">
               <span class="meta-pill">高等数学</span>
-              <span class="meta-pill">完整原稿</span>
-              <span class="meta-pill">30 页</span>
+              <span class="meta-pill">第三章</span>
+              <span class="meta-pill">中值定理</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="pages-wrap">
-        <div class="pages-head">
-          <h2>正文预览</h2>
-          <p>下面是按原 PDF 页面顺序完整展示的内容，文字、手写批注、图形和段落位置都保持一致。</p>
-        </div>
+      <article class="article">
+        <section>
+          <div class="block">
+            <span class="kicker">本章思维导图</span>
+            <div class="block-body">
+              <div class="diagram-grid mindmap">
+                <div class="map-node">
+                  <strong>中值定理</strong>
+                  <ul>
+                    <li>费马定理</li>
+                    <li>罗尔定理</li>
+                    <li>拉格朗日中值定理</li>
+                    <li>柯西中值定理</li>
+                    <li>泰勒中值定理</li>
+                  </ul>
+                </div>
+                <div class="map-node">
+                  <strong>导数微分学的应用</strong>
+                  <ul>
+                    <li>单调性</li>
+                    <li>极值</li>
+                    <li>最值</li>
+                    <li>曲线的凹凸性与拐点</li>
+                    <li>渐近线</li>
+                    <li>曲率与曲率圆</li>
+                  </ul>
+                </div>
+                <div class="map-node">
+                  <strong>曲率</strong>
+                  <ul>
+                    <li>弧长公式</li>
+                    <li>曲率的定义</li>
+                    <li>曲率计算公式</li>
+                    <li>曲率圆</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div class="pages">
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-01.png" alt="高数基础第三章第01页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-02.png" alt="高数基础第三章第02页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-03.png" alt="高数基础第三章第03页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-04.png" alt="高数基础第三章第04页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-05.png" alt="高数基础第三章第05页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-06.png" alt="高数基础第三章第06页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-07.png" alt="高数基础第三章第07页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-08.png" alt="高数基础第三章第08页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-09.png" alt="高数基础第三章第09页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-10.png" alt="高数基础第三章第10页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-11.png" alt="高数基础第三章第11页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-12.png" alt="高数基础第三章第12页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-13.png" alt="高数基础第三章第13页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-14.png" alt="高数基础第三章第14页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-15.png" alt="高数基础第三章第15页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-16.png" alt="高数基础第三章第16页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-17.png" alt="高数基础第三章第17页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-18.png" alt="高数基础第三章第18页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-19.png" alt="高数基础第三章第19页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-20.png" alt="高数基础第三章第20页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-21.png" alt="高数基础第三章第21页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-22.png" alt="高数基础第三章第22页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-23.png" alt="高数基础第三章第23页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-24.png" alt="高数基础第三章第24页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-25.png" alt="高数基础第三章第25页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-26.png" alt="高数基础第三章第26页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-27.png" alt="高数基础第三章第27页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-28.png" alt="高数基础第三章第28页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-29.png" alt="高数基础第三章第29页" loading="lazy" /></figure>
-          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-30.png" alt="高数基础第三章第30页" loading="lazy" /></figure>
-        </div>
-      </section>
+          <div class="block">
+            <span class="kicker">§1. 微分中值定理</span>
+            <div class="block-body">
+              <p class="subtle-title">【前言】</p>
+              <p class="subtle-title">（1）解决问题</p>
+              <p>中值定理主要解决开区间、有导数的存在性问题。</p>
+              <p class="subtle-title">（2）知识体系</p>
+              <div class="tree-flow">
+                <div class="tree-card">
+                  <strong>费马引理</strong>
+                  <ul>
+                    <li>定理前身</li>
+                  </ul>
+                </div>
+                <div class="tree-card">
+                  <strong>罗尔中值定理</strong>
+                  <ul>
+                    <li>定理前身</li>
+                    <li>证明基础</li>
+                  </ul>
+                </div>
+                <div class="tree-card">
+                  <strong>拉格朗日中值定理</strong>
+                  <ul>
+                    <li>定理内容</li>
+                    <li>推论与证明</li>
+                  </ul>
+                </div>
+                <div class="tree-card">
+                  <strong>柯西中值定理</strong>
+                  <ul>
+                    <li>定理前身</li>
+                    <li>证明基础</li>
+                  </ul>
+                </div>
+                <div class="tree-card">
+                  <strong>泰勒中值定理</strong>
+                  <ul>
+                    <li>定理前身</li>
+                    <li>应用</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">极值的定义</span>
+            <div class="block-body">
+              <p>若存在 \(\delta &gt; 0\)，使得对任意</p>
+              <div class="formula">\[
+                x\in(x_0-\delta,x_0+\delta),\quad x\neq x_0
+              \]</div>
+              <p>恒有</p>
+              <div class="formula">\[
+                f(x)&gt;f(x_0)\quad [f(x)&lt;f(x_0)]
+              \]</div>
+              <p>则称 \(x=x_0\) 是函数 \(y=f(x)\) 的极小（大）值点；\(f(x_0)\) 是函数 \(y=f(x)\) 的极小（大）值。</p>
+              <ul class="list">
+                <li>① 极值点一定在区间内部取得；</li>
+                <li>② 极大值点、极小值点统称为极值点；极大值、极小值统称为极值。</li>
+              </ul>
+              <div class="curve-grid">
+                <div class="sketch-card">
+                  <div class="sketch-title">极值示意图</div>
+                  <div class="sketch-box">
+                    <div class="axis-h"></div>
+                    <div class="axis-v"></div>
+                    <svg class="curve-line" viewBox="0 0 260 140" preserveAspectRatio="none" aria-hidden="true">
+                      <path d="M48 95 C72 40, 100 34, 128 74 S182 115, 218 58" fill="none" stroke="#fff0f6" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <span class="dot-label" style="left: 48px; bottom: 19px;">A</span>
+                    <span class="dot-label" style="left: 98px; top: 26px;">B</span>
+                    <span class="dot-label" style="left: 146px; bottom: 21px;">C</span>
+                    <span class="dot-label" style="left: 206px; top: 34px;">D</span>
+                    <span class="dot-label" style="left: 74px; bottom: 6px;">B、C 为极值点</span>
+                  </div>
+                </div>
+                <div class="curve-stack">
+                  <div class="sketch-card">
+                    <div class="sketch-title">定理 1 图像直观</div>
+                    <div class="sketch-box">
+                      <div class="axis-h"></div>
+                      <div class="axis-v"></div>
+                      <svg class="curve-line" viewBox="0 0 240 140" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M42 46 C84 18, 98 18, 132 58 S174 108, 214 74" fill="none" stroke="#fff0f6" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M76 38 H152" fill="none" stroke="#ffd8a8" stroke-width="2" stroke-dasharray="6 5"/>
+                        <path d="M118 76 H186" fill="none" stroke="#ffd8a8" stroke-width="2" stroke-dasharray="6 5"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="sketch-card">
+                    <div class="sketch-title">反例 1：\(y=x^3\)</div>
+                    <div class="sketch-box">
+                      <div class="axis-h"></div>
+                      <div class="axis-v"></div>
+                      <svg class="curve-line" viewBox="0 0 240 140" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M46 112 C88 108, 102 76, 121 70 S152 34, 202 18" fill="none" stroke="#fff0f6" stroke-width="3" stroke-linecap="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="sketch-card">
+                    <div class="sketch-title">反例 2：\(y=|x|\)</div>
+                    <div class="sketch-box">
+                      <div class="axis-h"></div>
+                      <div class="axis-v"></div>
+                      <svg class="curve-line" viewBox="0 0 240 140" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M54 26 L120 98 L202 26" fill="none" stroke="#fff0f6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">费马定理</span>
+            <div class="block-body">
+              <p class="subtle-title">1. 极值点处的可导性情况</p>
+              <p class="subtle-title">① 定理 1</p>
+              <p>若 \(x=x_0\) 是函数 \(y=f(x)\) 的极值点，则 \(f'(x_0)=0\) 或者 \(f'(x_0)\) 不存在。</p>
+              <p class="subtle-title">② 定理 2：费马定理</p>
+              <p>若 \(y=f(x)\) 在点 \(x=x_0\) 处取得极值且可导，则</p>
+              <div class="formula">\[
+                f'(x_0)=0
+              \]</div>
+              <p class="hand">注：本定理可理解为可导函数在极值点的必要条件。即上述定理反之不成立。</p>
+              <p class="hand">反例 1：\(y=x^3\)，此时 \(y'=3x^2\)，且 \(y'(0)=0\)，但 \(x=0\) 不是 \(y=x^3\) 的极值点。</p>
+              <p class="hand">反例 2：\(y=|x|\)，\(x=0\) 处不可导，但 \(x=0\) 是 \(y=|x|\) 的极小值点。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">罗尔中值定理</span>
+            <div class="block-body">
+              <p>设函数 \(f(x)\) 满足：</p>
+              <ul class="list">
+                <li>在闭区间 \([a,b]\) 上连续；</li>
+                <li>在开区间 \((a,b)\) 内可导；</li>
+                <li>\(f(a)=f(b)\)。</li>
+              </ul>
+              <p>则至少存在一点 \(\xi\in(a,b)\)，使得</p>
+              <div class="formula">\[
+                f'(\xi)=0
+              \]</div>
+              <p class="hand">证明：由于 \(f(x)\) 在 \([a,b]\) 上连续，故在该区间有最大值 \(M\) 与最小值 \(m\)。</p>
+              <p class="hand">1° 若 \(m=M\)，即 \(f(x)\) 恒为常数，此时结论显然成立。</p>
+              <p class="hand">2° 若 \(m&lt;M\)，由于 \(f(a)=f(b)\)，故至少有一个极值点落在 \((a,b)\) 内，由费马引理知，存在 \(\xi\in(a,b)\)，使 \(f'(\xi)=0\)。</p>
+              <p class="hand">总结 1：若 \(f(a)=f(b)\)，则可考虑用罗尔中值定理。</p>
+              <p class="hand">总结 2：构造函数法。若待证式可化为 \([\,\cdot\,]'=0\)，则可考虑构造辅助函数，再利用罗尔中值定理。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.1】设 \(f(x)\) 在 \([a,b]\) 上连续，\(0&lt;a&lt;b\)，在 \((a,b)\) 内可导，且 \(af(b)=bf(a)\)</span>
+            <div class="block-body">
+              <p>证明：存在 \(\xi\in(a,b)\)，使得</p>
+              <div class="formula">\[
+                f'(\xi)=\frac{f(\xi)}{\xi}.
+              \]</div>
+              <p class="hand">分析：移项且除以 \(x\)，有</p>
+              <div class="formula">\[
+                f'(x)-\frac{f(x)}{x}=0
+                \Longleftrightarrow
+                \frac{xf'(x)-f(x)}{x^2}=0
+                \Longleftrightarrow
+                \left[\frac{f(x)}{x}\right]'=0.
+              \]</div>
+              <p>构造辅助函数</p>
+              <div class="formula">\[
+                F(x)=\frac{f(x)}{x}.
+              \]</div>
+              <p>则 \(F(x)\) 在 \([a,b]\) 上连续，在 \((a,b)\) 内可导，且由 \(af(b)=bf(a)\) 得</p>
+              <div class="formula">\[
+                F(a)=\frac{f(a)}{a}=\frac{f(b)}{b}=F(b).
+              \]</div>
+              <p>由罗尔中值定理，存在 \(\xi\in(a,b)\)，使 \(F'(\xi)=0\)。而</p>
+              <div class="formula">\[
+                F'(x)=\frac{xf'(x)-f(x)}{x^2},
+              \]</div>
+              <p>所以 \( \xi f'(\xi)-f(\xi)=0\)，即 \(f'(\xi)=\dfrac{f(\xi)}{\xi}\)。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.2】设 \(f(x)\) 在 \([0,\pi]\) 上连续，在 \((0,\pi)\) 内可导</span>
+            <div class="block-body">
+              <p>证明：存在 \(\xi\in(0,\pi)\)，使得</p>
+              <div class="formula">\[
+                f'(\xi)=-f(\xi)\cot \xi.
+              \]</div>
+              <p class="hand">分析：移项后有 \(f'(x)\sin x+f(x)\cos x=0\)，即</p>
+              <div class="formula">\[
+                \bigl[f(x)\sin x\bigr]'=0.
+              \]</div>
+              <p>构造</p>
+              <div class="formula">\[
+                F(x)=f(x)\sin x.
+              \]</div>
+              <p>由 \(\sin 0=\sin\pi=0\)，得 \(F(0)=F(\pi)=0\)。故由罗尔中值定理，存在 \(\xi\in(0,\pi)\)，使 \(F'(\xi)=0\)。</p>
+              <div class="formula">\[
+                F'(x)=f'(x)\sin x+f(x)\cos x,
+              \]</div>
+              <p>于是</p>
+              <div class="formula">\[
+                f'(\xi)\sin \xi+f(\xi)\cos \xi=0
+                \quad \Longrightarrow \quad
+                f'(\xi)=-f(\xi)\cot \xi.
+              \]</div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">拉格朗日中值定理</span>
+            <div class="block-body">
+              <p>设函数 \(f(x)\) 在闭区间 \([a,b]\) 上连续，在开区间 \((a,b)\) 内可导，则在 \((a,b)\) 内至少存在一点 \(\xi\in(a,b)\)，使得</p>
+              <div class="formula">\[
+                \frac{f(b)-f(a)}{b-a}=f'(\xi)
+              \]</div>
+              <p class="hand">该式还可写成 \(f(b)-f(a)=f'(\xi)(b-a)\)。</p>
+              <p class="hand">又可写成 \(f(b)-f(a)=f'(a+\theta(b-a))(b-a)\)，\(0&lt;\theta&lt;1\)。几何意义：曲线上至少存在一点，其切线平行于弦 \(AB\)。</p>
+              <div class="curve-grid">
+                <div class="sketch-card">
+                  <div class="sketch-title">拉格朗日中值定理几何图</div>
+                  <div class="sketch-box">
+                    <div class="axis-h"></div>
+                    <div class="axis-v"></div>
+                    <svg class="curve-line" viewBox="0 0 260 140" preserveAspectRatio="none" aria-hidden="true">
+                      <path d="M42 76 C78 88, 118 44, 156 64 S208 56, 230 32" fill="none" stroke="#fff0f6" stroke-width="3" stroke-linecap="round"/>
+                      <path d="M44 86 L228 42" fill="none" stroke="#ffd8a8" stroke-width="2.2"/>
+                      <path d="M108 92 L108 42" fill="none" stroke="#ffd8a8" stroke-width="2" stroke-dasharray="6 5"/>
+                      <path d="M214 54 L214 30" fill="none" stroke="#ffd8a8" stroke-width="2" stroke-dasharray="6 5"/>
+                    </svg>
+                    <span class="dot-label" style="left: 50px; bottom: 18px;">a</span>
+                    <span class="dot-label" style="left: 103px; bottom: 18px;">ξ</span>
+                    <span class="dot-label" style="left: 208px; bottom: 18px;">b</span>
+                  </div>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">常用等价写法</div>
+                  <div class="formula">\[
+                    \frac{f(b)-f(a)}{b-a}=f'(\xi)
+                    \Longleftrightarrow
+                    f(b)-f(a)=f'(\xi)(b-a)
+                  \]</div>
+                  <div class="formula">\[
+                    \xi=a+\theta(b-a),\qquad 0&lt;\theta&lt;1
+                  \]</div>
+                  <p class="hand">应用：证明不等式、求极限、求单调性、比较大小。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.3】设 \(f(x)\) 在 \([a,b]\) 上连续，在 \((a,b)\) 内可导</span>
+            <div class="block-body">
+              <p>证明：存在 \(\xi\in(a,b)\)，使得</p>
+              <div class="formula">\[
+                \frac{f(b)-f(a)}{b-a}=f(\xi)+\xi f'(\xi).
+              \]</div>
+              <p class="hand">分析：\(f(\xi)+\xi f'(\xi)\) 联想到 \([xf(x)]'=f(x)+xf'(x)\)。</p>
+              <p>构造 \(F(x)=xf(x)\)。则 \(F(x)\) 在 \([a,b]\) 上连续，在 \((a,b)\) 内可导。由拉格朗日中值定理，存在 \(\xi\in(a,b)\)，使</p>
+              <div class="formula">\[
+                \frac{F(b)-F(a)}{b-a}=F'(\xi).
+              \]</div>
+              <p>又因为</p>
+              <div class="formula">\[
+                F'(x)=f(x)+xf'(x),
+              \]</div>
+              <p>所以</p>
+              <div class="formula">\[
+                \frac{f(b)-f(a)}{b-a}=f(\xi)+\xi f'(\xi).
+              \]</div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.4】证明：当 \(x&gt;0\) 时，\(\dfrac{x}{1+x}&lt;\ln(1+x)&lt;x\)</span>
+            <div class="block-body">
+              <p class="hand">分析：可直接利用拉格朗日中值定理，取 \(f(u)=\ln u\)，\(a=1\)，\(b=1+x\)。</p>
+              <p>由拉格朗日中值定理，存在 \(\xi\in(1,1+x)\)，使得</p>
+              <div class="formula">\[
+                \ln(1+x)-\ln 1=\frac{1}{\xi}(1+x-1)=\frac{x}{\xi}.
+              \]</div>
+              <p>因为 \(1&lt;\xi&lt;1+x\)，故有</p>
+              <div class="formula">\[
+                \frac{1}{1+x}&lt;\frac{1}{\xi}&lt;1.
+              \]</div>
+              <p>再乘以 \(x&gt;0\)，得</p>
+              <div class="formula">\[
+                \frac{x}{1+x}&lt;\ln(1+x)&lt;x.
+              \]</div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">可用拉格朗日中值定理证明的几个常识</span>
+            <div class="block-body">
+              <p>（1）推论 1：若 \(f(x)\) 在 \((a,b)\) 内可导，且 \(f'(x)=0\)，则 \(f(x)\) 在 \((a,b)\) 内为常数。</p>
+              <p class="hand">证明：任取 \(x_1&lt;x_2\in(a,b)\)，则 \(f(x)\) 在 \([x_1,x_2]\) 上连续，在 \((x_1,x_2)\) 内可导。</p>
+              <p>由拉格朗日中值定理，存在 \(\xi\in(x_1,x_2)\)，使</p>
+              <div class="formula">\[
+                f(x_2)-f(x_1)=f'(\xi)(x_2-x_1)=0,
+              \]</div>
+              <p>故 \(f(x_2)=f(x_1)\)，所以 \(f(x)\) 在 \((a,b)\) 内恒为常数。</p>
+              <p>（2）推论 2：若 \(f(x),g(x)\) 在 \((a,b)\) 内可导，且 \(f'(x)=g'(x)\)，则 \(f(x)=g(x)+C\)（\(C\) 为常数）。</p>
+              <p class="hand">证明：令 \(F(x)=f(x)-g(x)\)，则 \(F'(x)=f'(x)-g'(x)=0\)。由推论 1，知 \(F(x)=C\)，即 \(f(x)=g(x)+C\)。</p>
+              <p>（3）推论 3：若对任意 \(x\in(a,b)\) 有 \(f'(x)&gt;0\)（或 \(f'(x)&lt;0\)），则 \(f(x)\) 在 \((a,b)\) 内单调递增（或单调递减）。</p>
+              <p class="hand">证明：任取 \(x_1&lt;x_2\in(a,b)\)，由拉格朗日中值定理，存在 \(\xi\in(x_1,x_2)\)，使 \(f(x_2)-f(x_1)=f'(\xi)(x_2-x_1)\)。若 \(f'(\xi)&gt;0\)，则 \(f(x_2)&gt;f(x_1)\)。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.5】证明恒等式：\(\arcsin x+\arccos x=\dfrac{\pi}{2}\,\;(-1\le x\le 1)\)</span>
+            <div class="block-body">
+              <p class="hand">分析 1：证明 \(f(x)=g(x)\) 的思路：① 证明 \(f(x)-g(x)\) 为常数；② 求常数值。</p>
+              <p>设</p>
+              <div class="formula">\[
+                f(x)=\arcsin x+\arccos x.
+              \]</div>
+              <p>显然 \(f(x)\) 在 \([-1,1]\) 上连续，在 \((-1,1)\) 内可导，且</p>
+              <div class="formula">\[
+                f'(x)=\frac{1}{\sqrt{1-x^2}}-\frac{1}{\sqrt{1-x^2}}=0.
+              \]</div>
+              <p>由推论 1 知 \(f(x)\) 为常数。取 \(x=0\)，得</p>
+              <div class="formula">\[
+                f(0)=\arcsin 0+\arccos 0=0+\frac{\pi}{2}=\frac{\pi}{2}.
+              \]</div>
+              <p>故</p>
+              <div class="formula">\[
+                \arcsin x+\arccos x=\frac{\pi}{2}.
+              \]</div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">柯西中值定理</span>
+            <div class="block-body">
+              <p>设函数 \(f(x)\) 和 \(g(x)\) 在闭区间 \([a,b]\) 上均连续，在开区间 \((a,b)\) 内均可导，且对任意 \(x\in(a,b)\)，有 \(g'(x)\neq 0\)。则在 \((a,b)\) 内至少存在一点 \(\xi\in(a,b)\)，使得</p>
+              <div class="formula">\[
+                \frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(\xi)}{g'(\xi)}
+              \]</div>
+              <p class="hand">注：当 \(g(x)=x\) 时，柯西中值定理即为拉格朗日中值定理。</p>
+              <div class="curve-grid">
+                <div class="sketch-card">
+                  <div class="sketch-title">柯西中值定理几何图</div>
+                  <div class="sketch-box">
+                    <div class="axis-h"></div>
+                    <div class="axis-v"></div>
+                    <svg class="curve-line" viewBox="0 0 260 140" preserveAspectRatio="none" aria-hidden="true">
+                      <path d="M48 92 C80 68, 106 70, 140 52 S198 28, 228 36" fill="none" stroke="#fff0f6" stroke-width="3" stroke-linecap="round"/>
+                      <path d="M46 98 L232 54" fill="none" stroke="#ffd8a8" stroke-width="2.2"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">常见取法</div>
+                  <p class="hand">若右边出现 \(\dfrac{f'(\xi)}{1/\xi}\)，常取 \(g(x)=\ln x\)。</p>
+                  <p class="hand">若题目给出两函数增量之比，优先考虑柯西中值定理。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.6】设 \(0&lt;a&lt;b\)，函数 \(f(x)\) 在 \([a,b]\) 上连续，在 \((a,b)\) 内可导</span>
+            <div class="block-body">
+              <p>证明：存在一点 \(\xi\in(a,b)\)，使</p>
+              <div class="formula">\[
+                f(b)-f(a)=\xi f'(\xi)\ln\frac{b}{a}.
+              \]</div>
+              <p class="hand">分析：\(\dfrac{f(b)-f(a)}{\ln b-\ln a}=\xi f'(\xi)=\dfrac{f'(\xi)}{1/\xi}\)，故取 \(g(x)=\ln x\)。</p>
+              <p>令 \(g(x)=\ln x\)。则 \(g(x)\) 在 \([a,b]\) 上连续，在 \((a,b)\) 内可导，且 \(g'(x)=\dfrac{1}{x}\neq 0\)。由柯西中值定理，存在 \(\xi\in(a,b)\)，使</p>
+              <div class="formula">\[
+                \frac{f(b)-f(a)}{\ln b-\ln a}=\frac{f'(\xi)}{1/\xi}=\xi f'(\xi).
+              \]</div>
+              <p>即</p>
+              <div class="formula">\[
+                f(b)-f(a)=\xi f'(\xi)\ln\frac{b}{a}.
+              \]</div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">泰勒中值定理</span>
+            <div class="block-body">
+              <p class="subtle-title">【推导】</p>
+              <p class="hand">设 \(f(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n+o(x^n)\)。</p>
+              <p class="hand">令 \(x=0\)，得 \(f(0)=a_0\)；求导后再令 \(x=0\)，得 \(a_1=f'(0)\)，继续下去可得 \(a_n=\dfrac{f^{(n)}(0)}{n!}\)。</p>
+              <p class="subtle-title">（1）带皮亚诺余项型泰勒公式</p>
+              <p>若函数 \(f(x)\) 在包含 \(x_0\) 处具有 \(n\) 阶导数，那么在 \(x_0\) 的一个邻域内，对该邻域内的任一 \(x\)，有</p>
+              <div class="formula">\[
+                f(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\cdots+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+o[(x-x_0)^n]
+              \]</div>
+              <p class="hand">其中 \(o[(x-x_0)^n]\) 叫皮亚诺型余项。</p>
+              <p class="subtle-title">（2）带拉格朗日型余项的泰勒公式</p>
+              <div class="formula">\[
+                f(x)=f(x_0)+f'(x_0)(x-x_0)+\cdots+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}.
+              \]</div>
+              <div class="curve-grid">
+                <div class="sketch-card">
+                  <div class="sketch-title">推导记忆法</div>
+                  <p class="hand">记住“设多项式 + 逐次求导代入原点”这条主线。</p>
+                  <p class="hand">系数就是各阶导数在展开点处的值除以阶乘。</p>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">两类余项</div>
+                  <p class="hand">皮亚诺型余项：强调近似的阶数。</p>
+                  <p class="hand">拉格朗日型余项：常用于证明题与估计题。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.8】设 \(\lim\limits_{x\to 0}\dfrac{f(x)}{x}=1\)，且 \(f''(x)&gt;0\)，证明 \(f(x)&gt;x\)</span>
+            <div class="block-body">
+              <p>由</p>
+              <div class="formula">\[
+                \lim_{x\to 0}\frac{f(x)}{x}=1
+              \]</div>
+              <p>可知 \(f(0)=0\)，并且</p>
+              <div class="formula">\[
+                f'(0)=\lim_{x\to 0}\frac{f(x)-f(0)}{x-0}=1.
+              \]</div>
+              <p>于是 \(f(x)\) 在 \(x=0\) 处作泰勒展开：</p>
+              <div class="formula">\[
+                f(x)=f(0)+f'(0)x+\frac{f''(\xi)}{2}x^2=x+\frac{f''(\xi)}{2}x^2,
+              \]</div>
+              <p>其中 \(\xi\) 介于 \(0\) 与 \(x\) 之间。由于 \(f''(\xi)&gt;0\)，故</p>
+              <div class="formula">\[
+                f(x)&gt;x.
+              \]</div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="block">
+            <span class="kicker">§2. 导数的微分学应用</span>
+            <div class="block-body">
+              <p>本节按原顺序讨论函数的单调性、极值与最值、凹凸性与拐点，以及渐近线问题。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">1. 函数的单调性</span>
+            <div class="block-body">
+              <p>设函数 \(f(x)\) 在 \([a,b]\) 上连续，在 \((a,b)\) 内可导。</p>
+              <ul class="list">
+                <li>如果在 \((a,b)\) 内 \(f'(x)\ge 0\)，且等号仅在有限多个点处成立，那么函数 \(y=f(x)\) 在 \([a,b]\) 上单调增加。</li>
+                <li>如果在 \((a,b)\) 内 \(f'(x)\le 0\)，且等号仅在有限多个点处成立，那么函数 \(y=f(x)\) 在 \([a,b]\) 上单调减少。</li>
+              </ul>
+              <p class="hand">注 1：若 \(f'(x)&gt;0,\forall x\in(a,b)\)，则 \(f(x)\) 在 \((a,b)\) 上单调增加。</p>
+              <p class="hand">注 2：若 \(f(x)\) 在 \((a,b)\) 上单调增加，不能反推 \(f'(x)&gt;0\)。</p>
+              <p>求函数单调性的步骤：</p>
+              <ul class="list">
+                <li>① 求 \(f'(x)\)，得驻点与不可导点。</li>
+                <li>② 以上述点为分界点分段讨论 \(f'(x)\) 的符号，以 \(f'(x)\) 的符号得 \(y=f(x)\) 的单调性。</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">例：求 \(y=xe^{-x^2}\) 的单调区间</span>
+            <div class="block-body">
+              <p>求导得</p>
+              <div class="formula">\[
+                y'=e^{-x^2}-2x^2e^{-x^2}=(1-2x^2)e^{-x^2}.
+              \]</div>
+              <p>令 \(y'=0\)，得 \(x=\pm \dfrac{\sqrt{2}}{2}\)。由于 \(e^{-x^2}&gt;0\)，导数符号由 \(1-2x^2\) 决定，因此</p>
+              <ul class="list">
+                <li>在 \((-\infty,-\dfrac{\sqrt{2}}{2})\) 与 \((\dfrac{\sqrt{2}}{2},+\infty)\) 上，\(y'&lt;0\)，函数单调减少；</li>
+                <li>在 \((-\dfrac{\sqrt{2}}{2},\dfrac{\sqrt{2}}{2})\) 上，\(y'&gt;0\)，函数单调增加。</li>
+              </ul>
+              <p class="hand">对应判号表：\((-\infty,-\tfrac{\sqrt2}{2})\;|\;(-\tfrac{\sqrt2}{2},\tfrac{\sqrt2}{2})\;|\;(\tfrac{\sqrt2}{2},+\infty)\) 上导数符号依次为 \(-,+,-\)。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.9】设常数 \(k&gt;0\)，函数 \(f(x)=\ln x-\dfrac{x}{e}+k\) 在 \((0,+\infty)\) 内零点个数</span>
+            <div class="block-body">
+              <p class="hand">此类题解题步骤：</p>
+              <p class="hand">① 求 \(f'(x)\)，由 \(f'(x)=0\) 得驻点，\(g(x)\) 得导点；</p>
+              <p class="hand">② 以上述点为分界点，研究 \(f'(x)\) 符号，得单调性；</p>
+              <p class="hand">③ 分析函数与 \(y\) 轴、\(x\) 轴的关系，结合端点极限；</p>
+              <p class="hand">④ 画出简图，作答。</p>
+              <p>先求导：</p>
+              <div class="formula">\[
+                f'(x)=\frac{1}{x}-\frac{1}{e}.
+              \]</div>
+              <p>令 \(f'(x)=0\)，得驻点 \(x=e\)。于是当 \(x&lt;e\) 时，\(f'(x)&gt;0\)，函数单调递增；当 \(x&gt;e\) 时，\(f'(x)&lt;0\)，函数单调递减。</p>
+              <p>又因为</p>
+              <div class="formula">\[
+                f(e)=k&gt;0,\qquad \lim_{x\to 0^+}f(x)=-\infty,\qquad \lim_{x\to+\infty}f(x)=-\infty,
+              \]</div>
+              <p>所以图像先升后降，并且峰值在 \(x=e\) 处大于零，因此与 \(x\) 轴有两个交点，零点个数为 \(2\)。</p>
+              <p class="hand">简图可知：函数先增后减，且最高点在 \(x=e\) 处高于 \(x\) 轴，因此零点个数为 2。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.10】证明：\(\tan x &gt; x+\dfrac{x^3}{3}\,\,(0&lt;x&lt;\dfrac{\pi}{2})\)</span>
+            <div class="block-body">
+              <p class="hand">证明此类不等式步骤：</p>
+              <p class="hand">① 构造与问题有关的函数；</p>
+              <p class="hand">② 求导，求出 \(f'(x)=0\) 的驻点与导点；</p>
+              <p class="hand">③ 以这些点为分界点，确定 \(f(x)\) 的单调性；</p>
+              <p class="hand">④ 结合单调性与特殊点函数值求结论。</p>
+              <p>设</p>
+              <div class="formula">\[
+                f(x)=\tan x-x-\frac{x^3}{3}.
+              \]</div>
+              <p>则</p>
+              <div class="formula">\[
+                f'(x)=\sec^2 x-1-x^2=\tan^2 x-x^2.
+              \]</div>
+              <p class="hand">由 \(0&lt;x&lt;\dfrac{\pi}{2}\) 时 \(\tan x&gt;x\)，得 \(\tan^2x-x^2&gt;0\)。</p>
+              <p>于是 \(f'(x)&gt;0\)，函数 \(f(x)\) 在 \((0,\dfrac{\pi}{2})\) 上单调增加，而 \(f(0)=0\)，故</p>
+              <div class="formula">\[
+                f(x)&gt;0 \quad \Longrightarrow \quad \tan x&gt;x+\frac{x^3}{3}.
+              \]</div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.11】设 \(b&gt;a&gt;e\)，求证 \(a^b&gt;b^a\)</span>
+            <div class="block-body">
+              <p class="hand">转化为比较大小：\(a^b&gt;b^a \Longleftrightarrow b\ln a&gt;a\ln b \Longleftrightarrow \dfrac{\ln a}{a}&gt;\dfrac{\ln b}{b}\)。</p>
+              <p>两边取对数，问题化为证明</p>
+              <div class="formula">\[
+                b\ln a&gt;a\ln b \quad \Longleftrightarrow \quad \frac{\ln a}{a}&gt;\frac{\ln b}{b}.
+              \]</div>
+              <p>设 \(f(x)=\dfrac{\ln x}{x}\)，则</p>
+              <div class="formula">\[
+                f'(x)=\frac{1-\ln x}{x^2}.
+              \]</div>
+              <p>由于 \(x&gt;e\) 时 \(1-\ln x&lt;0\)，故 \(f(x)\) 在 \((e,+\infty)\) 上单调减少。又因 \(b&gt;a&gt;e\)，于是 \(f(a)&gt;f(b)\)，即</p>
+              <div class="formula">\[
+                \frac{\ln a}{a}&gt;\frac{\ln b}{b},
+              \]</div>
+              <p>从而 \(a^b&gt;b^a\)。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">2. 函数的极值与最值</span>
+            <div class="block-body">
+              <p class="hand">① 定义：看 \(x_0\) 附近函数值与 \(f(x_0)\) 的大小关系。</p>
+              <ul class="list">
+                <li>② 必要条件：极值点处可导时 \(f'(x_0)=0\)，若不可导，也可能是极值点。</li>
+                <li>③ 第一充分条件：若 \(f'(x)\) 在 \(x_0\) 左右异号，则 \(x_0\) 为极值点；左正右负为极大值点，左负右正为极小值点。</li>
+                <li>④ 第二充分条件：若 \(f'(x_0)=f''(x_0)=\cdots=f^{(2k-1)}(x_0)=0\)，且 \(f^{(2k)}(x_0)\neq 0\)，则 \(f^{(2k)}(x_0)&gt;0\) 时为极小值点，\(f^{(2k)}(x_0)&lt;0\) 时为极大值点。</li>
+              </ul>
+              <p class="hand">注：\(f'(x_0)=0\) 是极值点的必要条件，不能说明 \(x_0\) 一定取得极值。</p>
+              <p class="hand">若 \(f'(x_0)\) 左右同号，则 \(x_0\) 不是极值点。</p>
+              <p>求极值的步骤：</p>
+              <ul class="list">
+                <li>① 求 \(f'(x)\)，得驻点与不可导点；</li>
+                <li>② 利用极值的充分条件判断；</li>
+                <li>③ 作结。</li>
+              </ul>
+              <div class="compare-grid">
+                <div class="sketch-card">
+                  <div class="sketch-title">极值点</div>
+                  <p class="hand">定义：看 \(x_0\) 附近函数值与 \(f(x_0)\) 的比较。</p>
+                  <p class="hand">判法：\(f'\) 左右异号，或偶数阶首次非零。</p>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">拐点</div>
+                  <p class="hand">定义：连续曲线中凹凸性改变的点。</p>
+                  <p class="hand">判法：\(f''\) 左右异号，或 \(f'\) 左右单调性不同。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">例：设 \(f(x)=x\sin x+\cos x\)</span>
+            <div class="block-body">
+              <p>求导得</p>
+              <div class="formula">\[
+                f'(x)=\sin x+x\cos x-\sin x=x\cos x.
+              \]</div>
+              <p>由 \(f'(x)=0\) 得驻点 \(x=0\) 或 \(x=\dfrac{\pi}{2}\)。再求</p>
+              <div class="formula">\[
+                f''(x)=\cos x-\!x\sin x.
+              \]</div>
+              <p>于是 \(f''(0)=1&gt;0\)，\(f''(\dfrac{\pi}{2})=-\dfrac{\pi}{2}&lt;0\)，故 \(f(0)\) 是极小值，\(f(\dfrac{\pi}{2})\) 是极大值。</p>
+              <p class="hand">此题适合用第二充分条件判断极值。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.13】由导函数图形判断极值点个数</span>
+            <div class="block-body">
+              <p>已知 \(f(x)\) 在 \((-\infty,+\infty)\) 内连续，其导函数 \(f'(x)\) 的图形如图所示。</p>
+              <p class="hand">导数为零点或导数不存在点只是极值点的可能点。由图可得可能点为 \(A,B,C,D\)。</p>
+              <p class="hand">再由第一充分条件判号可知：\(A,C\) 为极大值点，\(B,D\) 为极小值点。</p>
+              <p class="hand">所以函数有两个极大值点和两个极小值点。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">3. 函数的最大值和最小值</span>
+            <div class="block-body">
+              <p>（1）求函数 \(f(x)\) 在 \([a,b]\) 上最大值和最小值的方法：</p>
+              <ul class="list">
+                <li>① 求 \(f'(x)\)，得函数在 \((a,b)\) 内的驻点及不可导点；</li>
+                <li>② 计算 \(f(x)\) 在上述驻点、不可导点处的函数值与端点值 \(f(a),f(b)\)；</li>
+                <li>③ 比较诸值大小，其中最大的是 \(f(x)\) 在 \([a,b]\) 上的最大值，最小的是 \(f(x)\) 在 \([a,b]\) 上的最小值。</li>
+              </ul>
+              <p>（2）求函数最值的一般方法：</p>
+              <ul class="list">
+                <li>① 求 \(f'(x)\)，得函数在对应区间内的驻点与不可导点；</li>
+                <li>② 以上述点为分界点，分段分析 \(f'(x)\) 的正、负号，得单调性与极值点；</li>
+                <li>③ 分析函数在端点处情况（取不到的点取极限即可）；</li>
+                <li>④ 结合单调性、极值点、端点的情况给出最值。</li>
+              </ul>
+              <p class="hand">闭区间最值：驻点值、不可导点值、端点值一起比较；开区间最值：再结合单调性与端点极限。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.12】最值问题</span>
+            <div class="block-body">
+              <p>（1）求函数 \(y=x+2\cos x\) 在区间 \([0,\dfrac{\pi}{2}]\) 上的最大值。</p>
+              <p>由</p>
+              <div class="formula">\[
+                y'=1-2\sin x=0
+              \]</div>
+              <p>得 \(x=\dfrac{\pi}{6}\)，\(x\in[0,\dfrac{\pi}{2}]\)。比较</p>
+              <div class="formula">\[
+                y(0)=2,\quad y\!\left(\frac{\pi}{6}\right)=\frac{\pi}{6}+\sqrt{3},\quad y\!\left(\frac{\pi}{2}\right)=\frac{\pi}{2},
+              \]</div>
+              <p>故最大值为 \(\dfrac{\pi}{6}+\sqrt{3}\)。</p>
+              <p>（2）求函数 \(y=x^{2x}\) 在 \((0,1]\) 上的最小值。</p>
+              <p>令 \(\ln y=2x\ln x\)，则</p>
+              <div class="formula">\[
+                \frac{y'}{y}=2(\ln x+1).
+              \]</div>
+              <p>故 \(y'=0\) 时 \(x=e^{-1}\)。当 \(x\in(0,e^{-1})\) 时 \(y'&lt;0\)，当 \(x\in(e^{-1},1]\) 时 \(y'&gt;0\)，故 \(y=e^{-1/e}\) 是最小值。</p>
+              <p class="hand">这里用对数求导，把幂指函数的最值问题转化成普通导数判号问题。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.14】围成正方形与圆使面积和最小</span>
+            <div class="block-body">
+              <p>设截成的两段长分别为 \(x\) 与 \(a-x\)。若长为 \(x\) 的一段围成正方形，则边长为 \(\dfrac{x}{4}\)；另一段围成圆，则半径为 \(\dfrac{a-x}{2\pi}\)。</p>
+              <p>总面积</p>
+              <div class="formula">\[
+                S=\left(\frac{x}{4}\right)^2\!+\pi\left(\frac{a-x}{2\pi}\right)^2
+                =\frac{x^2}{16}+\frac{(a-x)^2}{4\pi}.
+              \]</div>
+              <p>求导得</p>
+              <div class="formula">\[
+                S'=\frac{x}{8}-\frac{a-x}{2\pi}.
+              \]</div>
+              <p>令 \(S'=0\)，得</p>
+              <div class="formula">\[
+                x=\frac{4a}{4+\pi},\qquad a-x=\frac{a\pi}{4+\pi}.
+              \]</div>
+              <p>且当 \(x&gt;\dfrac{4a}{4+\pi}\) 时，\(S'&gt;0\)；当 \(x&lt;\dfrac{4a}{4+\pi}\) 时，\(S'&lt;0\)，故 \(x=\dfrac{4a}{4+\pi}\) 为最小值点。</p>
+              <p>因此两段长分别为</p>
+              <div class="formula">\[
+                \frac{4a}{4+\pi},\qquad a-\frac{4a}{4+\pi}=\frac{a\pi}{4+\pi}.
+              \]</div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">4. 曲线的凹凸性与拐点</span>
+            <div class="block-body">
+              <p>（1）凹凸性定义。设 \(f(x)\) 在区间 \(I\) 上连续，若对任意不同两点 \(x_1,x_2\in I\)，恒有</p>
+              <div class="formula">\[
+                f\!\left(\frac{x_1+x_2}{2}\right) &gt; \frac{f(x_1)+f(x_2)}{2},
+              \]</div>
+              <p>则称 \(f(x)\) 在 \(I\) 上是凸的；若恒有</p>
+              <div class="formula">\[
+                f\!\left(\frac{x_1+x_2}{2}\right) &lt; \frac{f(x_1)+f(x_2)}{2},
+              \]</div>
+              <p>则称 \(f(x)\) 在 \(I\) 上是凹的。</p>
+              <p class="hand">几何意义：凸时曲线在弦的上方；凹时曲线在弦的下方。</p>
+              <p>（2）凹凸性的判定。设函数 \(f(x)\) 在 \([a,b]\) 上连续，在 \((a,b)\) 内具有二阶导数，那么：</p>
+              <ul class="list">
+                <li>如果在 \((a,b)\) 内 \(f''(x)&lt;0\)，则曲线 \(y=f(x)\) 在 \([a,b]\) 上是凸的；</li>
+                <li>如果在 \((a,b)\) 内 \(f''(x)&gt;0\)，则曲线 \(y=f(x)\) 在 \([a,b]\) 上是凹的。</li>
+              </ul>
+              <p class="subtle-title">【注】求凹凸性的步骤</p>
+              <ul class="list">
+                <li>① 求 \(f''(x)\)，得 \(f''(x)=0\) 的解与 \(f''(x)\) 不存在的点；</li>
+                <li>② 以这些点为分界点讨论 \(f''(x)\) 的符号，以 \(f''(x)\) 的符号得凹凸性。</li>
+              </ul>
+              <p class="hand">记法：凸时曲线在切线的上方；凹时曲线在切线的下方。</p>
+              <div class="compare-grid">
+                <div class="sketch-card">
+                  <div class="sketch-title">凸</div>
+                  <p class="hand">切线在曲线下方</p>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">凹</div>
+                  <p class="hand">切线在曲线上方</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">例：求曲线 \(y=3x^4-4x^3+10\) 的凹凸区间</span>
+            <div class="block-body">
+              <p>有</p>
+              <div class="formula">\[
+                y'=12x^3-12x^2,\qquad y''=36x^2-24x=12x(3x-2).
+              \]</div>
+              <p>令 \(y''=0\)，得 \(x=0,\dfrac{2}{3}\)。分段讨论 \(y''\) 的符号，可知：</p>
+              <ul class="list">
+                <li>当 \(x\in(-\infty,0)\) 时，\(y''&gt;0\)，曲线在该区间上凹；</li>
+                <li>当 \(x\in(0,\dfrac{2}{3})\) 时，\(y''&lt;0\)，曲线在该区间上凸；</li>
+                <li>当 \(x\in(\dfrac{2}{3},+\infty)\) 时，\(y''&gt;0\)，曲线在该区间上凹。</li>
+              </ul>
+              <p class="hand">即曲线在 \((-\infty,0)\) 与 \((\dfrac{2}{3},+\infty)\) 上凹，在 \((0,\dfrac{2}{3})\) 上凸。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">（3）拐点的定义与判别</span>
+            <div class="block-body">
+              <p class="hand">① 定义：连续曲线中凹凸性改变的点。</p>
+              <ul class="list">
+                <li>② 必要条件：拐点处 \(f''(x_0)=0\) 或 \(f''(x_0)\) 不存在；</li>
+                <li>③ 第一充分条件：若 \(f''(x)\) 在 \(x_0\) 左右异号，则 \(x_0\) 为拐点；</li>
+                <li>④ 第二充分条件：若 \(f'(x)\) 在 \(x_0\) 左右单调性不同，也可判断为拐点。</li>
+              </ul>
+              <p class="hand">注：拐点要写成点 \((x_0,f(x_0))\)。</p>
+              <p class="subtle-title">【求拐点的步骤】</p>
+              <ul class="list">
+                <li>① 求 \(f''(x)\)，得 \(f''(x)=0\) 的解与 \(f''(x)\) 不存在的点；</li>
+                <li>② 利用拐点的充分条件判定；</li>
+                <li>③ 作结。</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.15】问 \(a,b\) 为何值时，点 \((1,3)\) 为曲线 \(y=ax^3+bx^2\) 的拐点</span>
+            <div class="block-body">
+              <p>由点 \((1,3)\) 在曲线上，得</p>
+              <div class="formula">\[
+                a+b=3.
+              \]</div>
+              <p>又因为</p>
+              <div class="formula">\[
+                y'=3ax^2+2bx,\qquad y''=6ax+2b.
+              \]</div>
+              <p>拐点处有 \(y''(1)=0\)，故</p>
+              <div class="formula">\[
+                6a+2b=0.
+              \]</div>
+              <p>联立</p>
+              <div class="formula">\[
+                \begin{cases}
+                a+b=3,\\
+                6a+2b=0,
+                \end{cases}
+              \]</div>
+              <p>解得</p>
+              <div class="formula">\[
+                a=-\frac{3}{2},\qquad b=\frac{9}{2}.
+              \]</div>
+              <p class="hand">故 \(a=-\dfrac{3}{2},\;b=\dfrac{9}{2}\)。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.16】设函数 \(f(x)=|x(1-x)|\)</span>
+            <div class="block-body">
+              <p class="hand">法一：图像法，得 \(x=0\) 不是极值点，而 \((0,0)\) 是拐点。</p>
+              <p class="hand">法二：计算法。</p>
+              <p>在 \(x=0\) 附近可写成</p>
+              <div class="formula">\[
+                f(x)=
+                \begin{cases}
+                x^2-x, & x&lt;0,\\
+                x-x^2, & 0&lt;x&lt;1.
+                \end{cases}
+              \]</div>
+              <p>于是</p>
+              <div class="formula">\[
+                f'(x)=
+                \begin{cases}
+                2x-1, & x&lt;0,\\
+                1-2x, & 0&lt;x&lt;1,
+                \end{cases}
+                \qquad
+                f''(x)=
+                \begin{cases}
+                2, & x&lt;0,\\
+                -2, & 0&lt;x&lt;1.
+                \end{cases}
+              \]</div>
+              <p>故 \(f'(x)\) 在 \(x=0\) 左右同号，\(x=0\) 不是 \(f(x)\) 的极值点；而 \(f''(x)\) 在 \(x=0\) 左右异号，所以 \((0,0)\) 是曲线 \(y=f(x)\) 的拐点。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">5. 渐近线</span>
+            <div class="block-body">
+              <p>当曲线上的动点沿着曲线无限远离原点时，若动点与某一直线的距离趋近于零，则称该直线为曲线的渐近线。</p>
+              <p>（1）垂直渐近线：</p>
+              <div class="formula">\[
+                \lim_{x\to a^+}f(x)=\infty \quad \text{或}\quad \lim_{x\to a^-}f(x)=\infty,
+              \]</div>
+              <p>则 \(x=a\) 为曲线 \(y=f(x)\) 的一条垂直渐近线。垂直渐近线只产生于无定义点处。</p>
+              <p>（2）水平渐近线：</p>
+              <div class="formula">\[
+                \lim_{x\to +\infty}f(x)=b \quad \text{或}\quad \lim_{x\to -\infty}f(x)=b,
+              \]</div>
+              <p>则 \(y=b\) 是曲线 \(y=f(x)\) 的一条水平渐近线。水平渐近线只产生于无穷远处，且至多两条。</p>
+              <p>（3）斜渐近线：当某个方向上没有水平渐近线时，可考虑该方向的斜渐近线。若</p>
+              <div class="formula">\[
+                \lim_{x\to \pm\infty}\frac{f(x)}{x}=a\neq 0,\qquad
+                \lim_{x\to \pm\infty}[f(x)-ax]=b,
+              \]</div>
+              <p>则 \(y=ax+b\) 是曲线 \(y=f(x)\) 的一条斜渐近线。</p>
+              <p class="hand">垂直渐近线产生于无定义点处；水平渐近线与斜渐近线产生于无穷远处。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【渐近线的求法总结】</span>
+            <div class="block-body">
+              <p class="hand">垂直渐近线：产生于定义点之外，求 \(\lim\limits_{x\to a^\pm}f(x)=\infty\)，得 \(x=a\)。</p>
+              <p class="hand">水平渐近线：产生在无穷远处，求 \(\lim\limits_{x\to\pm\infty}f(x)=A\)，得 \(y=A\)。</p>
+              <p class="hand">斜渐近线：产生在无穷远处，且同方向没有水平渐近线时，再求</p>
+              <div class="formula">\[
+                a=\lim_{x\to\pm\infty}\frac{f(x)}{x},\qquad
+                b=\lim_{x\to\pm\infty}[f(x)-ax],
+              \]</div>
+              <p class="hand">从而得斜渐近线 \(y=ax+b\)。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.17】曲线 \(y=\left(2x-\dfrac{1}{e}\right)e^{1/x}\) 的斜渐近线</span>
+            <div class="block-body">
+              <p class="hand">解：无穷中 \(+\infty\) 与 \(-\infty\) 两方向，直接用 \(x\to\infty\)。</p>
+              <p>先算</p>
+              <div class="formula">\[
+                a=\lim_{x\to\infty}\frac{y}{x}
+                =\lim_{x\to\infty}\left(2-\frac{1}{ex}\right)e^{1/x}=2.
+              \]</div>
+              <p>再算</p>
+              <div class="formula">\[
+                b=\lim_{x\to\infty}(y-2x).
+              \]</div>
+              <p>令 \(t=\dfrac{1}{x}\)，则</p>
+              <div class="formula">\[
+                b=\lim_{t\to 0^+}\left[\left(\frac{2}{t}-\frac{1}{e}\right)e^t-\frac{2}{t}\right]=1.
+              \]</div>
+              <p>因此斜渐近线方程为</p>
+              <div class="formula">\[
+                y=2x+1.
+              \]</div>
+              <p class="hand">故斜渐近线方程为 \(y=2x+1\)。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">【例3.18】曲线 \(y=\dfrac{1}{x}+\ln(1+e^x)\) 渐近线的条数</span>
+            <div class="block-body">
+              <p class="hand">解：① 先考虑垂直渐近线：考查 \(x=0\) 处。</p>
+              <p>函数在 \(x=0\) 处无定义，且</p>
+              <div class="formula">\[
+                \lim_{x\to 0}\left(\frac{1}{x}+\ln(1+e^x)\right)=\infty,
+              \]</div>
+              <p>故 \(x=0\) 是一条垂直渐近线。</p>
+              <p class="hand">② 再考虑水平渐近线。</p>
+              <p>当 \(x\to-\infty\) 时，</p>
+              <div class="formula">\[
+                \lim_{x\to-\infty}\left(\frac{1}{x}+\ln(1+e^x)\right)=0,
+              \]</div>
+              <p>所以有水平渐近线 \(y=0\)。</p>
+              <p class="hand">③ 考虑 \(+\infty\) 处的斜渐近线。</p>
+              <p>当 \(x\to+\infty\) 时，</p>
+              <div class="formula">\[
+                a=\lim_{x\to+\infty}\frac{y}{x}
+                =\lim_{x\to+\infty}\left(\frac{1}{x^2}+\frac{\ln(1+e^x)}{x}\right)=1,
+              \]</div>
+              <div class="formula">\[
+                b=\lim_{x\to+\infty}(y-x)
+                =\lim_{x\to+\infty}\left[\frac{1}{x}+\ln(1+e^x)-x\right]
+                =\lim_{x\to+\infty}\ln\frac{1+e^x}{e^x}=0.
+              \]</div>
+              <p>故斜渐近线为 \(y=x\)。综上，渐近线共有 \(3\) 条。</p>
+              <p class="hand">分别为：\(x=0\)、\(y=0\)、\(y=x\)。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">6. 曲率与曲率圆</span>
+            <div class="block-body">
+              <p class="subtle-title">（1）曲率</p>
+              <p>设曲线 \(C\) 的方程为 \(y=f(x)\)，且 \(f(x)\) 具有二阶导数，则点 \(M(x,y)\) 处的曲率</p>
+              <div class="formula">\[
+                K=\frac{|y''|}{(1+y'^2)^{3/2}},
+              \]</div>
+              <p>曲率半径</p>
+              <div class="formula">\[
+                \rho=\frac{1}{K}.
+              \]</div>
+              <p class="subtle-title">（2）曲率圆</p>
+              <p>若一圆满足如下三个条件，则称其为曲线 \(C\) 在点 \(M\) 处的曲率圆：</p>
+              <ul class="list">
+                <li>① 与曲线在点 \(M\) 处相切；</li>
+                <li>② 它的凹向与曲线在点 \(M\) 处的凹向相同；</li>
+                <li>③ 它的曲率与曲线在点 \(M\) 处的曲率相同。</li>
+              </ul>
+              <p>曲率圆的半径 \(R=\dfrac{1}{K}\)。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">例：参数方程曲线在 \(t=1\) 处的曲率半径</span>
+            <div class="block-body">
+              <p>设曲线</p>
+              <div class="formula">\[
+                \begin{cases}
+                x=t^2+t^3,\\
+                y=t^2+4t+1.
+                \end{cases}
+              \]</div>
+              <p>按参数方程求导，先求 \(\dfrac{dy}{dt}\)、\(\dfrac{dx}{dt}\)，再求 \(\dfrac{dy}{dx}\) 与二阶导，最后代入曲率公式求 \(K\)，再由 \(R=\dfrac{1}{K}\) 得曲率半径。</p>
+              <div class="formula">\[
+                K=\frac{|y''|}{(1+y'^2)^{3/2}},\qquad R=\frac{1}{K}.
+              \]</div>
+              <p class="hand">解题顺序就是：参数求导，转成 \(\dfrac{dy}{dx}\)，再代曲率公式。</p>
+            </div>
+          </div>
+        </section>
+      </article>
     </div>
   </body>
 </html>
