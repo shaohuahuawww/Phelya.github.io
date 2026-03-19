@@ -261,6 +261,7 @@
       const heroCoords = document.getElementById("heroCoords");
       const heroWeather = document.getElementById("heroWeather");
       const introScreen = document.getElementById("introScreen");
+      const main = document.querySelector(".main");
       const searchItems = [
         { title: "高等数学", text: "极限 连续 导数 微分 积分 级数 常微分方程", href: "#math-sections" },
         { title: "线性代数", text: "矩阵 行列式 向量组 线性空间 特征值 二次型", href: "#math-sections" }
@@ -282,6 +283,13 @@
 
       function closeSearch() {
         searchModal.classList.remove("is-open");
+      }
+
+      function dismissFloatingUi() {
+        closeSearch();
+        if (document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+        }
       }
 
       function renderSearchResults(keyword) {
@@ -437,6 +445,9 @@
       searchClose.addEventListener("click", closeSearch);
       searchInput.addEventListener("input", (event) => renderSearchResults(event.target.value));
       introScreen.addEventListener("click", enterSite);
+      main?.addEventListener("scroll", dismissFloatingUi, { passive: true });
+      window.addEventListener("wheel", dismissFloatingUi, { passive: true });
+      window.addEventListener("touchmove", dismissFloatingUi, { passive: true });
       introScreen.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
