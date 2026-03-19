@@ -175,6 +175,19 @@
         border-radius: 20px;
         background: rgba(255, 255, 255, 0.03);
       }
+      .map-node, .tree-card {
+        position: relative;
+        overflow: hidden;
+      }
+      .map-node::before, .tree-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at top right, rgba(255, 148, 183, 0.14), transparent 32%),
+          linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+        pointer-events: none;
+      }
       .map-node strong, .tree-card strong {
         display: inline-block;
         margin-bottom: 10px;
@@ -206,6 +219,30 @@
       .tree-card:last-child::after {
         display: none;
       }
+      .tree-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 28px;
+        height: 28px;
+        margin-bottom: 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 169, 199, 0.24);
+        background: rgba(255, 148, 183, 0.1);
+        color: var(--note);
+        font-weight: 800;
+        font-size: 0.9rem;
+      }
+      .mini-note {
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 169, 199, 0.14);
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--note);
+        font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+        line-height: 1.7;
+      }
       .curve-grid {
         margin-top: 16px;
         display: grid;
@@ -233,8 +270,19 @@
         border-radius: 16px;
         border: 1px dashed rgba(255, 169, 199, 0.25);
         background:
-          linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+          linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
         overflow: hidden;
+      }
+      .sketch-box::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 24px 24px;
+        opacity: 0.6;
+        pointer-events: none;
       }
       .axis-h, .axis-v, .curve-line, .dot-label {
         position: absolute;
@@ -257,6 +305,27 @@
         inset: 0;
         width: 100%;
         height: 100%;
+      }
+      .guide-line {
+        stroke: rgba(255, 216, 168, 0.92);
+        stroke-width: 2.2;
+        stroke-dasharray: 6 5;
+      }
+      .guide-solid {
+        stroke: rgba(255, 216, 168, 0.92);
+        stroke-width: 2.4;
+      }
+      .curve-stroke {
+        stroke: #fff0f6;
+        stroke-width: 3.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+      .mark {
+        fill: #ff94b7;
+        stroke: rgba(255, 240, 246, 0.95);
+        stroke-width: 2;
       }
       .dot-label {
         color: var(--note);
@@ -320,6 +389,7 @@
             <div class="block-body">
               <div class="diagram-grid mindmap">
                 <div class="map-node">
+                  <span class="tree-badge">1</span>
                   <strong>中值定理</strong>
                   <ul>
                     <li>费马定理</li>
@@ -328,8 +398,10 @@
                     <li>柯西中值定理</li>
                     <li>泰勒中值定理</li>
                   </ul>
+                  <div class="mini-note">由“极值点导数性质”出发，逐步推广到不同形式的中值定理。</div>
                 </div>
                 <div class="map-node">
+                  <span class="tree-badge">2</span>
                   <strong>导数微分学的应用</strong>
                   <ul>
                     <li>单调性</li>
@@ -339,8 +411,10 @@
                     <li>渐近线</li>
                     <li>曲率与曲率圆</li>
                   </ul>
+                  <div class="mini-note">把定理结果落到函数性态判断、作图与估计题中。</div>
                 </div>
                 <div class="map-node">
+                  <span class="tree-badge">3</span>
                   <strong>曲率</strong>
                   <ul>
                     <li>弧长公式</li>
@@ -348,6 +422,7 @@
                     <li>曲率计算公式</li>
                     <li>曲率圆</li>
                   </ul>
+                  <div class="mini-note">这是导数应用在几何量计算中的进一步延伸。</div>
                 </div>
               </div>
             </div>
@@ -362,12 +437,14 @@
               <p class="subtle-title">（2）知识体系</p>
               <div class="tree-flow">
                 <div class="tree-card">
+                  <span class="tree-badge">①</span>
                   <strong>费马引理</strong>
                   <ul>
                     <li>定理前身</li>
                   </ul>
                 </div>
                 <div class="tree-card">
+                  <span class="tree-badge">②</span>
                   <strong>罗尔中值定理</strong>
                   <ul>
                     <li>定理前身</li>
@@ -375,6 +452,7 @@
                   </ul>
                 </div>
                 <div class="tree-card">
+                  <span class="tree-badge">③</span>
                   <strong>拉格朗日中值定理</strong>
                   <ul>
                     <li>定理内容</li>
@@ -382,6 +460,7 @@
                   </ul>
                 </div>
                 <div class="tree-card">
+                  <span class="tree-badge">④</span>
                   <strong>柯西中值定理</strong>
                   <ul>
                     <li>定理前身</li>
@@ -389,6 +468,7 @@
                   </ul>
                 </div>
                 <div class="tree-card">
+                  <span class="tree-badge">⑤</span>
                   <strong>泰勒中值定理</strong>
                   <ul>
                     <li>定理前身</li>
@@ -422,13 +502,17 @@
                     <div class="axis-h"></div>
                     <div class="axis-v"></div>
                     <svg class="curve-line" viewBox="0 0 260 140" preserveAspectRatio="none" aria-hidden="true">
-                      <path d="M48 95 C72 40, 100 34, 128 74 S182 115, 218 58" fill="none" stroke="#fff0f6" stroke-width="3" stroke-linecap="round"/>
+                      <path class="curve-stroke" d="M30 84 C50 112, 78 112, 96 74 S136 20, 154 56 S196 118, 230 42" />
+                      <circle class="mark" cx="58" cy="102" r="4.5" />
+                      <circle class="mark" cx="124" cy="34" r="4.5" />
+                      <circle class="mark" cx="180" cy="96" r="4.5" />
+                      <circle class="mark" cx="222" cy="52" r="4.5" />
                     </svg>
-                    <span class="dot-label" style="left: 48px; bottom: 19px;">A</span>
-                    <span class="dot-label" style="left: 98px; top: 26px;">B</span>
-                    <span class="dot-label" style="left: 146px; bottom: 21px;">C</span>
-                    <span class="dot-label" style="left: 206px; top: 34px;">D</span>
-                    <span class="dot-label" style="left: 74px; bottom: 6px;">B、C 为极值点</span>
+                    <span class="dot-label" style="left: 42px; bottom: 22px;">A</span>
+                    <span class="dot-label" style="left: 114px; top: 20px;">B</span>
+                    <span class="dot-label" style="left: 170px; bottom: 20px;">C</span>
+                    <span class="dot-label" style="left: 214px; top: 30px;">D</span>
+                    <span class="dot-label" style="left: 80px; bottom: 6px;">B 为极大值点，C 为极小值点</span>
                   </div>
                 </div>
                 <div class="curve-stack">
@@ -438,10 +522,14 @@
                       <div class="axis-h"></div>
                       <div class="axis-v"></div>
                       <svg class="curve-line" viewBox="0 0 240 140" preserveAspectRatio="none" aria-hidden="true">
-                        <path d="M42 46 C84 18, 98 18, 132 58 S174 108, 214 74" fill="none" stroke="#fff0f6" stroke-width="3" stroke-linecap="round"/>
-                        <path d="M76 38 H152" fill="none" stroke="#ffd8a8" stroke-width="2" stroke-dasharray="6 5"/>
-                        <path d="M118 76 H186" fill="none" stroke="#ffd8a8" stroke-width="2" stroke-dasharray="6 5"/>
+                        <path class="curve-stroke" d="M32 90 C60 56, 82 24, 118 28 S166 102, 212 92" />
+                        <path class="guide-line" d="M78 30 H154" />
+                        <path class="guide-line" d="M122 92 H192" />
+                        <circle class="mark" cx="108" cy="28" r="4.5" />
+                        <circle class="mark" cx="160" cy="88" r="4.5" />
                       </svg>
+                      <span class="dot-label" style="left: 100px; top: 18px;">\(f'(x_0)=0\)</span>
+                      <span class="dot-label" style="left: 136px; bottom: 10px;">极值点处切线水平</span>
                     </div>
                   </div>
                   <div class="sketch-card">
@@ -450,8 +538,12 @@
                       <div class="axis-h"></div>
                       <div class="axis-v"></div>
                       <svg class="curve-line" viewBox="0 0 240 140" preserveAspectRatio="none" aria-hidden="true">
-                        <path d="M46 112 C88 108, 102 76, 121 70 S152 34, 202 18" fill="none" stroke="#fff0f6" stroke-width="3" stroke-linecap="round"/>
+                        <path class="curve-stroke" d="M42 110 C74 112, 94 102, 112 82 S138 40, 198 18" />
+                        <path class="guide-line" d="M96 74 H138" />
+                        <circle class="mark" cx="118" cy="74" r="4.5" />
                       </svg>
+                      <span class="dot-label" style="left: 104px; bottom: 10px;">\(x=0\)</span>
+                      <span class="dot-label" style="left: 116px; top: 18px;">导数为 0，但非极值</span>
                     </div>
                   </div>
                   <div class="sketch-card">
@@ -460,8 +552,11 @@
                       <div class="axis-h"></div>
                       <div class="axis-v"></div>
                       <svg class="curve-line" viewBox="0 0 240 140" preserveAspectRatio="none" aria-hidden="true">
-                        <path d="M54 26 L120 98 L202 26" fill="none" stroke="#fff0f6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path class="curve-stroke" d="M50 28 L118 98 L198 28" />
+                        <circle class="mark" cx="118" cy="98" r="4.5" />
                       </svg>
+                      <span class="dot-label" style="left: 104px; bottom: 10px;">\(x=0\)</span>
+                      <span class="dot-label" style="left: 112px; top: 18px;">极小值点，但不可导</span>
                     </div>
                   </div>
                 </div>
@@ -582,14 +677,17 @@
                     <div class="axis-h"></div>
                     <div class="axis-v"></div>
                     <svg class="curve-line" viewBox="0 0 260 140" preserveAspectRatio="none" aria-hidden="true">
-                      <path d="M42 76 C78 88, 118 44, 156 64 S208 56, 230 32" fill="none" stroke="#fff0f6" stroke-width="3" stroke-linecap="round"/>
-                      <path d="M44 86 L228 42" fill="none" stroke="#ffd8a8" stroke-width="2.2"/>
-                      <path d="M108 92 L108 42" fill="none" stroke="#ffd8a8" stroke-width="2" stroke-dasharray="6 5"/>
-                      <path d="M214 54 L214 30" fill="none" stroke="#ffd8a8" stroke-width="2" stroke-dasharray="6 5"/>
+                      <path class="curve-stroke" d="M34 92 C68 96, 90 64, 120 56 S176 68, 228 28" />
+                      <path class="guide-solid" d="M42 92 L226 48" />
+                      <path class="guide-line" d="M112 82 L162 70" />
+                      <circle class="mark" cx="44" cy="92" r="4.5" />
+                      <circle class="mark" cx="226" cy="48" r="4.5" />
+                      <circle class="mark" cx="136" cy="76" r="4.5" />
                     </svg>
-                    <span class="dot-label" style="left: 50px; bottom: 18px;">a</span>
-                    <span class="dot-label" style="left: 103px; bottom: 18px;">ξ</span>
-                    <span class="dot-label" style="left: 208px; bottom: 18px;">b</span>
+                    <span class="dot-label" style="left: 44px; bottom: 18px;">A</span>
+                    <span class="dot-label" style="left: 126px; bottom: 30px;">M</span>
+                    <span class="dot-label" style="left: 214px; bottom: 36px;">B</span>
+                    <span class="dot-label" style="left: 76px; bottom: 6px;">过 M 的切线平行于弦 AB</span>
                   </div>
                 </div>
                 <div class="sketch-card">
@@ -705,9 +803,16 @@
                     <div class="axis-h"></div>
                     <div class="axis-v"></div>
                     <svg class="curve-line" viewBox="0 0 260 140" preserveAspectRatio="none" aria-hidden="true">
-                      <path d="M48 92 C80 68, 106 70, 140 52 S198 28, 228 36" fill="none" stroke="#fff0f6" stroke-width="3" stroke-linecap="round"/>
-                      <path d="M46 98 L232 54" fill="none" stroke="#ffd8a8" stroke-width="2.2"/>
+                      <path class="curve-stroke" d="M40 96 C74 76, 100 80, 132 58 S188 28, 226 36" />
+                      <path class="guide-solid" d="M44 102 L228 58" />
+                      <path class="guide-line" d="M118 78 L170 66" />
+                      <circle class="mark" cx="44" cy="102" r="4.5" />
+                      <circle class="mark" cx="228" cy="58" r="4.5" />
+                      <circle class="mark" cx="148" cy="72" r="4.5" />
                     </svg>
+                    <span class="dot-label" style="left: 42px; bottom: 16px;">A</span>
+                    <span class="dot-label" style="left: 140px; bottom: 26px;">\(\xi\)</span>
+                    <span class="dot-label" style="left: 216px; bottom: 30px;">B</span>
                   </div>
                 </div>
                 <div class="sketch-card">
@@ -757,13 +862,17 @@
               <div class="curve-grid">
                 <div class="sketch-card">
                   <div class="sketch-title">推导记忆法</div>
-                  <p class="hand">记住“设多项式 + 逐次求导代入原点”这条主线。</p>
-                  <p class="hand">系数就是各阶导数在展开点处的值除以阶乘。</p>
+                  <div class="mini-note">
+                    记忆主线：先设多项式近似，再逐次求导并代入展开点。<br />
+                    每一阶系数都等于对应阶导数值除以阶乘。
+                  </div>
                 </div>
                 <div class="sketch-card">
                   <div class="sketch-title">两类余项</div>
-                  <p class="hand">皮亚诺型余项：强调近似的阶数。</p>
-                  <p class="hand">拉格朗日型余项：常用于证明题与估计题。</p>
+                  <div class="mini-note">
+                    皮亚诺型余项：强调逼近阶数。<br />
+                    拉格朗日型余项：更适合证明题与误差估计。
+                  </div>
                 </div>
               </div>
             </div>
@@ -1053,11 +1162,29 @@
               <div class="compare-grid">
                 <div class="sketch-card">
                   <div class="sketch-title">凸</div>
-                  <p class="hand">切线在曲线下方</p>
+                  <div class="sketch-box">
+                    <div class="axis-h"></div>
+                    <div class="axis-v"></div>
+                    <svg class="curve-line" viewBox="0 0 240 140" preserveAspectRatio="none" aria-hidden="true">
+                      <path class="curve-stroke" d="M34 38 C74 82, 110 96, 206 102" />
+                      <path class="guide-solid" d="M58 72 L188 96" />
+                    </svg>
+                    <span class="dot-label" style="left: 74px; top: 18px;">曲线在弦上方</span>
+                    <span class="dot-label" style="left: 86px; bottom: 10px;">切线在下方</span>
+                  </div>
                 </div>
                 <div class="sketch-card">
                   <div class="sketch-title">凹</div>
-                  <p class="hand">切线在曲线上方</p>
+                  <div class="sketch-box">
+                    <div class="axis-h"></div>
+                    <div class="axis-v"></div>
+                    <svg class="curve-line" viewBox="0 0 240 140" preserveAspectRatio="none" aria-hidden="true">
+                      <path class="curve-stroke" d="M36 102 C78 52, 122 38, 206 34" />
+                      <path class="guide-solid" d="M58 88 L190 46" />
+                    </svg>
+                    <span class="dot-label" style="left: 78px; top: 18px;">曲线在弦下方</span>
+                    <span class="dot-label" style="left: 92px; bottom: 10px;">切线在上方</span>
+                  </div>
                 </div>
               </div>
             </div>
