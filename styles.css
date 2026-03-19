@@ -43,6 +43,77 @@ body {
   font-family: "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.intro-screen[hidden] {
+  display: none;
+}
+
+.intro-screen.is-leaving {
+  pointer-events: none;
+  animation: introFadeOut 650ms ease forwards;
+}
+
+.intro-screen-bg,
+.intro-screen-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.intro-screen-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.08) brightness(0.34) blur(1px);
+  transform: scale(1.04);
+}
+
+.intro-screen-overlay {
+  background:
+    radial-gradient(circle at center, rgba(255, 130, 188, 0.14), transparent 26%),
+    linear-gradient(180deg, rgba(8, 5, 14, 0.36), rgba(8, 5, 14, 0.84));
+}
+
+.intro-screen-content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+}
+
+.intro-screen-avatar {
+  width: min(30vw, 260px);
+  height: min(30vw, 260px);
+  min-width: 170px;
+  min-height: 170px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+  border: 8px solid rgba(255, 247, 250, 0.94);
+  box-shadow:
+    0 0 0 8px rgba(255, 158, 189, 0.28),
+    0 24px 60px rgba(0, 0, 0, 0.34);
+  background: #fff;
+}
+
+.intro-screen-tip {
+  margin: 0;
+  color: rgba(255, 233, 242, 0.9);
+  font-size: 1rem;
+  letter-spacing: 0.16em;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.34);
+  animation: bob 1.6s ease-in-out infinite;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -595,6 +666,18 @@ kbd {
 
   50% {
     transform: translateY(6px);
+  }
+}
+
+@keyframes introFadeOut {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
   }
 }
 

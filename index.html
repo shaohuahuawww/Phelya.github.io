@@ -11,6 +11,17 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <div class="intro-screen" id="introScreen" role="button" aria-label="点击进入博客" tabindex="0">
+      <div class="intro-screen-bg">
+        <img src="./assets/anime/kikuri-landing-bg.jpg" alt="" class="intro-screen-bg-img" />
+      </div>
+      <div class="intro-screen-overlay"></div>
+      <div class="intro-screen-content">
+        <img class="intro-screen-avatar" src="./assets/anime/nav-avatar.jpg" alt="头像" />
+        <p class="intro-screen-tip">点击任意处进入</p>
+      </div>
+    </div>
+
     <header class="header">
       <div class="header-inner">
         <div class="header-left">
@@ -242,6 +253,7 @@
       const searchInput = document.getElementById("searchInput");
       const searchResults = document.getElementById("searchResults");
       const heroTime = document.getElementById("heroTime");
+      const introScreen = document.getElementById("introScreen");
       const searchItems = [
         { title: "高等数学", text: "极限 连续 导数 微分 积分 级数 常微分方程", href: "#math-sections" },
         { title: "线性代数", text: "矩阵 行列式 向量组 线性空间 特征值 二次型", href: "#math-sections" }
@@ -301,6 +313,14 @@
         });
       }
 
+      function enterSite() {
+        if (!introScreen || introScreen.classList.contains("is-leaving")) return;
+        introScreen.classList.add("is-leaving");
+        setTimeout(() => {
+          introScreen.setAttribute("hidden", "");
+        }, 650);
+      }
+
       applyTheme(localStorage.getItem("math-blog-theme") || "dark");
       updateTime();
       setInterval(updateTime, 1000);
@@ -310,6 +330,13 @@
       searchOverlay.addEventListener("click", closeSearch);
       searchClose.addEventListener("click", closeSearch);
       searchInput.addEventListener("input", (event) => renderSearchResults(event.target.value));
+      introScreen.addEventListener("click", enterSite);
+      introScreen.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          enterSite();
+        }
+      });
 
       document.addEventListener("keydown", (event) => {
         if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
