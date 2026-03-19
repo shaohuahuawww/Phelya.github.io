@@ -6,30 +6,21 @@
     <title>高数基础 第三章 | 中值定理及导数应用</title>
     <meta
       name="description"
-      content="高等数学第三章：中值定理及导数应用，整理版正文阅读页。"
+      content="高等数学第三章：中值定理及导数应用，完整原稿阅读页。"
     />
     <style>
       :root {
         --bg: #070a14;
-        --bg-soft: #0d1220;
-        --surface: rgba(16, 15, 26, 0.78);
-        --surface-strong: rgba(15, 12, 22, 0.86);
-        --surface-soft: rgba(255, 255, 255, 0.05);
+        --surface: rgba(16, 15, 26, 0.8);
         --line: rgba(255, 169, 199, 0.3);
         --text: #fff0f6;
-        --muted: rgba(255, 233, 242, 0.74);
+        --muted: rgba(255, 233, 242, 0.76);
         --accent: #ff94b7;
-        --accent-strong: #ff7fa8;
-        --note: #ffd8a8;
         --shadow: 0 20px 60px rgba(0, 0, 0, 0.32);
       }
 
       * {
         box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
       }
 
       body {
@@ -47,20 +38,19 @@
         text-decoration: none;
       }
 
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
       .shell {
-        width: min(1220px, calc(100% - 28px));
-        margin: 24px auto 42px;
+        width: min(1160px, calc(100% - 24px));
+        margin: 24px auto 40px;
       }
 
       .topbar,
       .hero,
-      .toc,
-      .article,
-      .theorem,
-      .example,
-      .note,
-      .method,
-      .figure-card {
+      .pages-wrap {
         border: 1px solid var(--line);
         border-radius: 24px;
         background: var(--surface);
@@ -106,20 +96,13 @@
       }
 
       .hero-cover {
-        position: relative;
-        min-height: 300px;
-        padding: 34px 32px;
+        min-height: 280px;
+        padding: 34px 30px;
         display: grid;
         align-items: end;
         background:
-          linear-gradient(180deg, rgba(9, 7, 14, 0.14), rgba(8, 5, 14, 0.82)),
+          linear-gradient(180deg, rgba(9, 7, 14, 0.16), rgba(8, 5, 14, 0.84)),
           url("../assets/anime/kikuri-landing-bg.jpg") center/cover;
-      }
-
-      .hero-copy {
-        position: relative;
-        z-index: 1;
-        max-width: 760px;
       }
 
       .eyebrow {
@@ -132,22 +115,19 @@
       }
 
       h1,
-      h2,
-      h3,
-      h4,
       p {
         margin: 0;
       }
 
       h1 {
         margin-top: 14px;
-        font-size: clamp(2.3rem, 4vw, 4rem);
+        font-size: clamp(2.4rem, 4vw, 4.2rem);
         line-height: 1.06;
       }
 
       .hero-desc {
         margin-top: 16px;
-        max-width: 700px;
+        max-width: 760px;
         color: var(--muted);
         line-height: 1.9;
       }
@@ -160,162 +140,59 @@
       }
 
       .meta-pill {
-        padding: 8px 12px;
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 12px;
         border-radius: 999px;
         border: 1px solid var(--line);
-        background: rgba(255, 148, 183, 0.14);
-        color: var(--text);
-        font-weight: 700;
-      }
-
-      .layout {
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        gap: 18px;
-        margin-top: 18px;
-        align-items: start;
-      }
-
-      .toc {
-        position: sticky;
-        top: 24px;
-        padding: 22px 20px;
-      }
-
-      .toc h2 {
-        font-size: 1.1rem;
-      }
-
-      .toc nav {
-        display: grid;
-        gap: 10px;
-        margin-top: 16px;
-      }
-
-      .toc a {
-        padding: 10px 12px;
-        border-radius: 16px;
-        background: var(--surface-soft);
-        color: var(--muted);
-      }
-
-      .article {
-        padding: 26px;
-      }
-
-      .article section + section {
-        margin-top: 28px;
-      }
-
-      .section-head {
-        display: flex;
-        align-items: end;
-        justify-content: space-between;
-        gap: 16px;
-        margin-bottom: 16px;
-      }
-
-      .section-tag {
+        background: rgba(255, 148, 183, 0.12);
         color: var(--accent);
-        font-size: 0.9rem;
         font-weight: 800;
-        letter-spacing: 0.1em;
       }
 
-      .section-sub {
+      .pages-wrap {
+        margin-top: 18px;
+        padding: 22px;
+      }
+
+      .pages-head {
+        margin-bottom: 18px;
+      }
+
+      .pages-head h2 {
+        margin: 0;
+        font-size: 1.28rem;
+      }
+
+      .pages-head p {
         margin-top: 8px;
         color: var(--muted);
         line-height: 1.8;
       }
 
-      .stack {
+      .pages {
         display: grid;
-        gap: 16px;
+        gap: 20px;
       }
 
-      .theorem,
-      .example,
-      .note,
-      .method,
-      .figure-card {
-        padding: 18px 18px 20px;
-      }
-
-      .card-kicker {
-        display: inline-flex;
-        align-items: center;
-        min-height: 32px;
-        padding: 0 10px;
-        border-radius: 999px;
+      .page-card {
+        margin: 0;
+        padding: 16px;
         border: 1px solid var(--line);
-        background: rgba(255, 148, 183, 0.12);
-        color: var(--accent);
-        font-size: 0.92rem;
-        font-weight: 800;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.04);
       }
 
-      .card-title {
-        margin-top: 12px;
-        font-size: 1.22rem;
-      }
-
-      .card-body {
-        margin-top: 12px;
-        color: var(--muted);
-        line-height: 1.9;
-      }
-
-      .hand {
-        color: var(--note);
-        font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
-      }
-
-      .formula {
-        margin: 14px 0;
-        padding: 14px 16px;
-        border: 1px solid rgba(255, 169, 199, 0.2);
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.03);
-        overflow-x: auto;
-      }
-
-      .columns {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      .figure-card svg {
+      .page-card img {
         width: 100%;
-        height: auto;
-        margin-top: 12px;
-      }
-
-      .list {
-        margin: 12px 0 0;
-        padding-left: 20px;
-        color: var(--muted);
-        line-height: 1.9;
-      }
-
-      .list li + li {
-        margin-top: 6px;
-      }
-
-      @media (max-width: 980px) {
-        .layout,
-        .columns {
-          grid-template-columns: 1fr;
-        }
-
-        .toc {
-          position: static;
-        }
+        border-radius: 16px;
+        box-shadow: 0 22px 48px rgba(0, 0, 0, 0.26);
       }
 
       @media (max-width: 720px) {
         .shell {
-          width: min(100% - 18px, 1220px);
+          width: min(100% - 16px, 1160px);
         }
 
         .topbar {
@@ -324,23 +201,12 @@
         }
 
         .hero-cover,
-        .article {
-          padding: 22px 18px;
+        .pages-wrap,
+        .page-card {
+          padding: 16px;
         }
       }
     </style>
-    <script>
-      window.MathJax = {
-        tex: {
-          inlineMath: [["\\(", "\\)"]],
-          displayMath: [["\\[", "\\]"]]
-        },
-        svg: {
-          fontCache: "global"
-        }
-      };
-    </script>
-    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   </head>
   <body>
     <div class="shell">
@@ -358,435 +224,57 @@
             <p class="eyebrow">Calculus Notes</p>
             <h1>第三章 中值定理及导数应用</h1>
             <p class="hero-desc">
-              这一页不再是文件下载页，而是直接阅读的整理版笔记。
-              内容会继续按博客风格长期维护，后续也会把更多章节做成同样的正文页。
+              这一版直接按原 PDF 页面完整展示，不做删减，不改段落位置。
+              外层保留博客主题风格，内部则完整显示原稿内容。
             </p>
             <div class="hero-meta">
               <span class="meta-pill">高等数学</span>
-              <span class="meta-pill">第三章</span>
-              <span class="meta-pill">中值定理</span>
-              <span class="meta-pill">导数应用</span>
+              <span class="meta-pill">完整原稿</span>
+              <span class="meta-pill">30 页</span>
             </div>
           </div>
         </div>
       </section>
 
-      <div class="layout">
-        <aside class="toc">
-          <h2>本页目录</h2>
-          <nav>
-            <a href="#sec-mean">微分中值定理</a>
-            <a href="#sec-extreme">极值与费马定理</a>
-            <a href="#sec-rolle">罗尔中值定理</a>
-            <a href="#sec-lagrange">拉格朗日中值定理</a>
-            <a href="#sec-cauchy">柯西中值定理</a>
-            <a href="#sec-taylor">泰勒中值定理</a>
-            <a href="#sec-apply">导数的微分学应用</a>
-          </nav>
-        </aside>
+      <section class="pages-wrap">
+        <div class="pages-head">
+          <h2>正文预览</h2>
+          <p>下面是按原 PDF 页面顺序完整展示的内容，文字、手写批注、图形和段落位置都保持一致。</p>
+        </div>
 
-        <article class="article">
-          <section id="sec-mean">
-            <div class="section-head">
-              <div>
-                <span class="section-tag">§1.</span>
-                <h2>微分中值定理</h2>
-                <p class="section-sub">本章主要研究开区间内有导数的存在性问题，以及中值定理如何服务于极值、单调性与估值问题。</p>
-              </div>
-            </div>
-
-            <div class="stack">
-              <div class="note">
-                <span class="card-kicker">前言</span>
-                <div class="card-body">
-                  <p>中值定理主要解决开区间内 <strong>有导数的存在性</strong> 问题。</p>
-                  <p class="hand">知识体系可以理解成：费马引理 → 罗尔中值定理 → 拉格朗日中值定理 → 柯西中值定理。</p>
-                </div>
-              </div>
-
-              <div class="columns">
-                <div class="figure-card">
-                  <span class="card-kicker">知识体系图</span>
-                  <svg viewBox="0 0 420 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="24" y="22" width="108" height="42" rx="14" stroke="rgba(255,169,199,0.45)" fill="rgba(255,255,255,0.04)"/>
-                    <rect x="24" y="104" width="138" height="42" rx="14" stroke="rgba(255,169,199,0.45)" fill="rgba(255,255,255,0.04)"/>
-                    <rect x="226" y="104" width="152" height="42" rx="14" stroke="rgba(255,169,199,0.45)" fill="rgba(255,255,255,0.04)"/>
-                    <rect x="226" y="190" width="136" height="42" rx="14" stroke="rgba(255,169,199,0.45)" fill="rgba(255,255,255,0.04)"/>
-                    <text x="78" y="48" fill="#ff94b7" font-size="16" text-anchor="middle">费马引理</text>
-                    <text x="93" y="130" fill="#ff94b7" font-size="16" text-anchor="middle">罗尔中值定理</text>
-                    <text x="302" y="130" fill="#ff94b7" font-size="16" text-anchor="middle">拉格朗日中值定理</text>
-                    <text x="294" y="216" fill="#ff94b7" font-size="16" text-anchor="middle">柯西中值定理</text>
-                    <path d="M78 64V100" stroke="rgba(255,169,199,0.7)" stroke-width="2.5"/>
-                    <path d="M162 125H220" stroke="rgba(255,169,199,0.7)" stroke-width="2.5"/>
-                    <path d="M302 146V186" stroke="rgba(255,169,199,0.7)" stroke-width="2.5"/>
-                  </svg>
-                </div>
-
-                <div class="method">
-                  <span class="card-kicker">层级关系</span>
-                  <ul class="list">
-                    <li>费马定理给出极值点处导数为零的必要条件。</li>
-                    <li>罗尔定理把“导数为零”放到整个闭区间上讨论。</li>
-                    <li>拉格朗日定理把端点等值条件推广成平均变化率。</li>
-                    <li>柯西定理再把一个函数推广成两个函数的导数比。</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="sec-extreme">
-            <div class="section-head">
-              <div>
-                <span class="section-tag">1.</span>
-                <h2>极值的定义与费马定理</h2>
-              </div>
-            </div>
-
-            <div class="stack">
-              <div class="theorem">
-                <span class="card-kicker">定义</span>
-                <h3 class="card-title">极值点</h3>
-                <div class="card-body">
-                  <p>若存在 \(\delta &gt; 0\)，使得对任意 \(x \in (x_0-\delta, x_0+\delta)\) 且 \(x \ne x_0\)，恒有</p>
-                  <div class="formula">\[
-                    f(x) &gt; f(x_0)\quad [f(x) &lt; f(x_0)]
-                  \]</div>
-                  <p>则称 \(x=x_0\) 为函数 \(y=f(x)\) 的极小值点（极大值点）。</p>
-                </div>
-              </div>
-
-              <div class="theorem">
-                <span class="card-kicker">定理</span>
-                <h3 class="card-title">费马定理</h3>
-                <div class="card-body">
-                  <p>若函数 \(y=f(x)\) 在点 \(x=x_0\) 处取得极值且在该点可导，则</p>
-                  <div class="formula">\[
-                    f'(x_0)=0
-                  \]</div>
-                  <p class="hand">这个结论只能理解为必要条件，反过来一般不成立。</p>
-                </div>
-              </div>
-
-              <div class="columns">
-                <div class="example">
-                  <span class="card-kicker">反例 1</span>
-                  <div class="card-body">
-                    <p>设 \(y=x^3\)，则</p>
-                    <div class="formula">\[
-                      y' = 3x^2,\qquad y'(0)=0
-                    \]</div>
-                    <p class="hand">但 \(x=0\) 不是函数 \(y=x^3\) 的极值点。</p>
-                  </div>
-                </div>
-
-                <div class="example">
-                  <span class="card-kicker">反例 2</span>
-                  <div class="card-body">
-                    <p>设</p>
-                    <div class="formula">\[
-                      y=
-                      \begin{cases}
-                        2x, & x&lt;0,\\
-                        x, & x\ge 0
-                      \end{cases}
-                    \]</div>
-                    <p class="hand">函数在 \(x=0\) 处不可导，但 \(x=0\) 也不是极值点。</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="sec-rolle">
-            <div class="section-head">
-              <div>
-                <span class="section-tag">2.</span>
-                <h2>罗尔中值定理</h2>
-              </div>
-            </div>
-
-            <div class="stack">
-              <div class="theorem">
-                <span class="card-kicker">定理</span>
-                <div class="card-body">
-                  <p>设函数 \(f(x)\) 在闭区间 \([a,b]\) 上连续，在开区间 \((a,b)\) 上可导，且</p>
-                  <div class="formula">\[
-                    f(a)=f(b)
-                  \]</div>
-                  <p>则至少存在一点 \(\xi \in (a,b)\)，使得</p>
-                  <div class="formula">\[
-                    f'(\xi)=0
-                  \]</div>
-                  <p class="hand">证明时可分常数函数与非常数函数两种情形。</p>
-                </div>
-              </div>
-
-              <div class="example">
-                <span class="card-kicker">例 3.1</span>
-                <div class="card-body">
-                  <p>已知 \(0&lt;a&lt;b\)，且 \(af(b)=bf(a)\)，证明存在 \(\xi \in (a,b)\)，使</p>
-                  <div class="formula">\[
-                    f'(\xi)=\frac{f(\xi)}{\xi}
-                  \]</div>
-                  <p class="hand">构造辅助函数 \(F(x)=\dfrac{f(x)}{x}\)。由题设得 \(F(a)=F(b)\)，再由罗尔定理可知</p>
-                  <div class="formula">\[
-                    F'(\xi)=\frac{\xi f'(\xi)-f(\xi)}{\xi^2}=0
-                  \]</div>
-                </div>
-              </div>
-
-              <div class="example">
-                <span class="card-kicker">例 3.2</span>
-                <div class="card-body">
-                  <p>构造 \(F(x)=f(x)\sin x\)，若满足 \(F(0)=F(\pi)=0\)，则由罗尔定理得某个 \(\xi\in(0,\pi)\) 满足</p>
-                  <div class="formula">\[
-                    F'(\xi)=f'(\xi)\sin\xi+f(\xi)\cos\xi=0
-                  \]</div>
-                  <p>从而</p>
-                  <div class="formula">\[
-                    f'(\xi)=-f(\xi)\cot\xi
-                  \]</div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="sec-lagrange">
-            <div class="section-head">
-              <div>
-                <span class="section-tag">3.</span>
-                <h2>拉格朗日中值定理</h2>
-              </div>
-            </div>
-
-            <div class="stack">
-              <div class="theorem">
-                <span class="card-kicker">定理</span>
-                <div class="card-body">
-                  <p>设函数 \(f(x)\) 在闭区间 \([a,b]\) 上连续，在开区间 \((a,b)\) 上可导，则至少存在一点 \(\xi\in(a,b)\)，使得</p>
-                  <div class="formula">\[
-                    \frac{f(b)-f(a)}{b-a}=f'(\xi)
-                  \]</div>
-                  <p class="hand">也可写成 \(f(b)-f(a)=f'(\xi)(b-a)\)。若设 \(\theta=\dfrac{\xi-a}{b-a}\)，则 \(\xi=a+\theta(b-a)\)。</p>
-                </div>
-              </div>
-
-              <div class="example">
-                <span class="card-kicker">例 3.3</span>
-                <div class="card-body">
-                  <p>证明存在 \(\xi\in(a,b)\)，使</p>
-                  <div class="formula">\[
-                    \frac{bf(b)-af(a)}{b-a}=f(\xi)+\xi f'(\xi)
-                  \]</div>
-                  <p class="hand">构造 \(F(x)=xf(x)\)，则 \(F'(x)=f(x)+xf'(x)\)。对 \(F(x)\) 应用拉格朗日中值定理即可。</p>
-                </div>
-              </div>
-
-              <div class="example">
-                <span class="card-kicker">例 3.4</span>
-                <div class="card-body">
-                  <p>证明当 \(x&gt;0\) 时</p>
-                  <div class="formula">\[
-                    \frac{x}{1+x}&lt;\ln(1+x)&lt;x
-                  \]</div>
-                  <p class="hand">令 \(f(t)=\ln(1+t)\)，在 \([0,x]\) 上应用拉格朗日中值定理，得</p>
-                  <div class="formula">\[
-                    \ln(1+x)=\frac{x}{1+\xi},\qquad \xi\in(0,x)
-                  \]</div>
-                  <p class="hand">由 \(0&lt;\xi&lt;x\) 可推出 \(\dfrac{1}{1+x}&lt;\dfrac{1}{1+\xi}&lt;1\)，两边同乘 \(x&gt;0\) 即得结论。</p>
-                </div>
-              </div>
-
-              <div class="example">
-                <span class="card-kicker">极限题</span>
-                <div class="card-body">
-                  <p>求极限</p>
-                  <div class="formula">\[
-                    \lim_{x\to\infty}x^2\left(\arctan\frac{1}{x}-\arctan\frac{1}{x+1}\right)
-                  \]</div>
-                  <p class="hand">令 \(f(t)=\arctan\dfrac{1}{t}\)，在 \([x,x+1]\) 上应用拉格朗日中值定理，则存在 \(\xi\in(x,x+1)\)，使</p>
-                  <div class="formula">\[
-                    \arctan\frac{1}{x}-\arctan\frac{1}{x+1}=-f'(\xi)
-                  \]</div>
-                  <div class="formula">\[
-                    f'(t)=-\frac{1}{1+t^2}
-                  \]</div>
-                  <p>故原式可化为 \(\lim\limits_{x\to\infty}\dfrac{x^2}{1+\xi^2}=1\)。</p>
-                </div>
-              </div>
-
-              <div class="method">
-                <span class="card-kicker">三个常用推论</span>
-                <ul class="list">
-                  <li>若 \(f'(x)\equiv 0\)，则 \(f(x)\) 在区间内为常数。</li>
-                  <li>若 \(f'(x)=g'(x)\)，则 \(f(x)=g(x)+C\)。</li>
-                  <li>若 \(f'(x)&gt;0\)（或 \(f'(x)&lt;0\)），则函数单调递增（或递减）。</li>
-                </ul>
-              </div>
-
-              <div class="example">
-                <span class="card-kicker">例 3.5</span>
-                <div class="card-body">
-                  <p>证明</p>
-                  <div class="formula">\[
-                    \arcsin x+\arccos x=\frac{\pi}{2}\qquad (-1\le x\le 1)
-                  \]</div>
-                  <p class="hand">设 \(F(x)=\arcsin x+\arccos x\)，则</p>
-                  <div class="formula">\[
-                    F'(x)=\frac{1}{\sqrt{1-x^2}}-\frac{1}{\sqrt{1-x^2}}=0
-                  \]</div>
-                  <p class="hand">故 \(F(x)\) 为常数，再取 \(x=0\) 得 \(F(0)=\dfrac{\pi}{2}\)。</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="sec-cauchy">
-            <div class="section-head">
-              <div>
-                <span class="section-tag">4.</span>
-                <h2>柯西中值定理</h2>
-              </div>
-            </div>
-
-            <div class="stack">
-              <div class="theorem">
-                <span class="card-kicker">定理</span>
-                <div class="card-body">
-                  <p>设函数 \(f(x)\) 和 \(g(x)\) 在闭区间 \([a,b]\) 上连续，在开区间 \((a,b)\) 上可导，且对任意 \(x\in(a,b)\)，有 \(g'(x)\ne 0\)。则存在 \(\xi\in(a,b)\)，使得</p>
-                  <div class="formula">\[
-                    \frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(\xi)}{g'(\xi)}
-                  \]</div>
-                  <p class="hand">当 \(g(x)=x\) 时，就退化为拉格朗日中值定理。</p>
-                </div>
-              </div>
-
-              <div class="example">
-                <span class="card-kicker">例 3.6</span>
-                <div class="card-body">
-                  <p>若 \(0&lt;a&lt;b\)，证明存在 \(\xi\in(a,b)\)，使</p>
-                  <div class="formula">\[
-                    f(b)-f(a)=\xi f'(\xi)\ln\frac{b}{a}
-                  \]</div>
-                  <p class="hand">取 \(g(x)=\ln x\)，则由柯西中值定理有</p>
-                  <div class="formula">\[
-                    \frac{f(b)-f(a)}{\ln b-\ln a}=\frac{f'(\xi)}{1/\xi}=\xi f'(\xi)
-                  \]</div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="sec-taylor">
-            <div class="section-head">
-              <div>
-                <span class="section-tag">5.</span>
-                <h2>泰勒中值定理</h2>
-              </div>
-            </div>
-
-            <div class="stack">
-              <div class="note">
-                <span class="card-kicker">推导</span>
-                <div class="card-body">
-                  <p>设</p>
-                  <div class="formula">\[
-                    f(x)=a_0+a_1x+a_2x^2+\cdots+a_nx^n+o(x^n)
-                  \]</div>
-                  <p>在 \(x=0\) 处比较各阶导数，可得</p>
-                  <div class="formula">\[
-                    a_0=f(0),\quad a_1=f'(0),\quad a_2=\frac{f''(0)}{2!},\quad \cdots,\quad a_n=\frac{f^{(n)}(0)}{n!}
-                  \]</div>
-                </div>
-              </div>
-
-              <div class="theorem">
-                <span class="card-kicker">带皮亚诺余项</span>
-                <div class="card-body">
-                  <div class="formula">\[
-                    f(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\cdots+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+o[(x-x_0)^n]
-                  \]</div>
-                  <p class="hand">适合直接写函数在某点附近的展开式。</p>
-                </div>
-              </div>
-
-              <div class="theorem">
-                <span class="card-kicker">带拉格朗日余项</span>
-                <div class="card-body">
-                  <div class="formula">\[
-                    f(x)=f(x_0)+f'(x_0)(x-x_0)+\cdots+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}
-                  \]</div>
-                  <p class="hand">更适合证明题与误差估计。</p>
-                </div>
-              </div>
-
-              <div class="example">
-                <span class="card-kicker">例 3.8</span>
-                <div class="card-body">
-                  <p>已知</p>
-                  <div class="formula">\[
-                    \lim_{x\to 0}\frac{f(x)}{x}=1,\qquad f''(x)&gt;0
-                  \]</div>
-                  <p>证明 \(f(x)&gt;x\)。</p>
-                  <p class="hand">由极限可得 \(f(0)=0,\ f'(0)=1\)。在 \(x=0\) 附近作二阶泰勒展开：</p>
-                  <div class="formula">\[
-                    f(x)=f(0)+f'(0)x+\frac{f''(\xi)}{2}x^2=x+\frac{f''(\xi)}{2}x^2&gt;x
-                  \]</div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="sec-apply">
-            <div class="section-head">
-              <div>
-                <span class="section-tag">§2.</span>
-                <h2>导数的微分学应用</h2>
-                <p class="section-sub">这一部分后续会继续拆成独立页面。当前先保留第三章中最常用的应用提纲，方便继续扩写。</p>
-              </div>
-            </div>
-
-            <div class="columns">
-              <div class="method">
-                <span class="card-kicker">单调性</span>
-                <ul class="list">
-                  <li>先求 \(f'(x)\)，找驻点与不可导点。</li>
-                  <li>按分界点讨论导数符号。</li>
-                  <li>根据符号写出单调区间。</li>
-                </ul>
-              </div>
-
-              <div class="method">
-                <span class="card-kicker">极值与最值</span>
-                <ul class="list">
-                  <li>极值：找驻点，用一阶或二阶导数法判断。</li>
-                  <li>最值：比较端点、驻点和不可导点处的函数值。</li>
-                  <li>闭区间问题尤其注意端点。</li>
-                </ul>
-              </div>
-
-              <div class="method">
-                <span class="card-kicker">凹凸与拐点</span>
-                <ul class="list">
-                  <li>若 \(f''(x)&gt;0\)，曲线为凸。</li>
-                  <li>若 \(f''(x)&lt;0\)，曲线为凹。</li>
-                  <li>二阶导数符号变化处常对应拐点。</li>
-                </ul>
-              </div>
-
-              <div class="method">
-                <span class="card-kicker">渐近线</span>
-                <ul class="list">
-                  <li>\(\lim_{x\to a^\pm}f(x)=\pm\infty\) 对应垂直渐近线。</li>
-                  <li>\(\lim_{x\to \pm\infty}f(x)=b\) 对应水平渐近线。</li>
-                  <li>\(\lim_{x\to \pm\infty}[f(x)-(ax+b)]=0\) 对应斜渐近线。</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-        </article>
-      </div>
+        <div class="pages">
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-01.png" alt="高数基础第三章第01页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-02.png" alt="高数基础第三章第02页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-03.png" alt="高数基础第三章第03页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-04.png" alt="高数基础第三章第04页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-05.png" alt="高数基础第三章第05页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-06.png" alt="高数基础第三章第06页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-07.png" alt="高数基础第三章第07页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-08.png" alt="高数基础第三章第08页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-09.png" alt="高数基础第三章第09页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-10.png" alt="高数基础第三章第10页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-11.png" alt="高数基础第三章第11页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-12.png" alt="高数基础第三章第12页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-13.png" alt="高数基础第三章第13页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-14.png" alt="高数基础第三章第14页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-15.png" alt="高数基础第三章第15页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-16.png" alt="高数基础第三章第16页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-17.png" alt="高数基础第三章第17页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-18.png" alt="高数基础第三章第18页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-19.png" alt="高数基础第三章第19页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-20.png" alt="高数基础第三章第20页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-21.png" alt="高数基础第三章第21页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-22.png" alt="高数基础第三章第22页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-23.png" alt="高数基础第三章第23页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-24.png" alt="高数基础第三章第24页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-25.png" alt="高数基础第三章第25页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-26.png" alt="高数基础第三章第26页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-27.png" alt="高数基础第三章第27页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-28.png" alt="高数基础第三章第28页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-29.png" alt="高数基础第三章第29页" loading="lazy" /></figure>
+          <figure class="page-card"><img src="../assets/posts/gaoshu-ch3/page-30.png" alt="高数基础第三章第30页" loading="lazy" /></figure>
+        </div>
+      </section>
     </div>
   </body>
 </html>
