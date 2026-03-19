@@ -43,6 +43,11 @@ body {
   font-family: "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
+body:not(.is-revealed) .landing-content,
+body:not(.is-revealed) .landing-scroll {
+  opacity: 0;
+}
+
 .intro-screen {
   position: fixed;
   inset: 0;
@@ -74,12 +79,42 @@ body {
   object-fit: cover;
   filter: saturate(1.08) brightness(0.34) blur(1px);
   transform: scale(1.04);
+  animation: introBgFloat 14s ease-in-out infinite alternate;
 }
 
 .intro-screen-overlay {
   background:
     radial-gradient(circle at center, rgba(255, 130, 188, 0.14), transparent 26%),
     linear-gradient(180deg, rgba(8, 5, 14, 0.36), rgba(8, 5, 14, 0.84));
+}
+
+.intro-screen::before,
+.intro-screen::after {
+  content: "";
+  position: absolute;
+  inset: auto;
+  width: 38vw;
+  height: 38vw;
+  min-width: 260px;
+  min-height: 260px;
+  border-radius: 50%;
+  filter: blur(18px);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.intro-screen::before {
+  top: 8%;
+  left: -6%;
+  background: radial-gradient(circle, rgba(255, 130, 188, 0.28), transparent 68%);
+  animation: driftBlob 10s ease-in-out infinite;
+}
+
+.intro-screen::after {
+  right: -8%;
+  bottom: 2%;
+  background: radial-gradient(circle, rgba(157, 139, 255, 0.22), transparent 70%);
+  animation: driftBlobAlt 12s ease-in-out infinite;
 }
 
 .intro-screen-content {
@@ -103,6 +138,7 @@ body {
     0 0 0 8px rgba(255, 158, 189, 0.28),
     0 24px 60px rgba(0, 0, 0, 0.34);
   background: #fff;
+  animation: avatarFloatIn 1.4s ease-out both, avatarHalo 4.2s ease-in-out infinite;
 }
 
 .intro-screen-tip {
@@ -335,6 +371,20 @@ kbd {
     linear-gradient(180deg, rgba(10, 5, 16, 0.46), rgba(8, 5, 14, 0.86));
 }
 
+.landing-screen::before {
+  content: "";
+  position: absolute;
+  inset: -20% -5%;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 18% 38%, rgba(255, 166, 210, 0.16), transparent 18%),
+    radial-gradient(circle at 78% 28%, rgba(180, 142, 255, 0.14), transparent 20%),
+    radial-gradient(circle at 58% 76%, rgba(255, 120, 172, 0.14), transparent 16%);
+  opacity: 0;
+  transform: scale(1.08);
+  pointer-events: none;
+}
+
 .landing-content {
   position: relative;
   z-index: 2;
@@ -344,6 +394,7 @@ kbd {
   gap: 28px;
   align-items: center;
   margin-top: 60px;
+  transition: opacity 320ms ease;
 }
 
 .landing-avatar-wrap {
@@ -380,8 +431,30 @@ kbd {
 
 .landing-title {
   font-size: clamp(3.2rem, 8vw, 6rem);
-  letter-spacing: -0.04em;
-  color: var(--accent);
+  letter-spacing: 0.01em;
+  font-family: "Cherry Bomb One", "Avenir Next", "PingFang SC", sans-serif;
+  font-weight: 400;
+  line-height: 0.98;
+  color: transparent;
+  background:
+    linear-gradient(
+      115deg,
+      #ffd6e7 0%,
+      #ff8fbb 18%,
+      #fff2f8 36%,
+      #c79cff 52%,
+      #ff82b1 68%,
+      #fff1f7 84%,
+      #ffb8d2 100%
+    );
+  background-size: 240% 240%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow:
+    0 0 24px rgba(255, 159, 198, 0.24),
+    0 14px 34px rgba(0, 0, 0, 0.36);
+  animation: titleFlow 6s linear infinite;
 }
 
 .landing-tagline {
@@ -447,6 +520,7 @@ kbd {
   gap: 4px;
   color: var(--muted);
   font-size: 0.95rem;
+  transition: opacity 320ms ease;
 }
 
 .scroll-arrow {
@@ -666,6 +740,75 @@ kbd {
 
   50% {
     transform: translateY(6px);
+  }
+}
+
+@keyframes titleFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 220% 50%;
+  }
+}
+
+@keyframes introBgFloat {
+  0% {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: scale(1.09) translate3d(1.5%, -1.5%, 0);
+  }
+}
+
+@keyframes driftBlob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(7%, 8%, 0) scale(1.1);
+  }
+}
+
+@keyframes driftBlobAlt {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-8%, -7%, 0) scale(1.08);
+  }
+}
+
+@keyframes avatarFloatIn {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.92);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes avatarHalo {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 8px rgba(255, 158, 189, 0.24),
+      0 24px 60px rgba(0, 0, 0, 0.34);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 11px rgba(255, 158, 189, 0.34),
+      0 30px 70px rgba(0, 0, 0, 0.4);
   }
 }
 

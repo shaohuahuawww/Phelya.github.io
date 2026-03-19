@@ -3,10 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>醉月失真 | 数学博客</title>
+    <title>Phelya | 数学博客</title>
     <meta
       name="description"
       content="全屏二次元首屏 + 下滑进入正文内容区的数学博客主页。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap"
+      rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -26,7 +32,7 @@
       <div class="header-inner">
         <div class="header-left">
           <a class="logo" href="#landing">
-            <img class="logo-avatar" src="./assets/anime/nav-avatar.jpg" alt="醉月失真" />
+            <img class="logo-avatar" src="./assets/anime/nav-avatar.jpg" alt="Phelya" />
           </a>
           <nav class="nav-left">
             <a href="#landing" class="nav-btn nav-btn-text"><span class="nav-icon">⌂</span><span>首页</span></a>
@@ -75,11 +81,9 @@
           </div>
 
           <div class="landing-copy">
-            <h1 class="landing-title">醉月失真</h1>
-            <p class="landing-tagline">热爱可抵岁月漫长</p>
+            <h1 class="landing-title">Phelya</h1>
             <p class="landing-bio">
-              一个喜欢数学、喜欢整理笔记，也喜欢二次元视觉的站长。
-              这里会长期整理高等数学与线性代数内容。
+              So long lives this, and this gives life to thee.
             </p>
             <div class="landing-meta">
               <span class="meta-pill" id="heroTime">--:--</span>
@@ -235,7 +239,7 @@
 
     <footer class="footer">
       <div class="footer-inner">
-        <p>© 2024 - 2026 醉月失真 版权所有</p>
+        <p>© 2024 - 2026 Phelya 版权所有</p>
         <div class="footer-links">
           <a href="#about">关于</a>
           <a href="#math-sections">分类</a>
@@ -318,6 +322,7 @@
         introScreen.classList.add("is-leaving");
         setTimeout(() => {
           introScreen.setAttribute("hidden", "");
+          document.body.classList.add("is-revealed");
         }, 650);
       }
 
