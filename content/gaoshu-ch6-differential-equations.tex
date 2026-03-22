@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{ctex}
+\title{高数基础 第六章\quad 微分方程}
+\author{Phelya}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{本章思维导图}
+\begin{itemize}
+\item 基本概念及一阶微分方程：微分方程、阶、解、通解与特解、初始条件、可分离变量方程、齐次方程、一阶线性方程。
+\item 高阶线性微分方程：二阶齐次与非齐次方程、解的叠加原理、通解结构、二阶与 $n$ 阶常系数齐次方程。
+\item 二阶常系数非齐次线性方程：通解结构、待定系数法、两类常见右端项。
+\end{itemize}
+
+\section*{\S 1. 微分方程的概念和一阶微分方程}
+\subsection*{一、微分方程的基本概念}
+\begin{itemize}
+\item 微分方程：含有自变量、未知函数和未知函数导数（或微分）的方程。
+\item 阶：最高阶导数的阶数。
+\item 解、通解、特解：通解含有与方程阶数相同个数的独立常数，特解由初始条件确定。
+\item 初始条件：在某点给出函数值及各阶导数值。
+\end{itemize}
+
+\subsection*{1. 可分离变量的微分方程}
+形如
+\[
+\frac{dy}{dx}=g(y)f(x)
+\]
+的方程称为可分离变量方程。步骤为：分离变量、两边积分、化简结果。
+
+\subsection*{2. 齐次方程}
+形如
+\[
+\frac{dy}{dx}=f\!\left(\frac{y}{x}\right)
+\]
+的方程称为齐次方程。常用代换 $u=\dfrac{y}{x}$，即 $y=ux$，再化为可分离变量方程。
+
+\subsection*{3. 一阶线性微分方程}
+形如
+\[
+y'+p(x)y=q(x)
+\]
+的方程称为一阶线性微分方程。
+
+齐次方程通解：
+\[
+y=Ce^{-\int p(x)\,dx}.
+\]
+
+非齐次方程通解：
+\[
+y=e^{-\int p(x)\,dx}\left(\int q(x)e^{\int p(x)\,dx}\,dx+C\right).
+\]
+
+\section*{\S 2. 高阶微分方程}
+\subsection*{一、二阶齐次、非齐次线性微分方程}
+\[
+y''+p(x)y'+q(x)y=0,\qquad
+y''+p(x)y'+q(x)y=f(x).
+\]
+
+\subsection*{二、线性微分方程解的性质}
+\begin{itemize}
+\item 齐 + 齐 = 齐
+\item 非齐 -- 非齐 = 齐
+\item 齐 + 非齐 = 非齐
+\end{itemize}
+
+二阶齐次线性微分方程通解：
+\[
+y=C_1y_1(x)+C_2y_2(x).
+\]
+
+二阶非齐次线性微分方程通解：
+\[
+y=C_1y_1(x)+C_2y_2(x)+y^\*(x).
+\]
+
+\subsection*{三、二阶与 $n$ 阶常系数齐次线性微分方程}
+二阶常系数齐次线性方程：
+\[
+y''+py'+qy=0.
+\]
+特征方程：
+\[
+\lambda^2+p\lambda+q=0.
+\]
+
+\begin{itemize}
+\item 两个不等实根 $\lambda_1,\lambda_2$：$y=C_1e^{\lambda_1x}+C_2e^{\lambda_2x}$。
+\item 重实根 $\lambda$：$y=(C_1+C_2x)e^{\lambda x}$。
+\item 共轭复根 $\alpha\pm \beta i$：$y=e^{\alpha x}(C_1\cos \beta x+C_2\sin \beta x)$。
+\end{itemize}
+
+\subsection*{四、二阶常系数非齐次线性微分方程}
+\[
+y''+py'+qy=f(x),\qquad y=y_h+y^\*.
+\]
+
+当 $f(x)=e^{\alpha x}P_n(x)$ 时：
+\begin{itemize}
+\item 若 $\alpha$ 不是特征根，则设 $y^\*=e^{\alpha x}R_n(x)$。
+\item 若 $\alpha$ 是单根，则设 $y^\*=xe^{\alpha x}R_n(x)$。
+\item 若 $\alpha$ 是重根，则设 $y^\*=x^2e^{\alpha x}R_n(x)$。
+\end{itemize}
+
+当
+\[
+f(x)=e^{\alpha x}\bigl(P_n(x)\cos\beta x+Q_m(x)\sin\beta x\bigr)
+\]
+时，若 $\alpha\pm \beta i$ 不是特征根，则设
+\[
+y^\*=e^{\alpha x}\bigl(R_l(x)\cos\beta x+S_l(x)\sin\beta x\bigr),
+\]
+若是特征根，则在前面乘 $x$（若重数更高则乘更高次幂）。
+
+\end{document}
