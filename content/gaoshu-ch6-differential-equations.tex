@@ -25,6 +25,20 @@
 \item 初始条件：在某点给出函数值及各阶导数值。
 \end{itemize}
 
+例如当
+\[
+y''=6x+2
+\]
+时，积分得
+\[
+y'=3x^2+2x+C_1,
+\]
+再积分得
+\[
+y=x^3+x^2+C_1x+C_2.
+\]
+这就是该方程的通解；给定常数或初始条件后可得到特解。
+
 \subsection*{1. 可分离变量的微分方程}
 形如
 \[
@@ -56,6 +70,12 @@ y=Ce^{-\int p(x)\,dx}.
 y=e^{-\int p(x)\,dx}\left(\int q(x)e^{\int p(x)\,dx}\,dx+C\right).
 \]
 
+讲义中的例题还特别强调，分部积分
+\[
+\int x^2\ln x\,dx=\frac{x^3}{3}\ln x-\frac{x^3}{9}+C
+\]
+是一阶线性方程求特解时的常见中间步骤。
+
 \section*{\S 2. 高阶微分方程}
 \subsection*{一、二阶齐次、非齐次线性微分方程}
 \[
@@ -69,6 +89,18 @@ y''+p(x)y'+q(x)y=f(x).
 \item 非齐 -- 非齐 = 齐
 \item 齐 + 非齐 = 非齐
 \end{itemize}
+
+若
+\[
+\begin{cases}
+y_1'+p(x)y_1=f_1(x),\\
+y_2'+p(x)y_2=f_2(x),
+\end{cases}
+\]
+则
+\[
+(k_1y_1+k_2y_2)'+p(x)(k_1y_1+k_2y_2)=k_1f_1+k_2f_2.
+\]
 
 二阶齐次线性微分方程通解：
 \[
@@ -96,6 +128,12 @@ y''+py'+qy=0.
 \item 共轭复根 $\alpha\pm \beta i$：$y=e^{\alpha x}(C_1\cos \beta x+C_2\sin \beta x)$。
 \end{itemize}
 
+二阶情形中可直接利用判别式
+\[
+\Delta=p^2-4q
+\]
+来判断根的类型。
+
 \subsection*{四、二阶常系数非齐次线性微分方程}
 \[
 y''+py'+qy=f(x),\qquad y=y_h+y^\*.
@@ -117,5 +155,39 @@ f(x)=e^{\alpha x}\bigl(P_n(x)\cos\beta x+Q_m(x)\sin\beta x\bigr)
 y^\*=e^{\alpha x}\bigl(R_l(x)\cos\beta x+S_l(x)\sin\beta x\bigr),
 \]
 若是特征根，则在前面乘 $x$（若重数更高则乘更高次幂）。
+
+例如：
+\begin{itemize}
+\item 若 $y''+2y'+y=x^2e^{-x}$，因为 $-1$ 是二重特征根，所以可设
+\[
+y^\*=x^2(ax^2+bx+c)e^{-x}.
+\]
+\item 若 $y''-y'-2y=xe^{2x}$，因为 $2$ 是单特征根，所以可设
+\[
+y^\*=x(ax+b)e^{2x}.
+\]
+\end{itemize}
+
+在例 6.6 中，
+\[
+y''-2y'+2y=e^x
+\]
+的一个特解可取为
+\[
+y^\*=e^x.
+\]
+
+而
+\[
+y''+y'-2y=2\cos 2x
+\]
+可设
+\[
+y^\*=A\cos 2x+B\sin 2x,
+\]
+比较系数得
+\[
+A=-\frac{7}{10},\qquad B=\frac{1}{10}.
+\]
 
 \end{document}
