@@ -269,7 +269,7 @@
             <p class="eyebrow">Calculus Notes</p>
             <h1>第六章 微分方程</h1>
             <p class="hero-desc">
-              本章按原讲义顺序整理微分方程的概念、一阶微分方程的几种基本解法，以及高阶线性微分方程、常系数齐次与非齐次方程的结构和待定系数法。
+              本章整理微分方程的概念、一阶微分方程的几种基本解法，以及高阶线性微分方程、常系数齐次与非齐次方程的结构和待定系数法。
             </p>
             <div class="hero-meta">
               <span class="meta-pill">高等数学</span>
@@ -337,7 +337,7 @@
                 <li>③ 不含任意常数或任意常数已被确定后的解，称为特解。</li>
               </ul>
               <p>4．初始条件：要求自变量取某定值时，对应函数及各阶导数取指定值的条件。</p>
-              <p class="hand">手写例子：若 \(y''=6x+2\)，积分得 \(y'=3x^2+2x+C_1\)，再积分得 \(y=x^3+x^2+C_1x+C_2\)。</p>
+              <p class="hand">例如若 \(y''=6x+2\)，积分得 \(y'=3x^2+2x+C_1\)，再积分得 \(y=x^3+x^2+C_1x+C_2\)。</p>
               <p class="hand">因此 \(y=x^3+x^2+C_1x+C_2\) 是通解；如取 \(C_1=1,C_2=2\)，则 \(y=x^3+x^2+x+2\) 是特解。</p>
               <p class="hand">例如 \(y(0)=1,\;y'(0)=2\) 就是一组初始条件。</p>
               <div class="curve-grid">
@@ -374,8 +374,8 @@
                 <li>② 两边同时积分；</li>
                 <li>③ 尽可能化简，整理成通解或特解形式。</li>
               </ul>
-              <p class="hand">页边手写重点：分离后常写成 \( \int \dfrac{1}{g(y)}\,dy = \int f(x)\,dx \) 的标准形式。</p>
-              <p class="hand">对应原页上的步骤就是“1° 分离，2° 两边同时积分，3° 化简”。</p>
+              <p class="hand">分离后常写成 \( \int \dfrac{1}{g(y)}\,dy = \int f(x)\,dx \) 的标准形式。</p>
+              <p class="hand">步骤可概括为“1° 分离，2° 两边同时积分，3° 化简”。</p>
             </div>
           </div>
 
@@ -387,7 +387,7 @@
                 (xy^2+x)\,dx+(y-xy^2)\,dy=0
               \]</div>
               <p>的通解。</p>
-              <p class="hand">按原讲义思路，先整理为</p>
+              <p class="hand">先整理为</p>
               <div class="formula">\[
                 y(1-y^2)\,dy=-x(1+y^2)\,dx,
               \]</div>
@@ -413,7 +413,7 @@
                 \frac{y^2}{2}=\frac{x^2}{2}+C.
               \]</div>
               <p>由初始条件 \(y(1)=e\)，可确定常数，得到相应特解。</p>
-              <p class="hand">原页手写更强调：先写成 \(\int y\,dy=\int x\,dx\)，再由初值代回确定常数。</p>
+              <p class="hand">先写成 \(\int y\,dy=\int x\,dx\)，再由初值代回确定常数。</p>
             </div>
           </div>
 
@@ -432,7 +432,7 @@
                 <li>③ 化为可分离变量方程后求解。</li>
                 <li>④ 积分后还原 \(u=\dfrac{y}{x}\)。</li>
               </ul>
-              <p class="hand">手写提醒：凡是右端只含 \(\dfrac{y}{x}\) 的，第一反应就是设 \(y=ux\)。</p>
+              <p class="hand">凡是右端只含 \(\dfrac{y}{x}\) 的，第一反应就是设 \(y=ux\)。</p>
             </div>
           </div>
 
@@ -449,7 +449,7 @@
                 \frac{dy}{dx}=\frac{y}{x}+e^{y/x}.
               \]</div>
               <p class="hand">两题都先令 \(u=\dfrac{y}{x}\)。代入后分别化成关于 \(u\) 与 \(x\) 的可分离变量方程，再积分求通解。</p>
-              <p class="hand">原讲义写得更细：代入后先凑出 \(u+x\dfrac{du}{dx}=f(u)\)，再变成 \(\dfrac{1}{f(u)-u}\,du=\dfrac{1}{x}\,dx\)。</p>
+              <p class="hand">代入后先凑出 \(u+x\dfrac{du}{dx}=f(u)\)，再变成 \(\dfrac{1}{f(u)-u}\,du=\dfrac{1}{x}\,dx\)。</p>
             </div>
           </div>
 
@@ -461,7 +461,7 @@
                 y'+p(x)y=q(x)
               \]</div>
               <p>的方程称为一阶线性微分方程。若 \(q(x)\equiv 0\) 则为齐次的，否则为非齐次的。</p>
-              <p class="hand">原讲义强调：这类方程“直接套公式”。</p>
+              <p class="hand">这类方程通常可以直接套公式。</p>
               <p>齐次方程 \(y'+p(x)y=0\) 的通解为</p>
               <div class="formula">\[
                 y=Ce^{-\int p(x)\,dx}.
@@ -524,7 +524,7 @@
               <div class="formula">\[
                 y=\frac{1}{3}x\ln x-\frac{x}{9}.
               \]</div>
-              <p class="hand">页边补充的关键一步是分部积分：\(\int x^2\ln x\,dx=\dfrac{x^3}{3}\ln x-\dfrac{1}{3}\int x^2dx\)。</p>
+              <p class="hand">关键一步是分部积分：\(\int x^2\ln x\,dx=\dfrac{x^3}{3}\ln x-\dfrac{1}{3}\int x^2dx\)。</p>
             </div>
           </div>
         </section>
@@ -600,8 +600,8 @@
               <div class="formula">\[
                 y=C_1y_1(x)+C_2y_2(x)+y^\*(x).
               \]</div>
-              <p class="hand">讲义里的“例补”本质上都在考这个结构：先认出齐次部分，再加一个特解。</p>
-              <p class="hand">红字总结：小齐通 = 两个线无关小齐解相加；小非通 = 小齐通 + 小非特。</p>
+              <p class="hand">这类例题本质上都在考这个结构：先认出齐次部分，再加一个特解。</p>
+              <p class="hand">可概括为：小齐通 = 两个线无关小齐解相加；小非通 = 小齐通 + 小非特。</p>
             </div>
           </div>
 
@@ -617,7 +617,7 @@
               <div class="formula">\[
                 y=C_1(x-1)+C_2(x^2-1)+1.
               \]</div>
-              <p class="hand">讲义还提醒：线性无关解不止一组，所以最后写法不唯一。</p>
+              <p class="hand">线性无关解不止一组，所以最后写法不唯一。</p>
             </div>
           </div>
 
@@ -633,7 +633,7 @@
                 <li>① 写出特征方程 \(\lambda^2+p\lambda+q=0\)；</li>
                 <li>② 根据特征根的不同情况写通解。</li>
               </ul>
-              <p class="hand">手写页直接用 \(\Delta=p^2-4q\) 来分三种情况讨论。</p>
+              <p class="hand">可直接用 \(\Delta=p^2-4q\) 来分三种情况讨论。</p>
               <p>若特征方程有：</p>
               <ul class="list">
                 <li>两个不相等实根 \(\lambda_1,\lambda_2\)，则 \(y=C_1e^{\lambda_1x}+C_2e^{\lambda_2x}\)；</li>
@@ -733,8 +733,8 @@
               <ul class="list">
                 <li>若 \(\alpha\pm\beta i\) 是特征根，则在前面再乘 \(x\)；若为重复根，则乘相应更高次幂。</li>
               </ul>
-              <p class="hand">这里 \(l=\max\{n,m\}\)。手写页重点一直在判断“右端项是否对应特征根”。</p>
-              <p class="hand">红字归纳：第一类先看 \(\alpha\)，第二类先看 \(\alpha\pm\beta i\)。如果它正好是特征根，就在试探特解前乘 \(x\)。</p>
+              <p class="hand">这里 \(l=\max\{n,m\}\)。重点在于判断“右端项是否对应特征根”。</p>
+              <p class="hand">可归纳为：第一类先看 \(\alpha\)，第二类先看 \(\alpha\pm\beta i\)。如果它正好是特征根，就在试探特解前乘 \(x\)。</p>
             </div>
           </div>
 
