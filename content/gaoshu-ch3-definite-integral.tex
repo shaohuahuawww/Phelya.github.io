@@ -1,0 +1,1262 @@
+\documentclass[12pt,a4paper]{ctexart}
+
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  urlcolor=blue!60!black
+}
+
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+\fancyhf{}
+\fancyhead[L]{第三章：定积分讲义}
+\fancyhead[R]{\thepage/\pageref{LastPage}}
+
+\setlist[itemize]{leftmargin=2em}
+\setlist[enumerate]{leftmargin=2.4em}
+
+\newtcolorbox{keybox}{
+  colback=blue!3,
+  colframe=blue!45!black,
+  boxrule=0.8pt,
+  arc=1.5mm
+}
+
+\newtcolorbox{methodbox}{
+  colback=green!3,
+  colframe=green!40!black,
+  boxrule=0.8pt,
+  arc=1.5mm
+}
+
+\newtcolorbox{examplebox}{
+  colback=orange!3,
+  colframe=orange!55!black,
+  boxrule=0.8pt,
+  arc=1.5mm
+}
+
+\title{\textbf{第三章：定积分讲义}\\[4pt]\large 定义、性质、计算、图像、常见题型与模板}
+\author{整理版}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{复习安排}
+
+\begin{methodbox}
+\begin{enumerate}
+  \item 先掌握定积分的定义、性质、牛顿--莱布尼茨公式与积分上限函数
+  \item 再系统练习换元法、分部积分法、对称变换、区间再现公式
+  \item 随后按题型归纳训练：黎曼和、图像面积、积分函数、含积分参数、平移关系、由导数求积分
+  \item 最后补充反常积分与定积分应用题，并结合易错点进行查漏补缺
+\end{enumerate}
+\end{methodbox}
+
+\section{本章框架}
+
+\begin{keybox}
+\textbf{这一章最常考的主线有九条：}
+\begin{enumerate}
+  \item 定积分的定义与几何意义
+  \item 定积分的基本性质
+  \item 微积分基本公式与积分上限函数
+  \item 定积分的计算：换元、分部、对称、递推
+  \item 由图像求积分与由积分求图像信息
+  \item 定积分应用：面积、体积、弧长、平均值
+  \item 特殊结构题：黎曼和、含积分参数、平移关系、由导数求积分
+  \item 反常积分
+  \item 可积性、原函数、间断点类型的综合判断
+\end{enumerate}
+\end{keybox}
+
+\section{定积分的定义与本质}
+
+\subsection{黎曼和定义}
+设函数 $f(x)$ 在区间 $[a,b]$ 上有界，将区间分成 $n$ 份，每一小段长度记为 $\Delta x_i$，在第 $i$ 段上任取一点 $\xi_i$，若极限
+\[
+\lim_{\lambda\to 0}\sum_{i=1}^n f(\xi_i)\Delta x_i
+\]
+存在且与分法、取点方式无关，则称该极限为 $f(x)$ 在 $[a,b]$ 上的定积分，记作
+\[
+\int_a^b f(x)\,dx.
+\]
+其中 $\lambda=\max\{\Delta x_1,\dots,\Delta x_n\}$。
+
+\subsection{等分形式}
+在考试中最常用的是等分形式：
+\[
+\int_a^b f(x)\,dx
+=
+\lim_{n\to\infty}\frac{b-a}{n}\sum_{k=1}^n
+f\!\left(a+\theta_k\frac{b-a}{n}\right),
+\quad \theta_k\in[k-1,k].
+\]
+若每段取同一类点，常写成
+\[
+\int_a^b f(x)\,dx
+=
+\lim_{n\to\infty}\frac{b-a}{n}\sum_{k=1}^n
+f\!\left(a+\frac{k+\alpha}{n}(b-a)\right),
+\quad -1\le \alpha\le 0.
+\]
+
+\begin{keybox}
+\textbf{定积分的本质：}
+\begin{enumerate}
+  \item 它是一个\textbf{数值}，不是变量；
+  \item 它是\textbf{带符号的面积}；
+  \item 它是\textbf{黎曼和的极限}；
+  \item 出现 $\int_a^b f(x)\,dx$ 时，积分变量只是“哑变量”，可以换成 $t,u,\xi$ 等。
+\end{enumerate}
+\end{keybox}
+
+\section{定积分的基本性质}
+
+\subsection{线性性质}
+\[
+\int_a^b [\alpha f(x)+\beta g(x)]\,dx
+=
+\alpha\int_a^b f(x)\,dx+\beta\int_a^b g(x)\,dx.
+\]
+
+\subsection{区间可加性}
+\[
+\int_a^b f(x)\,dx=\int_a^c f(x)\,dx+\int_c^b f(x)\,dx.
+\]
+
+\subsection{上下限交换}
+\[
+\int_a^b f(x)\,dx=-\int_b^a f(x)\,dx,\qquad
+\int_a^a f(x)\,dx=0.
+\]
+
+\subsection{保号性与估值}
+若在 $[a,b]$ 上 $f(x)\ge 0$，则
+\[
+\int_a^b f(x)\,dx\ge 0.
+\]
+若 $m\le f(x)\le M$，则
+\[
+m(b-a)\le \int_a^b f(x)\,dx\le M(b-a).
+\]
+
+\subsection{积分中值定理}
+若 $f$ 在 $[a,b]$ 上连续，则存在 $\xi\in[a,b]$，使得
+\[
+\int_a^b f(x)\,dx=f(\xi)(b-a).
+\]
+若 $g$ 不变号，$f$ 连续，$g$ 可积，则存在 $\xi\in[a,b]$ 使
+\[
+\int_a^b f(x)g(x)\,dx=f(\xi)\int_a^b g(x)\,dx.
+\]
+
+\section{微积分基本公式}
+
+\subsection{牛顿-莱布尼茨公式}
+若 $F'(x)=f(x)$，且 $f$ 在 $[a,b]$ 上连续，则
+\[
+\int_a^b f(x)\,dx=F(b)-F(a).
+\]
+
+\subsection{变上限积分函数}
+设
+\[
+F(x)=\int_a^x f(t)\,dt,
+\]
+若 $f$ 连续，则
+\[
+F'(x)=f(x).
+\]
+
+更一般地，
+\[
+\frac{d}{dx}\int_{\varphi(x)}^{\psi(x)}f(t)\,dt
+=
+f(\psi(x))\psi'(x)-f(\varphi(x))\varphi'(x).
+\]
+
+\subsection{积分上限函数的常见结构}
+
+\textbf{类型 1：标准型}
+\[
+F(x)=\int_a^x f(t)\,dt
+\quad\Longrightarrow\quad
+F'(x)=f(x).
+\]
+
+\textbf{类型 2：上下限都是函数}
+\[
+F(x)=\int_{\alpha(x)}^{\beta(x)} f(t)\,dt
+\]
+则
+\[
+F'(x)=f(\beta(x))\beta'(x)-f(\alpha(x))\alpha'(x).
+\]
+
+\textbf{类型 3：被积函数里含参数}
+\[
+F(x)=\int_a^b f(x,t)\,dt
+\]
+若条件允许，可对参数求导：
+\[
+F'(x)=\int_a^b \frac{\partial}{\partial x}f(x,t)\,dt.
+\]
+
+\textbf{类型 4：重点的 $x-t$ 型}
+\[
+F(x)=\int_a^x f(x-t)\,dt.
+\]
+这是考试里的高频结构。
+
+令
+\[
+u=x-t,
+\]
+则当 $t=a$ 时，$u=x-a$；当 $t=x$ 时，$u=0$，因此
+\[
+F(x)=\int_0^{x-a} f(u)\,du.
+\]
+于是
+\[
+F'(x)=f(x-a).
+\]
+
+特别地，
+\[
+\int_0^x f(x-t)\,dt=\int_0^x f(t)\,dt.
+\]
+
+\begin{keybox}
+\textbf{$x-t$ 型一定要会的三个等价写法：}
+\[
+\int_0^x f(x-t)\,dt=\int_0^x f(t)\,dt
+\]
+\[
+\frac{d}{dx}\int_0^x f(x-t)\,dt=f(x)
+\]
+\[
+\int_a^x f(x-t)\,dt=\int_0^{x-a} f(u)\,du
+\]
+\end{keybox}
+
+\begin{examplebox}
+\textbf{例}\quad 设
+\[
+F(x)=\int_0^x (x-t)e^{t}\,dt
+\]
+\textbf{求 } F'(x)。
+\par\textbf{解：}
+\begin{enumerate}
+  \item 将被积函数记为 $h(x,t)=(x-t)e^t$，则
+  \[
+  F(x)=\int_0^x h(x,t)\,dt.
+  \]
+  由 Leibniz 公式，
+  \[
+  F'(x)=h(x,x)+\int_0^x \frac{\partial}{\partial x}h(x,t)\,dt.
+  \]
+  \item 计算得
+  \[
+  h(x,x)=0,\qquad \frac{\partial}{\partial x}h(x,t)=e^t.
+  \]
+  因此
+  \[
+  F'(x)=\int_0^x e^t\,dt=e^x-1.
+  \]
+  \item 也可先化简
+  \[
+  F(x)=x\int_0^x e^t\,dt-\int_0^x te^t\,dt
+  \]
+  再求导，结果相同。
+\end{enumerate}
+\end{examplebox}
+
+\begin{methodbox}
+\textbf{积分函数题常用思路：}
+\begin{enumerate}
+  \item 先把 $F(x)=\int_0^x f(t)\,dt$ 理解成“从 $0$ 到 $x$ 的代数面积”
+  \item 要比较 $F(a),F(b)$，本质上是在比较图像面积
+  \item 若要求导，直接用 $F'(x)=f(x)$
+  \item 若上下限是函数，用 Leibniz 公式
+  \item 若出现 $x-t$，优先试换元 $u=x-t$
+  \item 若看到图像题，优先分段面积求和
+\end{enumerate}
+\end{methodbox}
+
+\section{定积分的几何意义}
+
+\subsection{带符号面积}
+\[
+\int_a^b f(x)\,dx
+\]
+表示曲线 $y=f(x)$、直线 $x=a$、$x=b$ 与 $x$ 轴围成图形的\textbf{代数面积}：
+\begin{itemize}
+  \item 在 $x$ 轴上方取正
+  \item 在 $x$ 轴下方取负
+\end{itemize}
+
+\subsection{平面图形面积}
+若 $f(x)\ge g(x)$，则
+\[
+S=\int_a^b [f(x)-g(x)]\,dx.
+\]
+
+\subsection{旋转体体积}
+\begin{itemize}
+  \item 绕 $x$ 轴：
+  \[
+  V=\pi\int_a^b [f(x)]^2\,dx.
+  \]
+  \item 上下两条曲线绕 $x$ 轴：
+  \[
+  V=\pi\int_a^b \big(f^2(x)-g^2(x)\big)\,dx.
+  \]
+\end{itemize}
+
+\subsection{弧长公式}
+若曲线 $y=f(x)$ 在 $[a,b]$ 上具有连续导数，则弧长
+\[
+L=\int_a^b \sqrt{1+[f'(x)]^2}\,dx.
+\]
+
+\subsection{平面图形的平均值}
+函数 $f(x)$ 在 $[a,b]$ 上的平均值为
+\[
+\bar f=\frac1{b-a}\int_a^b f(x)\,dx.
+\]
+
+\subsection{变力做功}
+若力 $F(x)$ 随位置变化，则做功
+\[
+W=\int_a^b F(x)\,dx.
+\]
+
+\begin{keybox}
+\textbf{定积分应用最常考的四类：}
+\begin{enumerate}
+  \item 面积：上减下，右减左
+  \item 体积：圆盘法、环形法
+  \item 弧长：$\sqrt{1+y'^2}$
+  \item 平均值：$\dfrac1{b-a}\int_a^b f(x)\,dx$
+\end{enumerate}
+\end{keybox}
+
+\subsection{应用题统一模板}
+\begin{enumerate}
+  \item 先画图或判断几何量
+  \item 再确定“积分元”是什么
+  \item 写出长度、面积、体积或功的表达式
+  \item 最后确定上下限
+\end{enumerate}
+
+\section{定积分的常用计算方法}
+
+\subsection{换元法}
+若 $x=\varphi(t)$，则
+\[
+\int_a^b f(x)\,dx=\int_{\alpha}^{\beta}f(\varphi(t))\varphi'(t)\,dt.
+\]
+其中 $\alpha,\beta$ 为新变量对应的新上下限。
+
+\subsection{分部积分法}
+\[
+\int_a^b u\,dv=\Big[uv\Big]_a^b-\int_a^b v\,du.
+\]
+
+\subsection{偶奇性与对称区间}
+\begin{itemize}
+  \item 若 $f$ 为奇函数，则
+  \[
+  \int_{-a}^a f(x)\,dx=0.
+  \]
+  \item 若 $f$ 为偶函数，则
+  \[
+  \int_{-a}^a f(x)\,dx=2\int_0^a f(x)\,dx.
+  \]
+\end{itemize}
+
+\subsection{区间再现公式}
+\[
+\int_a^b f(x)\,dx=\int_a^b f(a+b-x)\,dx.
+\]
+因此
+\[
+\int_a^b f(x)\,dx=\frac12\int_a^b\bigl[f(x)+f(a+b-x)\bigr]\,dx.
+\]
+
+\begin{keybox}
+\textbf{最常见特例：}
+\[
+\int_0^{\frac{\pi}{2}} f(\sin x)\,dx
+=
+\int_0^{\frac{\pi}{2}} f(\cos x)\,dx.
+\]
+\[
+\int_0^\pi f(\sin x)\,dx
+=
+2\int_0^{\frac{\pi}{2}} f(\sin x)\,dx.
+\]
+\[
+\int_0^\pi x f(\sin x)\,dx
+=
+\frac{\pi}{2}\int_0^\pi f(\sin x)\,dx
+=
+\pi\int_0^{\frac{\pi}{2}} f(\sin x)\,dx.
+\]
+\end{keybox}
+
+\subsection{幂三角积分与 Wallis 公式}
+\[
+\int_0^{\frac{\pi}{2}}\sin^n x\,dx
+=
+\int_0^{\frac{\pi}{2}}\cos^n x\,dx.
+\]
+
+当 $n$ 为奇数时，
+\[
+\int_0^{\frac{\pi}{2}}\sin^n x\,dx
+=
+\frac{(n-1)!!}{n!!}.
+\]
+
+当 $n$ 为偶数时，
+\[
+\int_0^{\frac{\pi}{2}}\sin^n x\,dx
+=
+\frac{(n-1)!!}{n!!}\cdot\frac{\pi}{2}.
+\]
+
+并且
+\[
+\int_0^\pi \sin^n x\,dx=2\int_0^{\frac{\pi}{2}}\sin^n x\,dx,
+\]
+\[
+\int_0^\pi \cos^n x\,dx=
+\begin{cases}
+0,& n\text{ 为奇数},\\
+2\int_0^{\frac{\pi}{2}}\cos^n x\,dx,& n\text{ 为偶数}.
+\end{cases}
+\]
+
+\section{重要题型总表}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.24\textwidth} >{\raggedright\arraybackslash}p{0.32\textwidth} >{\raggedright\arraybackslash}p{0.34\textwidth}}
+\toprule
+题型 & 识别信号 & 核心方法 \\
+\midrule
+黎曼和反认定积分 & 极限、求和、$\frac{a}{n}\sum$ & 认出 $\Delta x$ 和取样点 \\
+积分函数图像题 & $F(x)=\int_0^x f(t)\,dt$ & 代数面积、分段计算 \\
+可积性综合题 & 间断点、原函数、定积分同时出现 & 分清间断类型、可积与有原函数的区别 \\
+复合导数型积分 & $f'(\varphi(x))$、$f''(\varphi(x))$ & 先换元，再分部降阶 \\
+含积分参数函数方程 & $\int_a^b f(x)\,dx$ 与 $f(x)$ 同时出现 & 先把积分看成常数参数 \\
+平移关系型 & $f(x+a)-f(x)=g(x)$ & 在合适区间积分并换元 \\
+由导数求定积分 & 已知 $f'(x)$、$f(0)$ 求 $\int f$ & 先写出 $f(x)=f(0)+\int_0^x f'(t)\,dt$ \\
+三角对称型 & $\sin,\cos$ 配合 $[0,\pi]$、$[0,\pi/2]$ & 区间再现、对称换元 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{例题与方法}
+
+\subsection{题型一：由黎曼和反认定积分}
+
+\begin{examplebox}
+\textbf{例 1}\quad 设函数 $f(x)$ 在区间 $[0,a](a>0)$ 上连续，则
+\[
+\int_0^a f(x)\,dx=(\quad)
+\]
+选项中有
+\[
+\text{D.}\quad \lim_{n\to\infty}\frac{a}{n}\sum_{k=1}^n f\left(\frac{4ka-3a}{4n}\right).
+\]
+\textbf{解：}
+\[
+\frac{4ka-3a}{4n}=\frac{\left(k-\frac34\right)a}{n}.
+\]
+令
+\[
+\Delta x=\frac{a}{n},
+\]
+则第 $k$ 个小区间为
+\[
+\left[\frac{(k-1)a}{n},\frac{ka}{n}\right].
+\]
+而
+\[
+\frac{\left(k-\frac34\right)a}{n}\in
+\left[\frac{(k-1)a}{n},\frac{ka}{n}\right],
+\]
+说明该点是第 $k$ 个小区间内的一个取样点。因此
+\[
+\lim_{n\to\infty}\frac{a}{n}\sum_{k=1}^n f\left(\frac{4ka-3a}{4n}\right)
+\]
+正是区间 $[0,a]$ 上定积分的黎曼和极限，从而
+\[
+\int_0^a f(x)\,dx=
+\lim_{n\to\infty}\frac{a}{n}\sum_{k=1}^n f\left(\frac{4ka-3a}{4n}\right).
+\]
+故选 D。
+\end{examplebox}
+
+\textbf{方法归纳：}
+\begin{enumerate}
+  \item 先认前面的系数是否是小区间长度 $\Delta x$
+  \item 再把括号里的点写成
+  \[
+  \frac{(k-\theta)a}{n},\quad 0\le \theta\le 1
+  \]
+  \item 判断该点是否落在第 $k$ 个小区间
+  \[
+  \left[\frac{(k-1)a}{n},\frac{ka}{n}\right]
+  \]
+  \item 同时满足则可认出是
+  \[
+  \int_0^a f(x)\,dx
+  \]
+\end{enumerate}
+
+\textbf{高频结论：}
+\[
+\lim_{n\to\infty}\frac{b-a}{n}\sum_{k=1}^n
+f\left(a+\frac{k+\alpha}{n}(b-a)\right)=\int_a^b f(x)\,dx,
+\quad -1\le \alpha\le 0.
+\]
+
+\subsection{题型二：由图像求积分函数}
+
+\begin{examplebox}
+\textbf{例 2}\quad 已知图像分段由半圆与半椭圆组成，设
+\[
+F(x)=\int_0^x f(t)\,dt,
+\]
+判断下列关系。最终正确结论为
+\[
+F(-6)=\frac78F(-4).
+\]
+\textbf{解：}
+在区间 $[0,4]$ 上，图像是直径为 $4$ 的上半圆，半径为 $2$，故
+\[
+F(4)=\int_0^4 f(t)\,dt=\frac12\pi\cdot 2^2=2\pi.
+\]
+在区间 $[-4,0]$ 上，图像是直径为 $4$ 的下半圆，因此
+\[
+\int_{-4}^0 f(t)\,dt=-2\pi,
+\]
+从而
+\[
+F(-4)=\int_0^{-4}f(t)\,dt=-\int_{-4}^0f(t)\,dt=2\pi.
+\]
+
+在区间 $[-6,-4]$ 上，图像是长轴为 $2$、短轴为 $1$ 的上半椭圆。椭圆半轴长分别为
+\[
+a=1,\qquad b=\frac12,
+\]
+故对应上半椭圆面积为
+\[
+\frac12\pi ab=\frac12\pi\cdot 1\cdot \frac12=\frac{\pi}{4}.
+\]
+因此
+\[
+\int_{-6}^0 f(t)\,dt=\frac{\pi}{4}-2\pi=-\frac{7\pi}{4}.
+\]
+于是
+\[
+F(-6)=\int_0^{-6}f(t)\,dt
+=-\int_{-6}^0 f(t)\,dt
+=\frac{7\pi}{4}.
+\]
+再由
+\[
+F(-4)=2\pi=\frac{8\pi}{4},
+\]
+得到
+\[
+F(-6)=\frac{7\pi/4}{8\pi/4}F(-4)=\frac78F(-4).
+\]
+故选 C。
+\end{examplebox}
+
+\textbf{方法归纳：}
+\begin{enumerate}
+  \item 把 $F(x)=\int_0^x f(t)\,dt$ 理解为“从 $0$ 到 $x$ 的代数面积”
+  \item 按图像分段求面积：上方为正，下方为负
+  \item 若积分上限在左边，要注意
+  \[
+  \int_0^{-a}f(t)\,dt=-\int_{-a}^0 f(t)\,dt
+  \]
+  \item 半圆面积：
+  \[
+  S=\frac12\pi r^2
+  \]
+  \item 半椭圆面积：若半轴长为 $a,b$，则
+  \[
+  S=\frac12\pi ab
+  \]
+\end{enumerate}
+
+\textbf{易错点：}
+\begin{itemize}
+  \item 只看图像在 $x$ 轴下方就写负，忽略积分方向
+  \item 将长轴、短轴误认成半轴
+\end{itemize}
+
+\subsection{题型三：间断点、原函数、可积性综合判断}
+
+\begin{examplebox}
+\textbf{例 3}\quad
+\[
+f(x)=
+\begin{cases}
+2x\sin\frac1x-\cos\frac1x,& x\ne 0,\\
+0,&x=0,
+\end{cases}
+\quad
+g(x)=
+\begin{cases}
+e^x,&0<x\le 1,\\
+0,&x=0,\\
+-e^{-x},&-1\le x<0.
+\end{cases}
+\]
+判断正确命题。最终正确项为：两个定积分都存在。
+\textbf{解：}
+先考察 $f(x)$ 在 $x=0$ 处的性质。由
+\[
+f(x)=2x\sin\frac1x-\cos\frac1x
+\]
+可知当 $x\to 0$ 时，
+\[
+2x\sin\frac1x\to 0,
+\]
+而
+\[
+\cos\frac1x
+\]
+振荡无极限，因此 $f(x)$ 在 $x=0$ 处极限不存在。该函数在 $[-1,1]$ 上有界，并且仅在一点间断，所以
+\[
+\int_{-1}^1 f(x)\,dx
+\]
+存在。
+
+再考察 $g(x)$。当 $x\to 0^+$ 时，
+\[
+g(x)=e^x\to 1;
+\]
+当 $x\to 0^-$ 时，
+\[
+g(x)=-e^{-x}\to -1.
+\]
+左右极限都存在但不相等，因此 $g(x)$ 在 $x=0$ 处为跳跃间断点。该函数同样在闭区间上有界，且仅有一个间断点，所以
+\[
+\int_{-1}^1 g(x)\,dx
+\]
+也存在。
+
+因此正确命题是两个定积分都存在，故选 D。
+\end{examplebox}
+
+\textbf{方法归纳：}
+\begin{enumerate}
+  \item 先盯住可疑点，通常是分段点或 $x=0$
+  \item 先判断左右极限是否存在
+  \item 再区分：
+  \begin{itemize}
+    \item 左右极限都存在且相等：可去
+    \item 左右极限都存在但不等：跳跃
+    \item 振荡或无穷发散：第二类间断点
+  \end{itemize}
+  \item 再判断是否有界，若闭区间上只有有限个间断点且有界，则通常黎曼可积
+  \item “有原函数”比“可积”要求更高，跳跃间断一般不能作为某个函数的导数
+\end{enumerate}
+
+\textbf{要点：}
+\begin{itemize}
+  \item 可积不等于连续
+  \item 有原函数不等于可导函数简单拼接
+  \item 导函数必须满足 Darboux 性质
+\end{itemize}
+
+\subsection{题型四：三角对称与区间再现}
+
+\begin{examplebox}
+\textbf{例 4}\quad 证明
+\[
+\int_0^\pi x f(\sin x)\,dx
+=
+\pi\int_0^{\frac{\pi}{2}}f(\sin x)\,dx.
+\]
+\textbf{解：}
+记
+\[
+I=\int_0^\pi x f(\sin x)\,dx.
+\]
+作变换
+\[
+x=\pi-t,
+\]
+则
+\[
+dx=-dt,
+\qquad
+\sin x=\sin(\pi-t)=\sin t.
+\]
+因此
+\[
+I=\int_0^\pi (\pi-t)f(\sin t)\,dt.
+\]
+将上式中的变量 $t$ 改写为 $x$，得
+\[
+I=\int_0^\pi (\pi-x)f(\sin x)\,dx.
+\]
+与原式相加：
+\[
+2I=\int_0^\pi \pi f(\sin x)\,dx
+=\pi\int_0^\pi f(\sin x)\,dx.
+\]
+故
+\[
+I=\frac{\pi}{2}\int_0^\pi f(\sin x)\,dx.
+\]
+再由
+\[
+\int_0^\pi f(\sin x)\,dx=2\int_0^{\frac{\pi}{2}}f(\sin x)\,dx,
+\]
+可得
+\[
+I=\pi\int_0^{\frac{\pi}{2}}f(\sin x)\,dx.
+\]
+命题得证。
+\end{examplebox}
+
+\textbf{方法归纳：}
+\begin{enumerate}
+  \item 看见 $\sin x,\cos x$ 与区间 $[0,\pi/2]$，先试 $x\mapsto \frac{\pi}{2}-x$
+  \item 看见区间 $[0,\pi]$，先试 $x\mapsto \pi-x$
+  \item 看见单独的 $x$，优先与 $\pi-x$ 配对相加
+  \item 幂次积分题优先套 Wallis 公式
+\end{enumerate}
+
+\subsection{题型五：复合导数型积分}
+
+\begin{examplebox}
+\textbf{例 5}\quad 已知 $f$ 有二阶连续导数，且
+\[
+f(1)=-1,\quad f'(0)=0,\quad \int_0^1 f(x)\,dx=1,
+\]
+求
+\[
+\int_0^{\frac{\pi}{2}}\cos^3x\,f''(\sin x)\,dx.
+\]
+\textbf{解：} 记
+\[
+I=\int_0^{\frac{\pi}{2}}\cos^3x\,f''(\sin x)\,dx.
+\]
+\[
+\cos^3x=\cos x(1-\sin^2x),
+\]
+故
+\[
+I=\int_0^{\frac{\pi}{2}}(1-\sin^2x)f''(\sin x)\cos x\,dx.
+\]
+令
+\[
+t=\sin x,\qquad dt=\cos x\,dx,
+\]
+则
+\[
+I=\int_0^1 (1-t^2)f''(t)\,dt.
+\]
+对其分部积分，取
+\[
+u=1-t^2,\qquad dv=f''(t)\,dt,
+\]
+则
+\[
+du=-2t\,dt,\qquad v=f'(t).
+\]
+于是
+\[
+I=(1-t^2)f'(t)\Big|_0^1+2\int_0^1 t f'(t)\,dt.
+\]
+由 $f'(0)=0$，且 $1-t^2$ 在 $t=1$ 处为 $0$，故边界项为 $0$，从而
+\[
+I=2\int_0^1 t f'(t)\,dt.
+\]
+再次分部积分，取
+\[
+u=t,\qquad dv=f'(t)\,dt,
+\]
+则
+\[
+du=dt,\qquad v=f(t).
+\]
+于是
+\[
+\int_0^1 t f'(t)\,dt=t f(t)\Big|_0^1-\int_0^1 f(t)\,dt.
+\]
+由已知
+\[
+f(1)=-1,\qquad \int_0^1 f(t)\,dt=1,
+\]
+得
+\[
+\int_0^1 t f'(t)\,dt=-1-1=-2.
+\]
+因此
+\[
+I=2\times(-2)=-4.
+\]
+\end{examplebox}
+
+\textbf{方法归纳：}
+\begin{enumerate}
+  \item 看见 $f''(\sin x)$，先想换元 $t=\sin x$
+  \item 要想让 $dt$ 出现，主动拆出一个 $\cos x\,dx$
+  \item 化为
+  \[
+  \int_0^1 (1-t^2)f''(t)\,dt
+  \]
+  \item 再分部积分把 $f''$ 降成 $f'$，再降成 $f$
+  \item 目标通常是化成边界值和 $\int_0^1 f(t)\,dt$
+\end{enumerate}
+
+\subsection{题型六：含积分参数的函数方程}
+
+\begin{examplebox}
+\textbf{例 6}\quad 设
+\[
+f(x)=3x-\sqrt{1-x^2}\int_0^1 f^2(x)\,dx,
+\]
+求 $f(x)$。
+\par\textbf{解：} 设
+\[
+A=\int_0^1 f^2(x)\,dx,
+\]
+则题设可写为
+\[
+f(x)=3x-A\sqrt{1-x^2}.
+\]
+两边平方得
+\[
+f^2(x)=9x^2-6Ax\sqrt{1-x^2}+A^2(1-x^2).
+\]
+在区间 $[0,1]$ 上积分，有
+\[
+A=9\int_0^1 x^2\,dx-6A\int_0^1 x\sqrt{1-x^2}\,dx+A^2\int_0^1(1-x^2)\,dx.
+\]
+分别计算：
+\[
+\int_0^1 x^2\,dx=\frac13,
+\qquad
+\int_0^1(1-x^2)\,dx=\frac23.
+\]
+对
+\[
+\int_0^1 x\sqrt{1-x^2}\,dx
+\]
+令
+\[
+u=1-x^2,\qquad du=-2x\,dx,
+\]
+则
+\[
+\int_0^1 x\sqrt{1-x^2}\,dx=\frac12\int_0^1 u^{1/2}\,du=\frac13.
+\]
+代回得
+\[
+A=9\cdot \frac13-6A\cdot \frac13+A^2\cdot \frac23
+=3-2A+\frac23A^2.
+\]
+整理为
+\[
+2A^2-9A+9=0,
+\]
+解得
+\[
+A=3\qquad \text{或}\qquad A=\frac32.
+\]
+故
+\[
+f(x)=3x-3\sqrt{1-x^2}
+\quad\text{或}\quad
+f(x)=3x-\frac32\sqrt{1-x^2}.
+\]
+\end{examplebox}
+
+\textbf{方法归纳：}
+\begin{enumerate}
+  \item 先把积分整体设成常数
+  \[
+  A=\int_0^1 f^2(x)\,dx
+  \]
+  \item 原式化为
+  \[
+  f(x)=3x-A\sqrt{1-x^2}
+  \]
+  \item 平方后再积分，列出关于 $A$ 的方程
+  \item 解出 $A$ 后回代得到 $f(x)$
+\end{enumerate}
+
+\subsection{题型七：已知一个定积分求另一个定积分（平移型）}
+
+\begin{examplebox}
+\textbf{例 7}\quad 连续函数满足
+\[
+f(x+3)-f(x)=3x+\frac92,\qquad \int_0^3 f(x)\,dx=3,
+\]
+求
+\[
+\int_1^4 f(x)\,dx.
+\]
+\textbf{解：} 对恒等式
+\[
+f(x+3)-f(x)=3x+\frac92
+\]
+在区间 $[0,1]$ 上积分，得
+\[
+\int_0^1[f(x+3)-f(x)]\,dx=\int_0^1\left(3x+\frac92\right)\,dx.
+\]
+左边化为
+\[
+\int_3^4 f(x)\,dx-\int_0^1 f(x)\,dx,
+\]
+右边为
+\[
+\left[\frac32x^2+\frac92x\right]_0^1=6.
+\]
+故
+\[
+\int_3^4 f(x)\,dx-\int_0^1 f(x)\,dx=6.
+\]
+于是
+\[
+\int_3^4 f(x)\,dx=\int_0^1 f(x)\,dx+6.
+\]
+再由
+\[
+\int_0^3 f(x)\,dx=\int_0^1 f(x)\,dx+\int_1^3 f(x)\,dx=3,
+\]
+得到
+\[
+\int_1^4 f(x)\,dx
+=\int_1^3 f(x)\,dx+\int_3^4 f(x)\,dx
+\]
+\[
+=\int_1^3 f(x)\,dx+\int_0^1 f(x)\,dx+6
+=\int_0^3 f(x)\,dx+6=9.
+\]
+\end{examplebox}
+
+\textbf{方法归纳：}
+\begin{enumerate}
+  \item 看到 $f(x+a)-f(x)=g(x)$，优先在长度较短的区间积分
+  \item 例如本题在 $[0,1]$ 上积分，得到
+  \[
+  \int_3^4 f(x)\,dx-\int_0^1 f(x)\,dx=\int_0^1\left(3x+\frac92\right)dx
+  \]
+  \item 再与已知积分
+  \[
+  \int_0^3 f(x)\,dx
+  \]
+  进行拼接
+\end{enumerate}
+
+\subsection{题型八：已知导数求函数积分}
+
+\begin{examplebox}
+\textbf{例 8}\quad 已知
+\[
+f'(x)=\arctan(x-1)^2,\qquad f(0)=0,
+\]
+求
+\[
+\int_0^1 f(x)\,dx.
+\]
+\textbf{解：} 由 $f(0)=0$ 及
+\[
+f'(x)=\arctan(x-1)^2
+\]
+得
+\[
+f(x)=\int_0^x \arctan(t-1)^2\,dt.
+\]
+因此
+\[
+\int_0^1 f(x)\,dx
+=\int_0^1\left(\int_0^x \arctan(t-1)^2\,dt\right)dx.
+\]
+交换积分次序，得
+\[
+\int_0^1 f(x)\,dx
+=\int_0^1 (1-t)\arctan(t-1)^2\,dt.
+\]
+令
+\[
+u=1-t,
+\]
+则
+\[
+\int_0^1 f(x)\,dx
+=\int_0^1 u\arctan u^2\,du.
+\]
+再令
+\[
+v=u^2,\qquad dv=2u\,du,
+\]
+则
+\[
+\int_0^1 f(x)\,dx=\frac12\int_0^1 \arctan v\,dv.
+\]
+由
+\[
+\int \arctan v\,dv=v\arctan v-\frac12\ln(1+v^2)+C,
+\]
+可得
+\[
+\int_0^1 f(x)\,dx
+=\frac12\left[v\arctan v-\frac12\ln(1+v^2)\right]_0^1
+\]
+\[
+=\frac12\left(\frac{\pi}{4}-\frac12\ln 2\right)
+=\frac{\pi}{8}-\frac14\ln 2.
+\]
+\end{examplebox}
+
+\textbf{方法归纳：}
+\begin{enumerate}
+  \item 先由导数还原
+  \[
+  f(x)=f(0)+\int_0^x f'(t)\,dt
+  \]
+  \item 代入
+  \[
+  \int_0^1 f(x)\,dx
+  =
+  \int_0^1\left(\int_0^x f'(t)\,dt\right)dx
+  \]
+  \item 交换积分次序，化成单重积分
+  \item 再做换元与常规积分
+\end{enumerate}
+
+\textbf{标准模型：}
+\[
+\int_0^a f(x)\,dx
+=
+\int_0^a \left(\int_0^x \varphi(t)\,dt\right)dx
+=
+\int_0^a (a-t)\varphi(t)\,dt.
+\]
+
+\section{补充公式与题型}
+
+\subsection{换元法的对称替换}
+\[
+\int_0^{+\infty} f(x)\,dx
+=
+\int_0^1 f\left(\frac1t\right)\frac1{t^2}\,dt
+\]
+常用于反常积分。
+
+\subsection{积分不等式}
+\begin{itemize}
+  \item 若 $f(x)\le g(x)$，则
+  \[
+  \int_a^b f(x)\,dx\le \int_a^b g(x)\,dx.
+  \]
+  \item 绝对值估计：
+  \[
+  \left|\int_a^b f(x)\,dx\right|\le \int_a^b |f(x)|\,dx.
+  \]
+  \item Cauchy 不等式：
+  \[
+  \left(\int_a^b f(x)g(x)\,dx\right)^2
+  \le
+  \left(\int_a^b f^2(x)\,dx\right)\left(\int_a^b g^2(x)\,dx\right).
+  \]
+\end{itemize}
+
+\subsection{积分与极限}
+若在闭区间上，函数列一致收敛，可交换极限与积分。考研里更常见的是借助夹逼或有界性先求极限，再积分。
+
+\subsection{反常积分}
+\textbf{定义 1：无穷区间型}
+\[
+\int_a^{+\infty} f(x)\,dx:=\lim_{A\to+\infty}\int_a^A f(x)\,dx.
+\]
+\[
+\int_{-\infty}^{+\infty} f(x)\,dx
+:=
+\int_{-\infty}^c f(x)\,dx+\int_c^{+\infty}f(x)\,dx
+\]
+两边都收敛时才称收敛。
+
+\textbf{定义 2：无界函数型}
+\[
+\int_a^b f(x)\,dx:=\lim_{\varepsilon\to 0^+}\int_{a+\varepsilon}^b f(x)\,dx
+\]
+或
+\[
+\int_a^b f(x)\,dx:=\lim_{\varepsilon\to 0^+}\int_a^{b-\varepsilon} f(x)\,dx.
+\]
+若奇点在内部 $c\in(a,b)$，则拆成
+\[
+\int_a^b f(x)\,dx
+=
+\int_a^c f(x)\,dx+\int_c^b f(x)\,dx
+\]
+分别判定。
+
+\textbf{判断思路：}
+\begin{enumerate}
+  \item 先找“坏点”：无穷远处、分母为零处、对数零点处
+  \item 再看它像哪一个标准模型
+  \item 能比较就比较，能等价就等价
+  \item 最后才考虑直接算原函数
+\end{enumerate}
+
+\textbf{常见敛散性模型：}
+\[
+\int_1^{+\infty}\frac1{x^p}\,dx
+\begin{cases}
+\text{收敛},&p>1,\\
+\text{发散},&p\le 1,
+\end{cases}
+\qquad
+\int_0^1\frac1{x^p}\,dx
+\begin{cases}
+\text{收敛},&p<1,\\
+\text{发散},&p\ge 1.
+\end{cases}
+\]
+
+\textbf{常见对数模型：}
+\[
+\int_e^{+\infty}\frac{1}{x(\ln x)^p}\,dx
+\begin{cases}
+\text{收敛},&p>1,\\
+\text{发散},&p\le 1,
+\end{cases}
+\qquad
+\int_0^{1/2}\frac{1}{x|\ln x|^p}\,dx
+\begin{cases}
+\text{收敛},&p>1,\\
+\text{发散},&p\le 1.
+\end{cases}
+\]
+
+\textbf{比较判别法：}
+若在坏点附近有
+\[
+0\le f(x)\le g(x),
+\]
+则
+\begin{itemize}
+  \item $\int g$ 收敛 $\Rightarrow \int f$ 收敛
+  \item $\int f$ 发散 $\Rightarrow \int g$ 发散
+\end{itemize}
+
+\textbf{等价无穷小判别：}
+若在坏点附近
+\[
+f(x)\sim g(x),\qquad g(x)>0,
+\]
+则 $\int f$ 与 $\int g$ 同敛散。
+
+\begin{examplebox}
+\textbf{例}\quad 讨论
+\[
+\int_1^{+\infty}\frac{\sin x}{x}\,dx
+\]
+\textbf{说明：} 此类积分通常需要区分绝对收敛与条件收敛，不能仅通过
+\[
+\int_1^{+\infty}\frac{|\sin x|}{x}\,dx
+\]
+的发散性直接否定原积分的收敛性。
+\end{examplebox}
+
+\section{本章答题模板汇总}
+
+\subsection*{模板 1：黎曼和}
+\[
+\lim_{n\to\infty}\sum f(\text{取样点})\times \text{小段长度}
+\]
+\begin{enumerate}
+  \item 认 $\Delta x$
+  \item 认取样点是否在小区间内
+  \item 写出对应积分区间
+\end{enumerate}
+
+\subsection*{模板 2：图像面积}
+\begin{enumerate}
+  \item 分段
+  \item 上正下负
+  \item 左端积分注意反号
+  \item 用半圆、椭圆、三角形等面积公式
+\end{enumerate}
+
+\subsection*{模板 3：复合导数积分}
+\begin{enumerate}
+  \item 先找内函数 $\varphi(x)$
+  \item 凑出 $\varphi'(x)\,dx$
+  \item 换元
+  \item 分部降阶
+  \item 化到边界值和已知积分
+\end{enumerate}
+
+\subsection*{模板 4：含积分参数}
+\begin{enumerate}
+  \item 设参数
+  \item 代回原式
+  \item 列参数方程
+  \item 解参数并回代
+\end{enumerate}
+
+\subsection*{模板 5：平移型}
+\begin{enumerate}
+  \item 观察平移长度
+  \item 在合适区间积分
+  \item 把 $f(x+a)$ 改成另一段上的积分
+  \item 和已知区间拼接
+\end{enumerate}
+
+\subsection*{模板 6：已知导数求积分}
+\begin{enumerate}
+  \item 用
+  \[
+  f(x)=f(0)+\int_0^x f'(t)\,dt
+  \]
+  \item 代入目标积分
+  \item 换成二重积分后交换次序
+\end{enumerate}
+
+\section{本章易错点}
+
+\begin{itemize}
+  \item 把定积分当成函数，而不是数值
+  \item 图像题忘记“带符号面积”
+  \item 只看图像位置，不看积分上下限方向
+  \item 看到 $\sin,\cos$ 没有优先想到对称代换
+  \item 看到 $f''(\sin x)$ 直接硬算，没有先换元
+  \item 含积分参数题，没有先把积分设成常数
+  \item 把“可积”“连续”“有原函数”混为一谈
+\end{itemize}
+
+\end{document}

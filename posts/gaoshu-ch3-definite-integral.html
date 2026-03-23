@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>高数基础 第三章 | 定积分讲义</title>
+    <meta
+      name="description"
+      content="高等数学第三章：定积分讲义，包含定义、性质、微积分基本公式、几何意义、计算方法与常见题型。"
+    />
+    <style>
+      :root {
+        --bg: #070a14;
+        --surface: rgba(16, 15, 26, 0.8);
+        --surface-soft: rgba(255, 255, 255, 0.05);
+        --line: rgba(255, 169, 199, 0.3);
+        --text: #fff0f6;
+        --muted: rgba(255, 233, 242, 0.76);
+        --accent: #ff94b7;
+        --note: #ffd8a8;
+        --shadow: 0 20px 60px rgba(0, 0, 0, 0.32);
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(255, 148, 183, 0.1), transparent 18%),
+          radial-gradient(circle at top right, rgba(125, 211, 252, 0.08), transparent 22%),
+          linear-gradient(180deg, #060913 0%, #0a0f1a 100%);
+        font-family: "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+      a { color: inherit; text-decoration: none; }
+      h1, h2, h3, p { margin: 0; }
+      .shell {
+        width: min(1240px, calc(100% - 28px));
+        margin: 24px auto 42px;
+      }
+      .topbar, .hero, .article, .block {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--surface);
+        backdrop-filter: blur(18px);
+        box-shadow: var(--shadow);
+      }
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+        padding: 14px 18px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--accent);
+        font-weight: 800;
+      }
+      .brand img {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center 22%;
+      }
+      .back-link {
+        min-height: 42px;
+        padding: 10px 16px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--muted);
+      }
+      .hero {
+        margin-top: 18px;
+        overflow: hidden;
+      }
+      .hero-cover {
+        min-height: 280px;
+        padding: 34px 30px;
+        display: grid;
+        align-items: end;
+        background:
+          linear-gradient(180deg, rgba(9, 7, 14, 0.16), rgba(8, 5, 14, 0.84)),
+          url("../assets/anime/kikuri-landing-bg.jpg") center/cover;
+      }
+      .eyebrow {
+        margin: 0;
+        color: var(--accent);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+      h1 {
+        margin-top: 14px;
+        font-size: clamp(2.4rem, 4vw, 4.2rem);
+        line-height: 1.06;
+      }
+      .hero-desc {
+        margin-top: 16px;
+        max-width: 760px;
+        color: var(--muted);
+        line-height: 1.9;
+      }
+      .hero-meta {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .meta-pill,
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 148, 183, 0.12);
+        color: var(--accent);
+        font-weight: 800;
+      }
+      .article {
+        margin-top: 18px;
+        padding: 24px;
+      }
+      .article section + section { margin-top: 24px; }
+      .block {
+        padding: 18px 18px 20px;
+      }
+      .block + .block { margin-top: 16px; }
+      .block-body {
+        margin-top: 12px;
+        color: var(--muted);
+        line-height: 1.9;
+      }
+      .block-body p + p { margin-top: 10px; }
+      .subtle-title {
+        margin-top: 6px;
+        color: var(--text);
+        font-weight: 700;
+        font-size: 1.02rem;
+      }
+      .formula {
+        margin: 14px 0;
+        padding: 14px 16px;
+        border: 1px solid rgba(255, 169, 199, 0.2);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.03);
+        overflow-x: auto;
+      }
+      .list {
+        margin: 12px 0 0;
+        padding-left: 20px;
+        color: var(--muted);
+        line-height: 1.9;
+      }
+      .diagram-grid,
+      .topic-grid,
+      .summary-grid {
+        margin-top: 16px;
+        display: grid;
+        gap: 14px;
+      }
+      .diagram-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .topic-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .summary-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .map-node,
+      .sketch-card {
+        position: relative;
+        padding: 16px;
+        border: 1px solid rgba(255, 169, 199, 0.18);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.03);
+        overflow: hidden;
+      }
+      .map-node::before,
+      .sketch-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at top right, rgba(255, 148, 183, 0.14), transparent 32%),
+          linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+        pointer-events: none;
+      }
+      .map-node strong {
+        display: inline-block;
+        margin-bottom: 10px;
+        color: var(--accent);
+      }
+      .map-node ul,
+      .sketch-card ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+      .mini-note {
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 169, 199, 0.14);
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--note);
+        font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+        line-height: 1.7;
+      }
+      .tree-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 28px;
+        height: 28px;
+        margin-bottom: 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 169, 199, 0.24);
+        background: rgba(255, 148, 183, 0.1);
+        color: var(--note);
+        font-weight: 800;
+        font-size: 0.9rem;
+      }
+      .sketch-title {
+        margin-bottom: 10px;
+        color: var(--note);
+        font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+      }
+      .note {
+        color: var(--note);
+        font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
+      }
+      .pdf-shell {
+        margin-top: 16px;
+        padding: 18px;
+        border: 1px solid rgba(255, 169, 199, 0.18);
+        border-radius: 22px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      }
+      .pdf-frame {
+        width: 100%;
+        min-height: 1100px;
+        border: 0;
+        border-radius: 18px;
+        background: #ffffff;
+      }
+      @media (max-width: 900px) {
+        .diagram-grid,
+        .summary-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 720px) {
+        .shell { width: min(100% - 18px, 1240px); }
+        .topbar { flex-direction: column; align-items: stretch; }
+        .hero-cover, .article { padding: 18px; }
+        .diagram-grid,
+        .topic-grid,
+        .summary-grid {
+          grid-template-columns: 1fr;
+        }
+        .pdf-frame {
+          min-height: 780px;
+        }
+      }
+    </style>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["\\(", "\\)"]],
+          displayMath: [["\\[", "\\]"]]
+        },
+        svg: { fontCache: "global" }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="../index.html#math-sections">
+          <img src="../assets/anime/nav-avatar.jpg" alt="头像" />
+          <span>Phelya · 高等数学</span>
+        </a>
+        <a class="back-link" href="./gaoshu.html">返回目录</a>
+      </header>
+
+      <section class="hero">
+        <div class="hero-cover">
+          <div class="hero-copy">
+            <p class="eyebrow">Calculus Notes</p>
+            <h1>第三章 定积分讲义</h1>
+            <p class="hero-desc">
+              这一篇接入的是你自己整理的第三章定积分讲义。页面外壳和前两篇保持同一套夜色玻璃风，
+              章节脉络仍然沿用原稿：从定义、性质、基本公式、几何意义，到计算方法、题型总表和答题模板。
+            </p>
+            <div class="hero-meta">
+              <span class="meta-pill">高等数学</span>
+              <span class="meta-pill">第三章</span>
+              <span class="meta-pill">定积分</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <article class="article">
+        <section>
+          <div class="block">
+            <span class="kicker">本章框架</span>
+            <div class="block-body">
+              <div class="diagram-grid">
+                <div class="map-node">
+                  <span class="tree-badge">1</span>
+                  <strong>定义与性质</strong>
+                  <ul>
+                    <li>黎曼和定义</li>
+                    <li>等分形式</li>
+                    <li>线性、区间可加、保号与估值</li>
+                    <li>积分中值定理</li>
+                  </ul>
+                  <div class="mini-note">先把定积分看成一个数，再把它看成带符号面积与黎曼和极限。</div>
+                </div>
+                <div class="map-node">
+                  <span class="tree-badge">2</span>
+                  <strong>基本公式与几何意义</strong>
+                  <ul>
+                    <li>牛顿-莱布尼茨公式</li>
+                    <li>变上限积分函数</li>
+                    <li>面积、体积、弧长、平均值</li>
+                    <li>变力做功</li>
+                  </ul>
+                  <div class="mini-note">这一块是“会算”和“会解释图像意义”之间的桥梁。</div>
+                </div>
+                <div class="map-node">
+                  <span class="tree-badge">3</span>
+                  <strong>计算方法与题型</strong>
+                  <ul>
+                    <li>换元、分部、对称、区间再现</li>
+                    <li>Wallis 公式</li>
+                    <li>黎曼和、图像题、参数题、平移题</li>
+                    <li>答题模板与易错点</li>
+                  </ul>
+                  <div class="mini-note">后半章更偏方法论，适合直接按题型复盘。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">核心公式</span>
+            <div class="block-body">
+              <p class="subtle-title">黎曼和与牛顿-莱布尼茨是这一章最常出现的两条主线。</p>
+              <div class="formula">
+                \[
+                \int_a^b f(x)\,dx
+                =
+                \lim_{n\to\infty}\frac{b-a}{n}\sum_{k=1}^n
+                f\!\left(a+\theta_k\frac{b-a}{n}\right)
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \int_a^b f(x)\,dx=F(b)-F(a),\qquad F'(x)=f(x)
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \frac{d}{dx}\int_{\varphi(x)}^{\psi(x)}f(t)\,dt
+                =
+                f(\psi(x))\psi'(x)-f(\varphi(x))\varphi'(x)
+                \]
+              </div>
+              <p class="note">看到积分上限函数，就先分辨是标准型、上下限函数型，还是参数型。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">章节重点</span>
+            <div class="block-body">
+              <div class="topic-grid">
+                <div class="sketch-card">
+                  <div class="sketch-title">定积分的几何意义</div>
+                  <ul>
+                    <li>带符号面积</li>
+                    <li>平面图形面积：上减下、右减左</li>
+                    <li>旋转体体积与弧长</li>
+                    <li>平均值与做功</li>
+                  </ul>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">常用计算方法</div>
+                  <ul>
+                    <li>换元法和分部积分法</li>
+                    <li>偶奇性与对称区间</li>
+                    <li>区间再现公式</li>
+                    <li>幂三角积分与 Wallis 公式</li>
+                  </ul>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">常考题型</div>
+                  <ul>
+                    <li>由黎曼和反认定积分</li>
+                    <li>由图像求积分函数</li>
+                    <li>含积分参数的函数方程</li>
+                    <li>由导数求函数积分</li>
+                  </ul>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">答题模板</div>
+                  <ul>
+                    <li>先识别结构，再定方法</li>
+                    <li>变量替换时同步改上下限</li>
+                    <li>图像题先分段再算代数面积</li>
+                    <li>参数题先把积分整体看作常数</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">讲义概览</span>
+            <div class="block-body">
+              <div class="summary-grid">
+                <div class="sketch-card">
+                  <div class="sketch-title">01</div>
+                  <p>复习安排与本章框架</p>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">02</div>
+                  <p>定积分的定义与本质</p>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">03</div>
+                  <p>定积分的基本性质</p>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">04</div>
+                  <p>微积分基本公式</p>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">05</div>
+                  <p>几何意义与积分应用</p>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">06</div>
+                  <p>换元、分部、对称与递推</p>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">07</div>
+                  <p>重要题型总表与例题方法</p>
+                </div>
+                <div class="sketch-card">
+                  <div class="sketch-title">08</div>
+                  <p>补充公式、易错点和答题模板</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">完整讲义</span>
+            <div class="block-body">
+              <p>
+                下面直接放入你桌面那份整理好的完整讲义预览，阅读时仍然留在博客页面里，
+                视觉上和前两篇保持同一套主题外壳。
+              </p>
+              <div class="pdf-shell">
+                <iframe
+                  class="pdf-frame"
+                  src="../content/gaoshu-ch3-definite-integral.pdf#toolbar=0&navpanes=0&scrollbar=1"
+                  title="第三章 定积分讲义"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </section>
+      </article>
+    </div>
+  </body>
+</html>
