@@ -237,20 +237,6 @@
         color: var(--note);
         font-family: "Kaiti SC", "STKaiti", "KaiTi", serif;
       }
-      .pdf-shell {
-        margin-top: 16px;
-        padding: 18px;
-        border: 1px solid rgba(255, 169, 199, 0.18);
-        border-radius: 22px;
-        background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      }
-      .pdf-frame {
-        width: 100%;
-        min-height: 1100px;
-        border: 0;
-        border-radius: 18px;
-        background: #ffffff;
-      }
       @media (max-width: 900px) {
         .diagram-grid,
         .summary-grid {
@@ -265,9 +251,6 @@
         .topic-grid,
         .summary-grid {
           grid-template-columns: 1fr;
-        }
-        .pdf-frame {
-          min-height: 780px;
         }
       }
     </style>
@@ -298,8 +281,8 @@
             <p class="eyebrow">Calculus Notes</p>
             <h1>第四章：定积分定义</h1>
             <p class="hero-desc">
-              这一篇接入的是你自己整理的第三章定积分讲义。页面外壳和前两篇保持同一套夜色玻璃风，
-              章节脉络仍然沿用原稿：从定义、性质、基本公式、几何意义，到计算方法、题型总表和答题模板。
+              这一篇现在改成和前两章一致的正文阅读页。内容按你整理讲义的顺序展开：
+              从定积分的定义、性质、基本公式、几何意义，到计算方法、题型总表和答题模板。
             </p>
             <div class="hero-meta">
               <span class="meta-pill">高等数学</span>
@@ -466,19 +449,732 @@
           </div>
 
           <div class="block">
-            <span class="kicker">完整讲义</span>
+            <span class="kicker">§1. 定积分的定义与本质</span>
             <div class="block-body">
-              <p>
-                下面直接放入你桌面那份整理好的完整讲义预览，阅读时仍然留在博客页面里，
-                视觉上和前两篇保持同一套主题外壳。
-              </p>
-              <div class="pdf-shell">
-                <iframe
-                  class="pdf-frame"
-                  src="../content/gaoshu-ch3-definite-integral.pdf#toolbar=0&navpanes=0&scrollbar=1"
-                  title="第四章：定积分定义"
-                ></iframe>
+              <p class="subtle-title">黎曼和定义</p>
+              <p>设函数 \(f(x)\) 在区间 \([a,b]\) 上有界，将区间分成 \(n\) 份，每一小段长度记为 \(\Delta x_i\)，在第 \(i\) 段上任取一点 \(\xi_i\)。若极限</p>
+              <div class="formula">
+                \[
+                \lim_{\lambda\to 0}\sum_{i=1}^n f(\xi_i)\Delta x_i
+                \]
               </div>
+              <p>存在且与分法、取点方式无关，则称该极限为 \(f(x)\) 在 \([a,b]\) 上的定积分，记作</p>
+              <div class="formula">
+                \[
+                \int_a^b f(x)\,dx,\qquad \lambda=\max\{\Delta x_1,\dots,\Delta x_n\}.
+                \]
+              </div>
+              <p class="subtle-title">等分形式</p>
+              <div class="formula">
+                \[
+                \int_a^b f(x)\,dx
+                =
+                \lim_{n\to\infty}\frac{b-a}{n}\sum_{k=1}^n
+                f\!\left(a+\theta_k\frac{b-a}{n}\right),\quad \theta_k\in[k-1,k]
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \int_a^b f(x)\,dx
+                =
+                \lim_{n\to\infty}\frac{b-a}{n}\sum_{k=1}^n
+                f\!\left(a+\frac{k+\alpha}{n}(b-a)\right),\quad -1\le \alpha\le 0
+                \]
+              </div>
+              <div class="mini-note">
+                定积分的本质：它是一个数值，不是变量；它是带符号的面积；它是黎曼和的极限；积分变量只是哑变量。
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">§2. 定积分的基本性质</span>
+            <div class="block-body">
+              <p class="subtle-title">线性性质</p>
+              <div class="formula">
+                \[
+                \int_a^b [\alpha f(x)+\beta g(x)]\,dx
+                =
+                \alpha\int_a^b f(x)\,dx+\beta\int_a^b g(x)\,dx
+                \]
+              </div>
+              <p class="subtle-title">区间可加性与上下限交换</p>
+              <div class="formula">
+                \[
+                \int_a^b f(x)\,dx=\int_a^c f(x)\,dx+\int_c^b f(x)\,dx
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \int_a^b f(x)\,dx=-\int_b^a f(x)\,dx,\qquad \int_a^a f(x)\,dx=0
+                \]
+              </div>
+              <p class="subtle-title">保号性、估值与积分中值定理</p>
+              <div class="formula">
+                \[
+                f(x)\ge 0 \Longrightarrow \int_a^b f(x)\,dx\ge 0
+                \]
+              </div>
+              <div class="formula">
+                \[
+                m\le f(x)\le M \Longrightarrow m(b-a)\le \int_a^b f(x)\,dx\le M(b-a)
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \int_a^b f(x)\,dx=f(\xi)(b-a),\qquad \xi\in[a,b]
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \int_a^b f(x)g(x)\,dx=f(\xi)\int_a^b g(x)\,dx
+                \]
+              </div>
+              <p class="note">若 \(g\) 不变号，\(f\) 连续，\(g\) 可积，就可以用加权形式的积分中值定理。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">§3. 微积分基本公式</span>
+            <div class="block-body">
+              <p class="subtle-title">牛顿-莱布尼茨公式</p>
+              <div class="formula">
+                \[
+                \int_a^b f(x)\,dx=F(b)-F(a)
+                \]
+              </div>
+              <p class="subtle-title">变上限积分函数</p>
+              <div class="formula">
+                \[
+                F(x)=\int_a^x f(t)\,dt \Longrightarrow F'(x)=f(x)
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \frac{d}{dx}\int_{\varphi(x)}^{\psi(x)}f(t)\,dt
+                =
+                f(\psi(x))\psi'(x)-f(\varphi(x))\varphi'(x)
+                \]
+              </div>
+              <p class="subtle-title">积分上限函数常见结构</p>
+              <ul class="list">
+                <li>标准型：\(\int_a^x f(t)\,dt\)</li>
+                <li>上下限都是函数：\(\int_{\alpha(x)}^{\beta(x)}f(t)\,dt\)</li>
+                <li>被积函数里含参数：\(\int_a^b f(x,t)\,dt\)</li>
+                <li>高频结构：\(\int_a^x f(x-t)\,dt\)</li>
+              </ul>
+              <div class="formula">
+                \[
+                \int_0^x f(x-t)\,dt=\int_0^x f(t)\,dt
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \frac{d}{dx}\int_0^x f(x-t)\,dt=f(x),\qquad
+                \int_a^x f(x-t)\,dt=\int_0^{x-a}f(u)\,du
+                \]
+              </div>
+              <p class="subtle-title">例：求 \(F'(x)\)</p>
+              <div class="formula">
+                \[
+                F(x)=\int_0^x (x-t)e^t\,dt
+                \]
+              </div>
+              <p>记 \(h(x,t)=(x-t)e^t\)，则</p>
+              <div class="formula">
+                \[
+                F'(x)=h(x,x)+\int_0^x \frac{\partial}{\partial x}h(x,t)\,dt
+                \]
+              </div>
+              <p>又 \(h(x,x)=0,\ \frac{\partial h}{\partial x}=e^t\)，所以</p>
+              <div class="formula">
+                \[
+                F'(x)=\int_0^x e^t\,dt=e^x-1
+                \]
+              </div>
+              <div class="mini-note">积分函数题常用思路：先看面积，再看求导；若出现 \(x-t\)，优先试换元 \(u=x-t\)。</div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">§4. 定积分的几何意义</span>
+            <div class="block-body">
+              <p class="subtle-title">带符号面积</p>
+              <p>\(\int_a^b f(x)\,dx\) 表示曲线 \(y=f(x)\)、直线 \(x=a\)、\(x=b\) 与 \(x\) 轴围成图形的代数面积：上方取正，下方取负。</p>
+              <p class="subtle-title">平面图形面积</p>
+              <div class="formula">
+                \[
+                S=\int_a^b [f(x)-g(x)]\,dx
+                \]
+              </div>
+              <p class="subtle-title">旋转体体积</p>
+              <div class="formula">
+                \[
+                V=\pi\int_a^b [f(x)]^2\,dx,\qquad
+                V=\pi\int_a^b (f^2(x)-g^2(x))\,dx
+                \]
+              </div>
+              <p class="subtle-title">弧长、平均值与做功</p>
+              <div class="formula">
+                \[
+                L=\int_a^b \sqrt{1+[f'(x)]^2}\,dx,\qquad
+                \bar f=\frac1{b-a}\int_a^b f(x)\,dx,\qquad
+                W=\int_a^b F(x)\,dx
+                \]
+              </div>
+              <div class="mini-note">应用题统一模板：先画图，再确定积分元，写表达式，最后定上下限。</div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">§5. 定积分的常用计算方法</span>
+            <div class="block-body">
+              <p class="subtle-title">换元法</p>
+              <div class="formula">
+                \[
+                \int_a^b f(x)\,dx=\int_{\alpha}^{\beta}f(\varphi(t))\varphi'(t)\,dt
+                \]
+              </div>
+              <p class="subtle-title">分部积分法</p>
+              <div class="formula">
+                \[
+                \int_a^b u\,dv=\Big[uv\Big]_a^b-\int_a^b v\,du
+                \]
+              </div>
+              <p class="subtle-title">偶奇性与对称区间</p>
+              <div class="formula">
+                \[
+                \int_{-a}^a f(x)\,dx=
+                \begin{cases}
+                0,&f \text{ 为奇函数},\\
+                2\int_0^a f(x)\,dx,&f \text{ 为偶函数}.
+                \end{cases}
+                \]
+              </div>
+              <p class="subtle-title">区间再现公式</p>
+              <div class="formula">
+                \[
+                \int_a^b f(x)\,dx=\int_a^b f(a+b-x)\,dx
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \int_a^b f(x)\,dx=\frac12\int_a^b\bigl[f(x)+f(a+b-x)\bigr]\,dx
+                \]
+              </div>
+              <p class="subtle-title">最常见特例</p>
+              <div class="formula">
+                \[
+                \int_0^{\frac{\pi}{2}} f(\sin x)\,dx
+                =
+                \int_0^{\frac{\pi}{2}} f(\cos x)\,dx
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \int_0^\pi x f(\sin x)\,dx
+                =
+                \frac{\pi}{2}\int_0^\pi f(\sin x)\,dx
+                =
+                \pi\int_0^{\frac{\pi}{2}}f(\sin x)\,dx
+                \]
+              </div>
+              <p class="subtle-title">幂三角积分与 Wallis 公式</p>
+              <div class="formula">
+                \[
+                \int_0^{\frac{\pi}{2}}\sin^n x\,dx
+                =
+                \int_0^{\frac{\pi}{2}}\cos^n x\,dx
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \int_0^{\frac{\pi}{2}}\sin^n x\,dx=
+                \begin{cases}
+                \dfrac{(n-1)!!}{n!!},&n \text{ 为奇数},\\[4pt]
+                \dfrac{(n-1)!!}{n!!}\cdot \dfrac{\pi}{2},&n \text{ 为偶数}.
+                \end{cases}
+                \]
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">§6. 重要题型总表</span>
+            <div class="block-body">
+              <ul class="list">
+                <li>黎曼和反认定积分：极限、求和、\(\frac{a}{n}\sum\)，核心是认 \(\Delta x\) 和取样点。</li>
+                <li>积分函数图像题：\(F(x)=\int_0^x f(t)\,dt\)，核心是代数面积与分段计算。</li>
+                <li>可积性综合题：间断点、原函数、定积分同时出现，核心是分清间断类型和可积性。</li>
+                <li>复合导数型积分：\(f'(\varphi(x))\)、\(f''(\varphi(x))\)，核心是先换元再分部降阶。</li>
+                <li>含积分参数函数方程：先把积分看成常数参数。</li>
+                <li>平移关系型：\(f(x+a)-f(x)=g(x)\)，在合适区间积分并换元。</li>
+                <li>由导数求定积分：先写出 \(f(x)=f(0)+\int_0^x f'(t)\,dt\)。</li>
+                <li>三角对称型：\(\sin,\cos\) 配合 \([0,\pi]\)、\([0,\frac{\pi}{2}]\)，优先用区间再现与对称换元。</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">§7. 例题与方法</span>
+            <div class="block-body">
+              <p class="subtle-title">题型一：由黎曼和反认定积分</p>
+              <p>例 1 中</p>
+              <div class="formula">
+                \[
+                \lim_{n\to\infty}\frac{a}{n}\sum_{k=1}^n f\left(\frac{4ka-3a}{4n}\right)
+                \]
+              </div>
+              <p>先把括号里的取样点整理成</p>
+              <div class="formula">
+                \[
+                \frac{4ka-3a}{4n}=\frac{\left(k-\frac34\right)a}{n}
+                \]
+              </div>
+              <p>令</p>
+              <div class="formula">
+                \[
+                \Delta x=\frac{a}{n}
+                \]
+              </div>
+              <p>则第 \(k\) 个小区间为</p>
+              <div class="formula">
+                \[
+                \left[\frac{(k-1)a}{n},\frac{ka}{n}\right]
+                \]
+              </div>
+              <p>而</p>
+              <div class="formula">
+                \[
+                \frac{\left(k-\frac34\right)a}{n}\in
+                \left[\frac{(k-1)a}{n},\frac{ka}{n}\right]
+                \]
+              </div>
+              <p>说明它正是第 \(k\) 个小区间里的一个取样点，因此整个极限就是区间 \([0,a]\) 上的黎曼和极限，所以</p>
+              <div class="formula">
+                \[
+                \int_0^a f(x)\,dx=
+                \lim_{n\to\infty}\frac{a}{n}\sum_{k=1}^n f\left(\frac{4ka-3a}{4n}\right)
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \lim_{n\to\infty}\frac{b-a}{n}\sum_{k=1}^n
+                f\left(a+\frac{k+\alpha}{n}(b-a)\right)=\int_a^b f(x)\,dx,\quad -1\le \alpha\le 0
+                \]
+              </div>
+
+              <p class="subtle-title">题型二：由图像求积分函数</p>
+              <p>例 2 里把 \(F(x)=\int_0^x f(t)\,dt\) 理解成代数面积。先看 \([0,4]\) 上的上半圆，半径为 \(2\)，所以</p>
+              <div class="formula">
+                \[
+                F(4)=\int_0^4 f(t)\,dt=\frac12\pi\cdot 2^2=2\pi
+                \]
+              </div>
+              <p>再看 \([-4,0]\) 上的下半圆，有</p>
+              <div class="formula">
+                \[
+                \int_{-4}^0 f(t)\,dt=-2\pi
+                \]
+              </div>
+              <p>因此</p>
+              <div class="formula">
+                \[
+                F(-4)=\int_0^{-4}f(t)\,dt=-\int_{-4}^0f(t)\,dt=2\pi
+                \]
+              </div>
+              <p>在 \([-6,-4]\) 上是上半椭圆，若半轴长为 \(a=1,b=\frac12\)，则面积为</p>
+              <div class="formula">
+                \[
+                \frac12\pi ab=\frac12\pi\cdot 1\cdot \frac12=\frac{\pi}{4}
+                \]
+              </div>
+              <p>于是</p>
+              <div class="formula">
+                \[
+                \int_{-6}^0 f(t)\,dt=\frac{\pi}{4}-2\pi=-\frac{7\pi}{4}
+                \]
+              </div>
+              <div class="formula">
+                \[
+                F(-6)=\int_0^{-6}f(t)\,dt=-\int_{-6}^0f(t)\,dt=\frac{7\pi}{4}
+                \]
+              </div>
+              <p>再和 \(F(-4)=2\pi=\frac{8\pi}{4}\) 比较，就得到</p>
+              <div class="formula">
+                \[
+                F(-6)=\frac78F(-4)
+                \]
+              </div>
+
+              <p class="subtle-title">题型三：间断点、原函数、可积性综合判断</p>
+              <p>先看</p>
+              <div class="formula">
+                \[
+                f(x)=
+                \begin{cases}
+                2x\sin\frac1x-\cos\frac1x,& x\ne 0,\\
+                0,&x=0,
+                \end{cases}
+                \qquad
+                g(x)=
+                \begin{cases}
+                e^x,&0<x\le 1,\\
+                0,&x=0,\\
+                -e^{-x},&-1\le x<0.
+                \end{cases}
+                \]
+              </div>
+              <p>对 \(f(x)\)，当 \(x\to 0\) 时，\(2x\sin\frac1x\to 0\)，而 \(\cos\frac1x\) 振荡无极限，所以 \(f(x)\) 在 \(0\) 处极限不存在；但它在 \([-1,1]\) 上有界，而且只有一个间断点，因此</p>
+              <div class="formula">
+                \[
+                \int_{-1}^1 f(x)\,dx
+                \]
+              </div>
+              <p>存在。对 \(g(x)\)，当 \(x\to 0^+\) 时趋于 \(1\)，当 \(x\to 0^-\) 时趋于 \(-1\)，所以它在 \(0\) 处是跳跃间断点，但依然有界，也只有一个间断点，因此</p>
+              <div class="formula">
+                \[
+                \int_{-1}^1 g(x)\,dx
+                \]
+              </div>
+              <p>也存在。结论是两个定积分都存在。这里要特别注意：可积不等于连续，有原函数也不等于简单分段拼接后就一定成立。</p>
+
+              <p class="subtle-title">题型四：三角对称与区间再现</p>
+              <div class="formula">
+                \[
+                \int_0^\pi x f(\sin x)\,dx
+                =
+                \pi\int_0^{\frac{\pi}{2}}f(\sin x)\,dx
+                \]
+              </div>
+              <p>证明时记</p>
+              <div class="formula">
+                \[
+                I=\int_0^\pi x f(\sin x)\,dx
+                \]
+              </div>
+              <p>作代换 \(x=\pi-t\)，则 \(\sin x=\sin t\)，于是</p>
+              <div class="formula">
+                \[
+                I=\int_0^\pi (\pi-t)f(\sin t)\,dt
+                \]
+              </div>
+              <p>再把变量改写回 \(x\)，得到</p>
+              <div class="formula">
+                \[
+                I=\int_0^\pi (\pi-x)f(\sin x)\,dx
+                \]
+              </div>
+              <p>与原式相加，有</p>
+              <div class="formula">
+                \[
+                2I=\pi\int_0^\pi f(\sin x)\,dx
+                \]
+              </div>
+              <p>即</p>
+              <div class="formula">
+                \[
+                I=\frac{\pi}{2}\int_0^\pi f(\sin x)\,dx
+                \]
+              </div>
+              <p>再利用</p>
+              <div class="formula">
+                \[
+                \int_0^\pi f(\sin x)\,dx=2\int_0^{\frac{\pi}{2}}f(\sin x)\,dx
+                \]
+              </div>
+              <p>就得到结论。</p>
+
+              <p class="subtle-title">题型五：复合导数型积分</p>
+              <div class="formula">
+                \[
+                I=\int_0^{\frac{\pi}{2}}\cos^3x\,f''(\sin x)\,dx
+                =
+                \int_0^1 (1-t^2)f''(t)\,dt
+                \]
+              </div>
+              <p>先用 \(\cos^3x=\cos x(1-\sin^2x)\)，令 \(t=\sin x,\ dt=\cos x\,dx\)，化成上式。第一次分部积分取</p>
+              <div class="formula">
+                \[
+                u=1-t^2,\qquad dv=f''(t)\,dt
+                \]
+              </div>
+              <p>则</p>
+              <div class="formula">
+                \[
+                du=-2t\,dt,\qquad v=f'(t)
+                \]
+              </div>
+              <p>所以</p>
+              <div class="formula">
+                \[
+                I=(1-t^2)f'(t)\Big|_0^1+2\int_0^1 t f'(t)\,dt
+                \]
+              </div>
+              <p>由 \(f'(0)=0\) 且 \(1-t^2\) 在 \(t=1\) 处为 \(0\)，边界项消失，故</p>
+              <div class="formula">
+                \[
+                I=2\int_0^1 t f'(t)\,dt
+                \]
+              </div>
+              <p>再次分部积分，取 \(u=t,\ dv=f'(t)\,dt\)，得到</p>
+              <div class="formula">
+                \[
+                \int_0^1 t f'(t)\,dt=t f(t)\Big|_0^1-\int_0^1 f(t)\,dt
+                \]
+              </div>
+              <p>代入 \(f(1)=-1,\ \int_0^1 f(t)\,dt=1\)，有</p>
+              <div class="formula">
+                \[
+                \int_0^1 t f'(t)\,dt=-1-1=-2
+                \]
+              </div>
+              <p>因此</p>
+              <div class="formula">
+                \[
+                I=2\times(-2)=-4
+                \]
+              </div>
+
+              <p class="subtle-title">题型六：含积分参数的函数方程</p>
+              <div class="formula">
+                \[
+                f(x)=3x-\sqrt{1-x^2}\int_0^1 f^2(x)\,dx
+                \]
+              </div>
+              <p>设</p>
+              <div class="formula">
+                \[
+                A=\int_0^1 f^2(x)\,dx
+                \]
+              </div>
+              <p>则原式变成</p>
+              <div class="formula">
+                \[
+                f(x)=3x-A\sqrt{1-x^2}
+                \]
+              </div>
+              <p>两边平方并在 \([0,1]\) 上积分，有</p>
+              <div class="formula">
+                \[
+                A=9\int_0^1 x^2\,dx-6A\int_0^1 x\sqrt{1-x^2}\,dx+A^2\int_0^1(1-x^2)\,dx
+                \]
+              </div>
+              <p>分别计算</p>
+              <div class="formula">
+                \[
+                \int_0^1 x^2\,dx=\frac13,\qquad \int_0^1(1-x^2)\,dx=\frac23
+                \]
+              </div>
+              <p>对中间一项令 \(u=1-x^2\)，则</p>
+              <div class="formula">
+                \[
+                \int_0^1 x\sqrt{1-x^2}\,dx=\frac12\int_0^1 u^{1/2}\,du=\frac13
+                \]
+              </div>
+              <p>代回可得</p>
+              <div class="formula">
+                \[
+                2A^2-9A+9=0
+                \]
+              </div>
+              <p>解得 \(A=3\) 或 \(A=\frac32\)，于是</p>
+              <div class="formula">
+                \[
+                f(x)=3x-3\sqrt{1-x^2}
+                \quad\text{或}\quad
+                f(x)=3x-\frac32\sqrt{1-x^2}
+                \]
+              </div>
+
+              <p class="subtle-title">题型七：平移型</p>
+              <div class="formula">
+                \[
+                f(x+3)-f(x)=3x+\frac92,\qquad \int_0^3 f(x)\,dx=3
+                \]
+              </div>
+              <p>对恒等式在 \([0,1]\) 上积分，得</p>
+              <div class="formula">
+                \[
+                \int_0^1[f(x+3)-f(x)]\,dx=\int_0^1\left(3x+\frac92\right)\,dx
+                \]
+              </div>
+              <p>左边化成</p>
+              <div class="formula">
+                \[
+                \int_3^4 f(x)\,dx-\int_0^1 f(x)\,dx
+                \]
+              </div>
+              <p>右边为</p>
+              <div class="formula">
+                \[
+                \left[\frac32x^2+\frac92x\right]_0^1=6
+                \]
+              </div>
+              <p>所以</p>
+              <div class="formula">
+                \[
+                \int_3^4 f(x)\,dx=\int_0^1 f(x)\,dx+6
+                \]
+              </div>
+              <p>再由</p>
+              <div class="formula">
+                \[
+                \int_0^3 f(x)\,dx=\int_0^1 f(x)\,dx+\int_1^3 f(x)\,dx=3
+                \]
+              </div>
+              <p>拼接得到</p>
+              <div class="formula">
+                \[
+                \int_1^4 f(x)\,dx=9
+                \]
+              </div>
+
+              <p class="subtle-title">题型八：已知导数求函数积分</p>
+              <div class="formula">
+                \[
+                f'(x)=\arctan(x-1)^2,\qquad f(0)=0
+                \]
+              </div>
+              <p>先由初值得</p>
+              <div class="formula">
+                \[
+                f(x)=\int_0^x \arctan(t-1)^2\,dt
+                \]
+              </div>
+              <p>于是</p>
+              <div class="formula">
+                \[
+                \int_0^1 f(x)\,dx
+                =
+                \int_0^1\left(\int_0^x \arctan(t-1)^2\,dt\right)dx
+                \]
+              </div>
+              <p>交换积分次序，得</p>
+              <div class="formula">
+                \[
+                \int_0^1 f(x)\,dx=\int_0^1 (1-t)\arctan(t-1)^2\,dt
+                \]
+              </div>
+              <p>令 \(u=1-t\)，再令 \(v=u^2,\ dv=2u\,du\)，则</p>
+              <div class="formula">
+                \[
+                \int_0^1 f(x)\,dx=\frac12\int_0^1 \arctan v\,dv
+                \]
+              </div>
+              <p>利用</p>
+              <div class="formula">
+                \[
+                \int \arctan v\,dv=v\arctan v-\frac12\ln(1+v^2)+C
+                \]
+              </div>
+              <p>最后得到</p>
+              <div class="formula">
+                \[
+                \int_0^1 f(x)\,dx=\frac{\pi}{8}-\frac14\ln 2
+                \]
+              </div>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">§8. 补充公式与题型</span>
+            <div class="block-body">
+              <p class="subtle-title">换元法的对称替换</p>
+              <div class="formula">
+                \[
+                \int_0^{+\infty} f(x)\,dx
+                =
+                \int_0^1 f\left(\frac1t\right)\frac1{t^2}\,dt
+                \]
+              </div>
+              <p class="subtle-title">积分不等式</p>
+              <div class="formula">
+                \[
+                f(x)\le g(x)\Longrightarrow \int_a^b f(x)\,dx\le \int_a^b g(x)\,dx
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \left|\int_a^b f(x)\,dx\right|\le \int_a^b |f(x)|\,dx
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \left(\int_a^b f(x)g(x)\,dx\right)^2
+                \le
+                \left(\int_a^b f^2(x)\,dx\right)\left(\int_a^b g^2(x)\,dx\right)
+                \]
+              </div>
+              <p class="subtle-title">积分与极限</p>
+              <p>若在闭区间上一致收敛，就可以交换极限与积分；考研常见处理仍然是先夹逼、先有界、再积分。</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <span class="kicker">§9. 反常积分、答题模板与易错点</span>
+            <div class="block-body">
+              <p class="subtle-title">反常积分定义</p>
+              <div class="formula">
+                \[
+                \int_a^{+\infty} f(x)\,dx:=\lim_{A\to+\infty}\int_a^A f(x)\,dx
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \int_a^b f(x)\,dx:=\lim_{\varepsilon\to 0^+}\int_{a+\varepsilon}^b f(x)\,dx
+                \]
+              </div>
+              <p class="subtle-title">常见敛散性模型</p>
+              <div class="formula">
+                \[
+                \int_1^{+\infty}\frac1{x^p}\,dx
+                \begin{cases}
+                \text{收敛},&p>1,\\
+                \text{发散},&p\le 1,
+                \end{cases}
+                \qquad
+                \int_0^1\frac1{x^p}\,dx
+                \begin{cases}
+                \text{收敛},&p<1,\\
+                \text{发散},&p\ge 1.
+                \end{cases}
+                \]
+              </div>
+              <div class="formula">
+                \[
+                \int_e^{+\infty}\frac{1}{x(\ln x)^p}\,dx
+                \begin{cases}
+                \text{收敛},&p>1,\\
+                \text{发散},&p\le 1.
+                \end{cases}
+                \]
+              </div>
+              <p class="subtle-title">判断思路</p>
+              <ul class="list">
+                <li>先找坏点：无穷远处、分母为零处、对数零点处。</li>
+                <li>再看它更像哪一个标准模型。</li>
+                <li>能比较就比较，能等价就等价，最后才考虑直接算原函数。</li>
+              </ul>
+              <p class="subtle-title">本章答题模板</p>
+              <ul class="list">
+                <li>黎曼和：认 \(\Delta x\)，认取样点，写积分区间。</li>
+                <li>图像面积：先分段，上正下负，左端积分注意反号。</li>
+                <li>复合导数积分：找内函数，凑导数，换元后分部降阶。</li>
+                <li>含积分参数：设参数，代回原式，列参数方程，再回代。</li>
+                <li>平移型：观察平移长度，在合适区间积分，再和已知区间拼接。</li>
+                <li>已知导数求积分：先由 \(f(x)=f(0)+\int_0^x f'(t)\,dt\) 还原，再交换积分次序。</li>
+              </ul>
+              <p class="subtle-title">本章易错点</p>
+              <ul class="list">
+                <li>把定积分当成函数，而不是数值。</li>
+                <li>图像题忘记带符号面积。</li>
+                <li>只看图像位置，不看积分上下限方向。</li>
+                <li>看到 \(\sin,\cos\) 没有优先想到对称代换。</li>
+                <li>看到 \(f''(\sin x)\) 直接硬算，没有先换元。</li>
+                <li>含积分参数题没有先把积分设成常数。</li>
+                <li>把“可积”“连续”“有原函数”混为一谈。</li>
+              </ul>
             </div>
           </div>
         </section>
